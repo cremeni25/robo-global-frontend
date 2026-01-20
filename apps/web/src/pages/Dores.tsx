@@ -1,53 +1,55 @@
-import { useParams, useNavigate } from "react-router-dom";
-
-const doresPorNicho: Record<string, string[]> = {
-  renda: [
-    "Trabalho muito e ganho pouco",
-    "Minha renda é instável",
-    "Preciso de previsibilidade",
-  ],
-  negocios: [
-    "Tenho dificuldade para escalar",
-    "Vendo pouco no digital",
-    "Falta consistência",
-  ],
-  performance: [
-    "Resultados irregulares",
-    "Falta foco e direção",
-    "Muito esforço, pouco retorno",
-  ],
-  financas: [
-    "Perco o controle do dinheiro",
-    "Não consigo planejar",
-    "Vivo no limite",
-  ],
-};
+// apps/web/src/pages/Dores.tsx
+import { useParams, Link } from "react-router-dom";
 
 export default function Dores() {
-  const { nicho } = useParams<{ nicho: string }>();
-  const navigate = useNavigate();
-
-  const dores = nicho ? doresPorNicho[nicho] : [];
+  const { context } = useParams<{ context: string }>();
 
   return (
-    <div className="min-h-screen bg-neutral-950 text-white px-6 py-16">
-      <div className="max-w-4xl mx-auto">
-        <h2 className="text-2xl font-semibold mb-10 text-center">
-          Qual frase mais representa você hoje?
-        </h2>
+    <main className="min-h-screen w-full bg-white flex justify-center">
+      <section className="w-full max-w-3xl px-6 py-24 flex flex-col gap-16">
+        {/* Bloco institucional */}
+        <div className="flex flex-col gap-8">
+          <h1 className="text-2xl md:text-3xl font-light tracking-tight text-gray-900">
+            Todo contexto carrega tensões invisíveis.
+          </h1>
 
-        <div className="space-y-4">
-          {dores.map((dor, index) => (
-            <button
-              key={index}
-              onClick={() => navigate("/go")}
-              className="w-full p-6 bg-neutral-900 border border-neutral-800 rounded-lg hover:border-pink-500 transition text-left"
-            >
-              {dor}
-            </button>
-          ))}
+          <p className="text-base md:text-lg font-light leading-relaxed text-gray-700">
+            Nenhuma situação humana é neutra. Mesmo quando tudo parece estável,
+            existem forças internas atuando, pressionando, pedindo ajuste.
+          </p>
+
+          <p className="text-base md:text-lg font-light leading-relaxed text-gray-700">
+            Reconhecer essas tensões não é admitir fraqueza. É apenas aceitar a
+            realidade como ela se apresenta no momento.
+          </p>
+
+          <p className="text-base md:text-lg font-light leading-relaxed text-gray-700">
+            Este espaço não busca solução imediata. Ele existe para permitir
+            consciência.
+          </p>
         </div>
-      </div>
-    </div>
+
+        {/* Contexto atual */}
+        <div className="flex flex-col gap-6">
+          <h2 className="text-sm uppercase tracking-widest text-gray-400">
+            Contexto reconhecido
+          </h2>
+
+          <p className="text-base md:text-lg font-light text-gray-900">
+            {context}
+          </p>
+        </div>
+
+        {/* Transição */}
+        <div className="pt-8">
+          <Link
+            to="/go"
+            className="text-base md:text-lg font-light text-gray-900 hover:text-gray-600 transition-colors"
+          >
+            Prosseguir
+          </Link>
+        </div>
+      </section>
+    </main>
   );
 }
