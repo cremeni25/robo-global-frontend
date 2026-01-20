@@ -1,34 +1,76 @@
-import { useNavigate } from "react-router-dom";
-
-const nichos = [
-  { id: "renda", label: "Renda Extra" },
-  { id: "negocios", label: "Negócios Digitais" },
-  { id: "performance", label: "Alta Performance" },
-  { id: "financas", label: "Organização Financeira" },
-];
+// apps/web/src/pages/Nichos.tsx
+import { Link } from "react-router-dom";
 
 export default function Nichos() {
-  const navigate = useNavigate();
-
   return (
-    <div className="min-h-screen bg-neutral-950 text-white px-6 py-16">
-      <div className="max-w-5xl mx-auto">
-        <h2 className="text-2xl font-semibold mb-10 text-center">
-          Escolha o contexto que mais se aproxima da sua realidade
-        </h2>
+    <main className="min-h-screen w-full bg-white flex justify-center">
+      <section className="w-full max-w-3xl px-6 py-24 flex flex-col gap-16">
+        {/* Bloco de texto institucional */}
+        <div className="flex flex-col gap-8">
+          <h1 className="text-2xl md:text-3xl font-light tracking-tight text-gray-900">
+            Todo contexto humano começa em um ponto.
+          </h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {nichos.map((nicho) => (
-            <button
-              key={nicho.id}
-              onClick={() => navigate(`/dores/${nicho.id}`)}
-              className="p-8 bg-neutral-900 border border-neutral-800 rounded-lg hover:border-blue-600 transition text-left"
-            >
-              <span className="text-lg">{nicho.label}</span>
-            </button>
-          ))}
+          <p className="text-base md:text-lg font-light leading-relaxed text-gray-700">
+            Nenhuma decisão nasce do nada. Toda escolha é consequência de um
+            cenário, de uma vivência, de um momento específico.
+          </p>
+
+          <p className="text-base md:text-lg font-light leading-relaxed text-gray-700">
+            Aqui, você não escolhe um produto, um serviço ou uma promessa. Você
+            apenas reconhece o contexto em que está agora.
+          </p>
+
+          <p className="text-base md:text-lg font-light leading-relaxed text-gray-700">
+            O Robô Global não interpreta você. Ele acompanha o ponto em que você
+            se encontra.
+          </p>
         </div>
-      </div>
-    </div>
+
+        {/* Seleção de contextos */}
+        <div className="flex flex-col gap-6">
+          <h2 className="text-sm uppercase tracking-widest text-gray-400">
+            Selecione um contexto
+          </h2>
+
+          <nav className="flex flex-col gap-4">
+            <Link
+              to="/dores/financeiro"
+              className="text-base md:text-lg font-light text-gray-900 hover:text-gray-600 transition-colors"
+            >
+              Financeiro
+            </Link>
+
+            <Link
+              to="/dores/produtividade"
+              className="text-base md:text-lg font-light text-gray-900 hover:text-gray-600 transition-colors"
+            >
+              Produtividade
+            </Link>
+
+            <Link
+              to="/dores/relacionamentos"
+              className="text-base md:text-lg font-light text-gray-900 hover:text-gray-600 transition-colors"
+            >
+              Relacionamentos
+            </Link>
+
+            <Link
+              to="/dores/saude"
+              className="text-base md:text-lg font-light text-gray-900 hover:text-gray-600 transition-colors"
+            >
+              Saúde
+            </Link>
+
+            <Link
+              to="/dores/proposito"
+              className="text-base md:text-lg font-light text-gray-900 hover:text-gray-600 transition-colors"
+            >
+              Propósito
+            </Link>
+          </nav>
+        </div>
+      </section>
+    </main>
   );
 }
