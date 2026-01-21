@@ -1,4 +1,3 @@
-// apps/web/src/pages/Dores.tsx
 import { useParams, Link } from "react-router-dom";
 
 export default function Dores() {
@@ -7,48 +6,42 @@ export default function Dores() {
   return (
     <main className="min-h-screen w-full bg-white flex justify-center">
       <section className="w-full max-w-3xl px-6 py-24 flex flex-col gap-16">
-        {/* Bloco institucional */}
         <div className="flex flex-col gap-8">
           <h1 className="text-2xl md:text-3xl font-light tracking-tight text-gray-900">
             Todo contexto carrega tensões invisíveis.
           </h1>
 
           <p className="text-base md:text-lg font-light leading-relaxed text-gray-700">
-            Nenhuma situação humana é neutra. Mesmo quando tudo parece estável,
-            existem forças internas atuando, pressionando, pedindo ajuste.
+            Mesmo em cenários aparentemente estáveis, existem forças atuando em
+            segundo plano — pressões, dúvidas e necessidades de ajuste.
           </p>
 
           <p className="text-base md:text-lg font-light leading-relaxed text-gray-700">
-            Reconhecer essas tensões não é admitir fraqueza. É apenas aceitar a
-            realidade como ela se apresenta no momento.
+            Reconhecer essas tensões não significa fragilidade. Significa
+            maturidade diante da realidade.
           </p>
 
           <p className="text-base md:text-lg font-light leading-relaxed text-gray-700">
-            Este espaço não busca solução imediata. Ele existe para permitir
-            consciência.
+            Este espaço não oferece respostas imediatas. Ele existe para permitir
+            leitura, consciência e preparação para o próximo passo.
           </p>
         </div>
 
-        {/* Contexto atual */}
-        <div className="flex flex-col gap-6">
-          <h2 className="text-sm uppercase tracking-widest text-gray-400">
+        <div className="flex flex-col gap-2">
+          <span className="text-sm uppercase tracking-widest text-gray-400">
             Contexto reconhecido
-          </h2>
-
-          <p className="text-base md:text-lg font-light text-gray-900">
+          </span>
+          <span className="text-base md:text-lg font-light text-gray-900">
             {context}
-          </p>
+          </span>
         </div>
 
-        {/* Transição */}
-        <div className="pt-8">
-          <Link
-            to="/go"
-            className="text-base md:text-lg font-light text-gray-900 hover:text-gray-600 transition-colors"
-          >
-            Prosseguir
-          </Link>
-        </div>
+        <Link
+          to="/go"
+          className="text-base md:text-lg font-light text-gray-900 hover:text-gray-600 transition-colors"
+        >
+          Prosseguir
+        </Link>
       </section>
     </main>
   );
