@@ -1,6 +1,9 @@
 import React from 'react';
+import { getB2Snapshot } from '../services/b2Reader';
 
 export function NichosAltaAssertividadePanel() {
+  const { highAssertivenessNichos } = getB2Snapshot();
+
   return (
     <section className="space-y-2">
       <h2 className="text-sm font-medium text-neutral-text-secondary uppercase tracking-wide">
@@ -8,15 +11,14 @@ export function NichosAltaAssertividadePanel() {
       </h2>
 
       <ul className="space-y-2 text-sm">
-        <li className="p-3 bg-neutral-surface rounded-md">
-          Marketing Digital — <strong>Consistente</strong>
-        </li>
-        <li className="p-3 bg-neutral-surface rounded-md">
-          Produtividade — <strong>Estável</strong>
-        </li>
-        <li className="p-3 bg-neutral-surface rounded-md">
-          Tecnologia Aplicada — <strong>Promissor</strong>
-        </li>
+        {highAssertivenessNichos.map((nicho) => (
+          <li
+            key={nicho.name}
+            className="p-3 bg-neutral-surface rounded-md"
+          >
+            {nicho.name} — <strong>{nicho.level}</strong>
+          </li>
+        ))}
       </ul>
     </section>
   );
