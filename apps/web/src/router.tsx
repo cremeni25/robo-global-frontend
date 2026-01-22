@@ -1,4 +1,5 @@
 import { HashRouter, Routes, Route } from "react-router-dom";
+
 import Home from "./pages/Home";
 import Nichos from "./pages/Nichos";
 import Dores from "./pages/Dores";
@@ -6,7 +7,7 @@ import Go from "./pages/Go";
 
 export default function Router() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/nichos" element={<Nichos />} />
