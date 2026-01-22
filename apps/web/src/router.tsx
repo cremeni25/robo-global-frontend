@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Nichos from "./pages/Nichos";
 import Dores from "./pages/Dores";
@@ -13,6 +13,6 @@ export default function Router() {
         <Route path="/dores/:context" element={<Dores />} />
         <Route path="/go" element={<Go />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
