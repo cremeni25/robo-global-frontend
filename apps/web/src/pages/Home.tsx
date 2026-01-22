@@ -1,36 +1,88 @@
 export default function Home() {
   return (
-    <main className="min-h-screen w-full bg-white flex justify-center">
-      <section className="w-full max-w-3xl px-6 py-24 flex flex-col gap-16">
-        <div className="flex flex-col gap-8">
-          <h1 className="text-2xl md:text-3xl font-light tracking-tight text-gray-900">
-            Intelligence that helps people navigate global opportunities
+    <main style={{ padding: "64px 24px", maxWidth: "1100px", margin: "0 auto" }}>
+      
+      {/* BLOCO 1 — ABERTURA HUMANA */}
+      <section style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "40px", alignItems: "center", marginBottom: "96px" }}>
+        <div>
+          <h1 style={{ fontSize: "40px", lineHeight: "1.2", marginBottom: "24px" }}>
+            Entender o contexto muda a forma de decidir
           </h1>
 
-          <p className="text-base md:text-lg font-light leading-relaxed text-gray-700">
-            O Robô Global é uma plataforma institucional de inteligência aplicada,
-            criada para apoiar pessoas em decisões reais diante de um cenário
-            global cada vez mais complexo.
-          </p>
-
-          <p className="text-base md:text-lg font-light leading-relaxed text-gray-700">
-            Não se trata de prever o futuro, oferecer promessas ou indicar caminhos
-            únicos. Trata-se de organizar contexto, reduzir ruído e permitir que
-            cada pessoa avance com mais clareza.
-          </p>
-
-          <p className="text-base md:text-lg font-light leading-relaxed text-gray-700">
-            O mundo oferece oportunidades em todos os momentos. O desafio está em
-            reconhecê-las com consciência, no tempo certo e a partir do ponto em
-            que cada um se encontra.
-          </p>
-
-          <p className="text-base md:text-lg font-light leading-relaxed text-gray-700">
-            O Robô Global existe para acompanhar esse processo — com sobriedade,
-            governança e responsabilidade.
+          <p style={{ fontSize: "18px", lineHeight: "1.6", color: "#444" }}>
+            Todos os dias lidamos com escolhas — algumas simples, outras complexas.
+            O Robô Global existe para ajudar na leitura de cenários, organizando
+            informações e oferecendo clareza antes do próximo passo.
           </p>
         </div>
+
+        <div>
+          <img
+            src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe"
+            alt="Pessoa refletindo calmamente em ambiente cotidiano"
+            style={{ width: "100%", borderRadius: "12px" }}
+          />
+        </div>
       </section>
+
+      {/* BLOCO 2 — O QUE É */}
+      <section style={{ marginBottom: "80px" }}>
+        <h2 style={{ fontSize: "28px", marginBottom: "16px" }}>
+          O que é o Robô Global
+        </h2>
+
+        <p style={{ fontSize: "17px", lineHeight: "1.6", color: "#444", maxWidth: "760px" }}>
+          O Robô Global é um ambiente de leitura e organização de contextos.
+          Ele ajuda a identificar padrões, esclarecer situações e apoiar
+          decisões mais conscientes no dia a dia.
+        </p>
+      </section>
+
+      {/* BLOCO 3 — PARA QUE SERVE */}
+      <section style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "48px", marginBottom: "96px", alignItems: "center" }}>
+        <div>
+          <h2 style={{ fontSize: "28px", marginBottom: "16px" }}>
+            Para que ele serve
+          </h2>
+
+          <ul style={{ fontSize: "17px", lineHeight: "1.8", color: "#444", paddingLeft: "18px" }}>
+            <li>Ajudar a entender situações antes de decidir</li>
+            <li>Organizar informações que parecem confusas</li>
+            <li>Perceber pressões invisíveis que influenciam escolhas</li>
+            <li>Refletir com mais calma sobre caminhos possíveis</li>
+          </ul>
+        </div>
+
+        <div>
+          <img
+            src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
+            alt="Pessoas conversando de forma tranquila em ambiente cotidiano"
+            style={{ width: "100%", borderRadius: "12px" }}
+          />
+        </div>
+      </section>
+
+      {/* BLOCO 4 — COMO UTILIZAR */}
+      <section style={{ marginBottom: "96px" }}>
+        <h2 style={{ fontSize: "28px", marginBottom: "16px" }}>
+          Como utilizar a plataforma
+        </h2>
+
+        <p style={{ fontSize: "17px", lineHeight: "1.6", color: "#444", maxWidth: "760px" }}>
+          Você pode explorar contextos, refletir sobre situações e avançar
+          no seu próprio ritmo. Não há respostas prontas — apenas apoio
+          para decisões mais conscientes.
+        </p>
+      </section>
+
+      {/* BLOCO 5 — FECHAMENTO */}
+      <section>
+        <p style={{ fontSize: "18px", lineHeight: "1.6", color: "#333", maxWidth: "760px" }}>
+          Cada pessoa vive um momento diferente.
+          Entender o contexto certo pode mudar completamente o próximo passo.
+        </p>
+      </section>
+
     </main>
   );
 }
