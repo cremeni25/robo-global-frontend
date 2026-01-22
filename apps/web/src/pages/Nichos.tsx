@@ -1,37 +1,34 @@
+// src/pages/Nichos.tsx
+
 export default function Nichos() {
   return (
-    <main style={{ width: "100%", margin: "0 auto" }}>
-      {/* HERO — mesma lógica do Home */}
+    <main style={{ width: "100%", margin: "0 auto", backgroundColor: "#ffffff" }}>
+      {/* HERO — padrão Home / Fidelity-like */}
       <section
         style={{
           width: "100%",
           backgroundImage:
-            "linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80')",
+            "linear-gradient(rgba(15,23,42,0.65), rgba(15,23,42,0.65)), url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           padding: "120px 24px",
           color: "#ffffff",
         }}
       >
-        <div
-          style={{
-            maxWidth: "1100px",
-            margin: "0 auto",
-          }}
-        >
+        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <h1 style={{ fontSize: "48px", marginBottom: "16px" }}>
             Cada pessoa vive um contexto diferente
           </h1>
           <p style={{ fontSize: "18px", maxWidth: "640px", lineHeight: 1.6 }}>
-            O Robô Global observa padrões de vida, decisões recorrentes e
-            situações reais enfrentadas por pessoas comuns. Aqui, nichos não
-            são rótulos — são <strong>contextos humanos</strong>.
+            O Robô Global™ observa padrões de vida, decisões recorrentes e
+            situações reais enfrentadas por pessoas comuns. Aqui, nichos não são
+            rótulos — são <strong>contextos humanos</strong>.
           </p>
         </div>
       </section>
 
       {/* INTRO */}
-      <section style={{ padding: "80px 24px" }}>
+      <section style={{ padding: "72px 24px" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <h2 style={{ fontSize: "32px", marginBottom: "12px" }}>
             Contextos observados
@@ -44,7 +41,7 @@ export default function Nichos() {
       </section>
 
       {/* BLOCO 1 */}
-      <section style={{ padding: "60px 24px" }}>
+      <section style={{ padding: "56px 24px" }}>
         <div
           style={{
             maxWidth: "1100px",
@@ -56,8 +53,8 @@ export default function Nichos() {
           }}
         >
           <img
-            src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80"
-            alt="Pessoas reorganizando a própria vida"
+            src="https://images.unsplash.com/photo-1520975922284-9a8d56f1f7b4?auto=format&fit=crop&w=900&q=80"
+            alt="Pessoa reorganizando a própria vida"
             style={{ width: "100%", borderRadius: "12px" }}
           />
           <div>
@@ -73,7 +70,7 @@ export default function Nichos() {
       </section>
 
       {/* BLOCO 2 */}
-      <section style={{ padding: "60px 24px", background: "#f7f7f7" }}>
+      <section style={{ padding: "56px 24px", background: "#f7f7f7" }}>
         <div
           style={{
             maxWidth: "1100px",
@@ -95,14 +92,14 @@ export default function Nichos() {
           </div>
           <img
             src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=80"
-            alt="Famílias e responsabilidades"
+            alt="Família e responsabilidades"
             style={{ width: "100%", borderRadius: "12px" }}
           />
         </div>
       </section>
 
       {/* BLOCO 3 */}
-      <section style={{ padding: "60px 24px" }}>
+      <section style={{ padding: "56px 24px" }}>
         <div
           style={{
             maxWidth: "1100px",
@@ -124,21 +121,31 @@ export default function Nichos() {
             </h3>
             <p style={{ lineHeight: 1.6 }}>
               Pressão por desempenho, escolhas estratégicas e necessidade de
-              entender o cenário antes de agir.
+              compreender o cenário antes de agir.
             </p>
           </div>
         </div>
       </section>
 
-      {/* FOOTER */}
+      {/* FECHAMENTO */}
+      <section style={{ padding: "72px 24px" }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+          <p style={{ fontSize: "18px", lineHeight: 1.6 }}>
+            O Robô Global™ não entrega respostas prontas. Ele existe para reduzir
+            ruído, organizar informações e apoiar decisões mais conscientes —
+            respeitando o tempo, o contexto e a realidade de cada pessoa.
+          </p>
+        </div>
+      </section>
+
+      {/* FOOTER INSTITUCIONAL */}
       <footer
         style={{
-          padding: "48px 24px",
+          padding: "40px 24px",
           textAlign: "center",
           fontSize: "14px",
-          color: "#555",
-          borderTop: "1px solid #e5e5e5",
-          marginTop: "80px",
+          color: "#475569",
+          borderTop: "1px solid #e5e7eb",
         }}
       >
         Robô Global™ by CREMENIO
