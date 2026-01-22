@@ -5,116 +5,185 @@ export default function Nichos() {
     <>
       <Header />
 
-      <main style={{ padding: "4rem 2rem", maxWidth: 1200, margin: "0 auto" }}>
+      <main style={{ padding: "64px 0" }}>
         {/* HERO */}
         <section
           style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "3rem",
+            display: "flex",
             alignItems: "center",
-            marginBottom: "5rem",
+            justifyContent: "space-between",
+            maxWidth: "1200px",
+            margin: "0 auto",
+            padding: "0 24px",
+            gap: "48px",
           }}
         >
-          <div>
-            <h1 style={{ fontSize: "2.6rem", marginBottom: "1.5rem" }}>
+          <div style={{ flex: 1 }}>
+            <h1 style={{ fontSize: "42px", lineHeight: "1.2", marginBottom: "24px" }}>
               Cada pessoa vive um contexto diferente
             </h1>
-
-            <p style={{ fontSize: "1.1rem", lineHeight: 1.6 }}>
+            <p style={{ fontSize: "18px", color: "#444" }}>
               O Robô Global observa padrões de vida, necessidades recorrentes e
-              situações reais enfrentadas por pessoas comuns.  
-              Aqui, os nichos não são rótulos — são **contextos humanos**.
+              situações reais enfrentadas por pessoas comuns. Aqui, nichos não
+              são rótulos — são <strong>contextos humanos</strong>.
             </p>
           </div>
 
-          <img
-            src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
-            alt="Pessoas em diferentes realidades do dia a dia"
-            style={{
-              width: "100%",
-              borderRadius: 12,
-              objectFit: "cover",
-            }}
-          />
-        </section>
-
-        {/* LISTA DE NICHOS */}
-        <section>
-          <h2 style={{ fontSize: "2rem", marginBottom: "3rem" }}>
-            Contextos observados
-          </h2>
-
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-              gap: "2rem",
-            }}
-          >
-            {/* NICHO 1 */}
-            <div style={cardStyle}>
-              <img
-                src="https://images.unsplash.com/photo-1607746882042-944635dfe10e"
-                alt="Pessoa organizando a vida"
-                style={imgStyle}
-              />
-              <h3>Pessoas reorganizando a própria vida</h3>
-              <p>
-                Momentos de transição, recomeços, decisões importantes ou
-                necessidade de clareza antes do próximo passo.
-              </p>
-            </div>
-
-            {/* NICHO 2 */}
-            <div style={cardStyle}>
-              <img
-                src="https://images.unsplash.com/photo-1507537297725-24a1c029d3ca"
-                alt="Família em casa"
-                style={imgStyle}
-              />
-              <h3>Famílias lidando com múltiplas responsabilidades</h3>
-              <p>
-                Organização do dia a dia, escolhas que afetam mais de uma pessoa
-                e necessidade de equilíbrio entre demandas.
-              </p>
-            </div>
-
-            {/* NICHO 3 */}
-            <div style={cardStyle}>
-              <img
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c"
-                alt="Grupo de trabalho"
-                style={imgStyle}
-              />
-              <h3>Pessoas em ambientes profissionais</h3>
-              <p>
-                Decisões estruturais, mudanças de rumo, avaliação de cenários e
-                leitura de riscos invisíveis.
-              </p>
-            </div>
-
-            {/* NICHO 4 */}
-            <div style={cardStyle}>
-              <img
-                src="https://images.unsplash.com/photo-1517841905240-472988babdf9"
-                alt="Pessoa idosa refletindo"
-                style={imgStyle}
-              />
-              <h3>Pessoas em fases mais maduras da vida</h3>
-              <p>
-                Reflexão, cautela, necessidade de segurança e compreensão antes
-                de qualquer escolha relevante.
-              </p>
-            </div>
+          <div style={{ flex: 1 }}>
+            <img
+              src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
+              alt="Pessoas em conversa e tomada de decisão"
+              style={{
+                width: "100%",
+                borderRadius: "16px",
+                objectFit: "cover",
+              }}
+            />
           </div>
         </section>
 
+        {/* ESPAÇO */}
+        <div style={{ height: "96px" }} />
+
+        {/* CONTEXTO 1 */}
+        <section
+          style={{
+            maxWidth: "1200px",
+            margin: "0 auto",
+            padding: "0 24px",
+            display: "flex",
+            alignItems: "center",
+            gap: "48px",
+          }}
+        >
+          <img
+            src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e"
+            alt="Pessoa refletindo sobre mudanças"
+            style={{
+              width: "45%",
+              borderRadius: "16px",
+            }}
+          />
+
+          <div style={{ width: "55%" }}>
+            <h2>Pessoas reorganizando a própria vida</h2>
+            <p>
+              Mudanças pessoais, recomeços, transições de fase e decisões que
+              exigem mais clareza antes do próximo passo.
+            </p>
+          </div>
+        </section>
+
+        <div style={{ height: "80px" }} />
+
+        {/* CONTEXTO 2 */}
+        <section
+          style={{
+            maxWidth: "1200px",
+            margin: "0 auto",
+            padding: "0 24px",
+            display: "flex",
+            alignItems: "center",
+            gap: "48px",
+            flexDirection: "row-reverse",
+          }}
+        >
+          <img
+            src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c"
+            alt="Família conversando"
+            style={{
+              width: "45%",
+              borderRadius: "16px",
+            }}
+          />
+
+          <div style={{ width: "55%" }}>
+            <h2>Famílias lidando com múltiplas decisões</h2>
+            <p>
+              Contextos familiares envolvem responsabilidades cruzadas,
+              prioridades conflitantes e escolhas que impactam mais de uma
+              pessoa.
+            </p>
+          </div>
+        </section>
+
+        <div style={{ height: "80px" }} />
+
+        {/* CONTEXTO 3 */}
+        <section
+          style={{
+            maxWidth: "1200px",
+            margin: "0 auto",
+            padding: "0 24px",
+            display: "flex",
+            alignItems: "center",
+            gap: "48px",
+          }}
+        >
+          <img
+            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c"
+            alt="Ambiente profissional colaborativo"
+            style={{
+              width: "45%",
+              borderRadius: "16px",
+            }}
+          />
+
+          <div style={{ width: "55%" }}>
+            <h2>Pessoas em ambientes profissionais</h2>
+            <p>
+              Pressões invisíveis, responsabilidades contínuas e decisões
+              estratégicas fazem parte do cotidiano profissional moderno.
+            </p>
+          </div>
+        </section>
+
+        <div style={{ height: "80px" }} />
+
+        {/* CONTEXTO 4 */}
+        <section
+          style={{
+            maxWidth: "1200px",
+            margin: "0 auto",
+            padding: "0 24px",
+            display: "flex",
+            alignItems: "center",
+            gap: "48px",
+            flexDirection: "row-reverse",
+          }}
+        >
+          <img
+            src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e"
+            alt="Pessoa em fase madura refletindo"
+            style={{
+              width: "45%",
+              borderRadius: "16px",
+            }}
+          />
+
+          <div style={{ width: "55%" }}>
+            <h2>Pessoas em fases mais maduras da vida</h2>
+            <p>
+              Reflexão, cautela e necessidade de segurança fazem parte desse
+              contexto, onde decisões exigem mais consciência e menos impulso.
+            </p>
+          </div>
+        </section>
+
+        <div style={{ height: "96px" }} />
+
         {/* FECHAMENTO */}
-        <section style={{ marginTop: "5rem", maxWidth: 800 }}>
-          <p style={{ fontSize: "1.1rem", lineHeight: 1.6 }}>
-            O Robô Global não oferece respostas prontas.  
-            Ele existe para **ajudar a enxergar o contexto com mais clareza**,
+        <section
+          style={{
+            maxWidth: "900px",
+            margin: "0 auto",
+            padding: "0 24px",
+            textAlign: "center",
+          }}
+        >
+          <p style={{ fontSize: "18px", color: "#444" }}>
+            O Robô Global não entrega respostas prontas. Ele existe para{" "}
+            <strong>ajudar a enxergar o contexto com mais clareza</strong>,
             reduzindo ruídos, pressões invisíveis e decisões precipitadas.
           </p>
         </section>
@@ -122,19 +191,3 @@ export default function Nichos() {
     </>
   );
 }
-
-/* estilos simples e humanos */
-const cardStyle: React.CSSProperties = {
-  border: "1px solid #eee",
-  borderRadius: 12,
-  padding: "1.5rem",
-  background: "#fff",
-};
-
-const imgStyle: React.CSSProperties = {
-  width: "100%",
-  height: 180,
-  objectFit: "cover",
-  borderRadius: 8,
-  marginBottom: "1rem",
-};
