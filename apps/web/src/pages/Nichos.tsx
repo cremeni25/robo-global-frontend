@@ -1,111 +1,126 @@
-import "../styles/pages.css";
-
 export default function Nichos() {
   return (
-    <div className="page-root">
-      {/* HEADER FIXO (arquitetura tipo Fidelity) */}
-      <header className="topbar">
-        <div className="topbar-inner">
-          <div className="logo">Robô Global</div>
-
-          <nav className="nav">
-            <a href="/">Início</a>
-            <a href="/#/nichos" className="active">Nichos</a>
-            <a href="/#/contextos">Contextos</a>
-            <a href="/#/sobre">Sobre</a>
-          </nav>
-
-          <div className="actions">
-            <select aria-label="Idioma">
-              <option>PT</option>
-              <option>EN</option>
-              <option>ES</option>
-            </select>
-          </div>
-        </div>
-      </header>
-
-      {/* CONTEÚDO CENTRAL */}
-      <main className="container">
+    <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+      <div style={{ maxWidth: "1200px", width: "100%", padding: "40px 24px" }}>
+        
         {/* HERO */}
-        <section className="hero">
-          <div className="hero-text">
-            <h1>Cada pessoa vive um contexto diferente</h1>
-            <p>
+        <section
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "40px",
+            alignItems: "center",
+            marginBottom: "80px",
+          }}
+        >
+          <div>
+            <h1 style={{ fontSize: "40px", marginBottom: "16px" }}>
+              Cada pessoa vive um contexto diferente
+            </h1>
+            <p style={{ fontSize: "18px", lineHeight: 1.6 }}>
               O Robô Global observa padrões de vida, necessidades recorrentes e
               situações reais enfrentadas por pessoas comuns.
               <br />
-              Aqui, nichos não são rótulos — são <strong>contextos humanos</strong>.
+              Aqui, nichos não são rótulos — são{" "}
+              <strong>contextos humanos</strong>.
             </p>
           </div>
 
-          <div className="hero-image">
-            <img
-              src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
-              alt="Pessoas em conversa e tomada de decisão"
-            />
-          </div>
+          <img
+            src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
+            alt="Pessoas analisando contextos"
+            style={{
+              width: "100%",
+              borderRadius: "12px",
+              objectFit: "cover",
+            }}
+          />
         </section>
 
         {/* INTRO */}
-        <section className="section-intro">
-          <h2>Contextos observados</h2>
-          <p>
-            Situações recorrentes onde clareza, organização e leitura de cenário
-            fazem diferença antes do próximo passo.
+        <section style={{ marginBottom: "40px" }}>
+          <h2 style={{ fontSize: "28px", marginBottom: "8px" }}>
+            Contextos observados
+          </h2>
+          <p style={{ fontSize: "16px", color: "#555" }}>
+            Situações recorrentes onde clareza e organização fazem diferença
+            antes do próximo passo.
           </p>
         </section>
 
-        {/* GRID DE CONTEXTOS (CARDS – PADRÃO FIDELITY) */}
-        <section className="cards-grid">
-          <div className="card">
+        {/* CARDS */}
+        <section
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: "24px",
+          }}
+        >
+          <div style={cardStyle}>
             <img
               src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e"
-              alt="Pessoa refletindo sobre mudanças pessoais"
+              alt="Reorganização pessoal"
+              style={imgStyle}
             />
             <h3>Pessoas reorganizando a própria vida</h3>
             <p>
-              Mudanças pessoais, recomeços e decisões que exigem mais clareza
-              antes do próximo passo.
+              Mudanças pessoais e decisões que exigem mais clareza antes de
+              avançar.
             </p>
           </div>
 
-          <div className="card">
+          <div style={cardStyle}>
             <img
               src="https://images.unsplash.com/photo-1504674900247-0877df9cc836"
-              alt="Família lidando com responsabilidades"
+              alt="Família"
+              style={imgStyle}
             />
-            <h3>Famílias lidando com múltiplas responsabilidades</h3>
+            <h3>Famílias lidando com responsabilidades</h3>
             <p>
-              Organização do dia a dia e equilíbrio entre decisões que impactam
-              mais de uma pessoa ao mesmo tempo.
+              Equilíbrio entre obrigações e decisões que impactam mais de uma
+              pessoa.
             </p>
           </div>
 
-          <div className="card">
+          <div style={cardStyle}>
             <img
               src="https://images.unsplash.com/photo-1522071820081-009f0129c71c"
-              alt="Pessoas trabalhando em ambiente profissional"
+              alt="Ambiente profissional"
+              style={imgStyle}
             />
             <h3>Pessoas em ambientes profissionais</h3>
             <p>
-              Pressão por desempenho, escolhas estratégicas e necessidade de
-              compreender melhor o cenário antes de agir.
+              Pressões, escolhas estratégicas e necessidade de leitura de
+              cenário.
             </p>
           </div>
         </section>
 
         {/* FECHAMENTO */}
-        <section className="closing">
-          <p>
+        <section style={{ marginTop: "80px", textAlign: "center" }}>
+          <p style={{ fontSize: "18px", lineHeight: 1.6 }}>
             O Robô Global não entrega respostas prontas.
             <br />
-            Ele existe para <strong>reduzir ruído</strong>, organizar informações
-            e apoiar decisões mais conscientes — respeitando o tempo,
-            o contexto e a realidade de cada pessoa.
+            Ele existe para <strong>reduzir ruído</strong> e apoiar decisões mais
+            conscientes.
           </p>
         </section>
-      </main>
+      </div>
     </div>
   );
 }
+
+const cardStyle: React.CSSProperties = {
+  background: "#fff",
+  borderRadius: "12px",
+  padding: "16px",
+  boxShadow: "0 4px 12px rgba(0,0,0,0.06)",
+};
+
+const imgStyle: React.CSSProperties = {
+  width: "100%",
+  height: "180px",
+  objectFit: "cover",
+  borderRadius: "8px",
+  marginBottom: "12px",
+};
