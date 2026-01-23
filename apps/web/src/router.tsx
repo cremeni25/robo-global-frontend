@@ -1,8 +1,10 @@
+// src/router.tsx
 import { createBrowserRouter } from "react-router-dom";
 import LayoutGlobal from "./components/LayoutGlobal";
+
 import Home from "./pages/Home";
 import Nichos from "./pages/Nichos";
-// import Dores from "./pages/Dores"; (quando existir)
+import Dores from "./pages/Dores";
 
 export const router = createBrowserRouter([
   {
@@ -10,7 +12,7 @@ export const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "/nichos", element: <Nichos /> },
-      // { path: "/dores", element: <Dores /> },
+      { path: "/dores", element: <Dores /> },
     ],
   },
 ]);
