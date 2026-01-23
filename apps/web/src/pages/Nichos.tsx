@@ -1,125 +1,238 @@
-import { useState } from "react"
-
 export default function Nichos() {
-  const [selectedNicho, setSelectedNicho] = useState<string | null>(null)
-
   return (
-    <div className="min-h-screen w-full bg-neutral-100 text-neutral-900">
-      {/* Barra superior institucional */}
-      <div className="w-full border-b border-neutral-300 bg-white">
-        <div className="mx-auto flex h-14 max-w-7xl items-center px-8">
-          <span className="text-sm font-semibold tracking-wide text-neutral-800">
-            ROBÔ GLOBAL
-          </span>
-          <span className="ml-3 text-xs text-neutral-500">B1 · Nichos</span>
+    <main style={{ width: "100%", backgroundColor: "#ffffff" }}>
+      {/* HERO */}
+      <section
+        style={{
+          width: "100%",
+          backgroundImage:
+            "linear-gradient(rgba(15,23,42,0.55), rgba(15,23,42,0.55)), url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          padding: "110px 24px",
+          color: "#ffffff",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: "1100px",
+            margin: "0 auto",
+          }}
+        >
+          <h1
+            style={{
+              fontSize: "48px",
+              fontWeight: 600,
+              marginBottom: "16px",
+              maxWidth: "720px",
+            }}
+          >
+            Cada pessoa vive um contexto diferente
+          </h1>
 
-          <div className="ml-auto text-xs font-medium text-neutral-500">
-            Barra de Comandos
+          <p
+            style={{
+              fontSize: "18px",
+              lineHeight: 1.6,
+              maxWidth: "640px",
+            }}
+          >
+            O <strong>Robô Global™</strong> organiza padrões de vida, decisões
+            recorrentes e situações reais enfrentadas por pessoas comuns.
+          </p>
+        </div>
+      </section>
+
+      {/* BLOCO EXPLICATIVO */}
+      <section style={{ padding: "72px 24px" }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+          <h2
+            style={{
+              fontSize: "32px",
+              fontWeight: 600,
+              marginBottom: "12px",
+            }}
+          >
+            Nichos não são rótulos
+          </h2>
+
+          <p
+            style={{
+              fontSize: "16px",
+              lineHeight: 1.6,
+              maxWidth: "720px",
+            }}
+          >
+            Neste ambiente, nichos são tratados como{" "}
+            <strong>contextos humanos</strong> — situações recorrentes onde
+            clareza, organização e leitura de cenário fazem diferença antes do
+            próximo passo.
+          </p>
+        </div>
+      </section>
+
+      {/* GRID DE CONTEXTOS */}
+      <section style={{ padding: "40px 24px" }}>
+        <div
+          style={{
+            maxWidth: "1100px",
+            margin: "0 auto",
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: "32px",
+          }}
+        >
+          {/* CARD 1 */}
+          <div
+            style={{
+              border: "1px solid #e5e7eb",
+              borderRadius: "14px",
+              overflow: "hidden",
+              backgroundColor: "#ffffff",
+            }}
+          >
+            <img
+              src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80"
+              alt="Pessoa reorganizando a própria vida"
+              style={{
+                width: "100%",
+                height: "180px",
+                objectFit: "cover",
+              }}
+            />
+            <div style={{ padding: "20px" }}>
+              <h3
+                style={{
+                  fontSize: "20px",
+                  fontWeight: 600,
+                  marginBottom: "8px",
+                }}
+              >
+                Pessoas reorganizando a própria vida
+              </h3>
+              <p style={{ lineHeight: 1.6 }}>
+                Transições, recomeços e decisões importantes que exigem mais
+                clareza.
+              </p>
+            </div>
+          </div>
+
+          {/* CARD 2 */}
+          <div
+            style={{
+              border: "1px solid #e5e7eb",
+              borderRadius: "14px",
+              overflow: "hidden",
+              backgroundColor: "#ffffff",
+            }}
+          >
+            <img
+              src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=80"
+              alt="Família lidando com responsabilidades"
+              style={{
+                width: "100%",
+                height: "180px",
+                objectFit: "cover",
+              }}
+            />
+            <div style={{ padding: "20px" }}>
+              <h3
+                style={{
+                  fontSize: "20px",
+                  fontWeight: 600,
+                  marginBottom: "8px",
+                }}
+              >
+                Famílias lidando com múltiplas responsabilidades
+              </h3>
+              <p style={{ lineHeight: 1.6 }}>
+                Organização do cotidiano e escolhas que impactam mais de uma
+                pessoa.
+              </p>
+            </div>
+          </div>
+
+          {/* CARD 3 */}
+          <div
+            style={{
+              border: "1px solid #e5e7eb",
+              borderRadius: "14px",
+              overflow: "hidden",
+              backgroundColor: "#ffffff",
+            }}
+          >
+            <img
+              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=80"
+              alt="Ambiente profissional"
+              style={{
+                width: "100%",
+                height: "180px",
+                objectFit: "cover",
+              }}
+            />
+            <div style={{ padding: "20px" }}>
+              <h3
+                style={{
+                  fontSize: "20px",
+                  fontWeight: 600,
+                  marginBottom: "8px",
+                }}
+              >
+                Pessoas em ambientes profissionais
+              </h3>
+              <p style={{ lineHeight: 1.6 }}>
+                Pressões, decisões estratégicas e necessidade de leitura de
+                cenário.
+              </p>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Conteúdo principal */}
-      <main className="mx-auto max-w-7xl px-8 py-16">
-        {/* Cabeçalho */}
-        <header className="mb-16 max-w-3xl">
-          <h1 className="text-4xl font-semibold tracking-tight text-neutral-900">
-            Nichos de Mercado
-          </h1>
-          <p className="mt-4 text-base leading-relaxed text-neutral-600">
-            Visualização institucional dos nichos disponíveis para análise.
-            Esta etapa apresenta exclusivamente organização e leitura
-            estruturada, sem qualquer inferência automatizada.
+      {/* BLOCO DE TRANSIÇÃO */}
+      <section
+        style={{
+          backgroundColor: "#f8fafc",
+          padding: "72px 24px",
+          marginTop: "72px",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: "900px",
+            margin: "0 auto",
+            textAlign: "center",
+          }}
+        >
+          <h2
+            style={{
+              fontSize: "30px",
+              fontWeight: 600,
+              marginBottom: "16px",
+            }}
+          >
+            Entender o contexto muda a forma de decidir
+          </h2>
+          <p style={{ fontSize: "18px", lineHeight: 1.6 }}>
+            O <strong>Robô Global™</strong> existe para ajudar a organizar
+            informações, reduzir ruídos e apoiar decisões mais conscientes no
+            cotidiano.
           </p>
-        </header>
+        </div>
+      </section>
 
-        {/* Grid de Nichos */}
-        <section className="grid grid-cols-1 gap-10 md:grid-cols-2 xl:grid-cols-3">
-          {NICHOS_BASE.map((nicho) => {
-            const ativo = selectedNicho === nicho.id
-
-            return (
-              <div
-                key={nicho.id}
-                onClick={() => setSelectedNicho(nicho.id)}
-                className={`rounded-2xl border bg-white p-8 transition
-                  ${
-                    ativo
-                      ? "border-neutral-900 shadow-xl"
-                      : "border-neutral-300 hover:shadow-md"
-                  }`}
-              >
-                <div className="mb-6 text-xs font-semibold uppercase tracking-wider text-neutral-500">
-                  {nicho.categoria}
-                </div>
-
-                <h2 className="text-xl font-semibold tracking-tight text-neutral-900">
-                  {nicho.nome}
-                </h2>
-
-                <p className="mt-4 text-sm leading-relaxed text-neutral-600">
-                  {nicho.descricao}
-                </p>
-              </div>
-            )
-          })}
-        </section>
-
-        {/* Rodapé */}
-        <footer className="mt-24 max-w-4xl border-t border-neutral-300 pt-6 text-xs text-neutral-500">
-          Bloco B1 — Nichos. Interface institucional sem lógica decisória,
-          ranking, sugestão ou leitura de performance.
-        </footer>
-      </main>
-    </div>
-  )
+      {/* FOOTER */}
+      <footer
+        style={{
+          padding: "32px 24px",
+          textAlign: "center",
+          fontSize: "14px",
+          color: "#475569",
+          borderTop: "1px solid #e5e7eb",
+        }}
+      >
+        Robô Global™ by CREMENIO
+      </footer>
+    </main>
+  );
 }
-
-/* =========================
-   Dados base — B1 somente
-   ========================= */
-
-const NICHOS_BASE = [
-  {
-    id: "saude-bem-estar",
-    nome: "Saúde e Bem-Estar",
-    descricao:
-      "Produtos e soluções voltadas à qualidade de vida, hábitos saudáveis e bem-estar físico e mental.",
-    categoria: "Lifestyle",
-  },
-  {
-    id: "financas-pessoais",
-    nome: "Finanças Pessoais",
-    descricao:
-      "Educação financeira, organização patrimonial, investimentos e renda.",
-    categoria: "Financeiro",
-  },
-  {
-    id: "marketing-digital",
-    nome: "Marketing Digital",
-    descricao:
-      "Aquisição, conversão e retenção de audiência em ambientes digitais.",
-    categoria: "Negócios",
-  },
-  {
-    id: "desenvolvimento-pessoal",
-    nome: "Desenvolvimento Pessoal",
-    descricao:
-      "Alta performance, produtividade, mentalidade e crescimento individual.",
-    categoria: "Comportamental",
-  },
-  {
-    id: "educacao-online",
-    nome: "Educação Online",
-    descricao:
-      "Cursos, treinamentos e métodos de ensino em ambientes digitais.",
-    categoria: "Educação",
-  },
-  {
-    id: "tecnologia-aplicada",
-    nome: "Tecnologia Aplicada",
-    descricao:
-      "Uso prático de tecnologia para automação, eficiência e escala.",
-    categoria: "Tecnologia",
-  },
-]
