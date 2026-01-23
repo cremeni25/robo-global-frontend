@@ -1,21 +1,18 @@
-// Nichos.tsx — B1 (Final)
-// Arquitetura baseada em Home.tsx
-// Escopo: apenas visual + estrutura B1 (Nichos)
-
 import { useState } from "react"
-import { CommandBar } from "@/components/CommandBar"
-import { Card } from "@/components/ui/card"
-import { Separator } from "@/components/ui/separator"
 
 export default function Nichos() {
   const [selectedNicho, setSelectedNicho] = useState<string | null>(null)
 
   return (
     <div className="min-h-screen w-full bg-neutral-50 text-neutral-900">
-      {/* Barra de comandos — obrigatória */}
-      <CommandBar />
+      {/* Barra superior — placeholder estrutural B1 */}
+      <div className="w-full border-b border-neutral-200 bg-white">
+        <div className="mx-auto max-w-7xl px-6 py-4 text-sm font-medium text-neutral-700">
+          Barra de Comandos
+        </div>
+      </div>
 
-      {/* Container central — mesma lógica estrutural do Home */}
+      {/* Container central — arquitetura base do Home */}
       <main className="mx-auto max-w-7xl px-6 py-10">
         {/* Cabeçalho */}
         <header className="mb-10">
@@ -29,34 +26,38 @@ export default function Nichos() {
           </p>
         </header>
 
-        <Separator className="mb-8" />
+        <div className="mb-8 h-px w-full bg-neutral-200" />
 
-        {/* Grid principal */}
+        {/* Grid de nichos */}
         <section className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {NICHOS_BASE.map((nicho) => (
-            <Card
-              key={nicho.id}
-              onClick={() => setSelectedNicho(nicho.id)}
-              className={`cursor-pointer rounded-xl border p-6 transition
-                ${
-                  selectedNicho === nicho.id
-                    ? "border-neutral-900 bg-white shadow-sm"
-                    : "border-neutral-200 bg-white hover:border-neutral-400"
-                }`}
-            >
-              <h2 className="text-lg font-medium tracking-tight">
-                {nicho.nome}
-              </h2>
+          {NICHOS_BASE.map((nicho) => {
+            const ativo = selectedNicho === nicho.id
 
-              <p className="mt-2 text-sm text-neutral-600">
-                {nicho.descricao}
-              </p>
+            return (
+              <div
+                key={nicho.id}
+                onClick={() => setSelectedNicho(nicho.id)}
+                className={`cursor-pointer rounded-xl border bg-white p-6 transition
+                  ${
+                    ativo
+                      ? "border-neutral-900 shadow-sm"
+                      : "border-neutral-200 hover:border-neutral-400"
+                  }`}
+              >
+                <h2 className="text-lg font-medium tracking-tight">
+                  {nicho.nome}
+                </h2>
 
-              <div className="mt-4 text-xs font-medium text-neutral-500">
-                Categoria: {nicho.categoria}
+                <p className="mt-2 text-sm text-neutral-600">
+                  {nicho.descricao}
+                </p>
+
+                <div className="mt-4 text-xs font-medium text-neutral-500">
+                  Categoria: {nicho.categoria}
+                </div>
               </div>
-            </Card>
-          ))}
+            )
+          })}
         </section>
 
         {/* Rodapé institucional */}
