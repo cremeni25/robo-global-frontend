@@ -1,13 +1,5 @@
-import Header from "./components/Header";
-import Router from "./router";
+// src/App.tsx
 
-function App() {
-  return (
-    <>
-      <Header />
-      <Router />
-    </>
-  );
+export default function App() {
+  return null;
 }
-
-export default App;
