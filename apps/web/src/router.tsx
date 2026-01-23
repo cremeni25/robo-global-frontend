@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import Nichos from "./pages/Nichos";
 import Dores from "./pages/Dores";
 
-export const router = createBrowserRouter([
+const router = createBrowserRouter([
   {
     element: <LayoutGlobal />,
     children: [
@@ -24,3 +24,5 @@ export const router = createBrowserRouter([
     ],
   },
 ]);
+
+export default router;
