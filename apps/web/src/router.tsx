@@ -1,19 +1,26 @@
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
+import LayoutGlobal from "./components/LayoutGlobal";
 
 import Home from "./pages/Home";
 import Nichos from "./pages/Nichos";
 import Dores from "./pages/Dores";
-import Go from "./pages/Go";
 
-export default function Router() {
-  return (
-    <HashRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/nichos" element={<Nichos />} />
-        <Route path="/dores/:context" element={<Dores />} />
-        <Route path="/go" element={<Go />} />
-      </Routes>
-    </HashRouter>
-  );
-}
+export const router = createBrowserRouter([
+  {
+    element: <LayoutGlobal />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/nichos",
+        element: <Nichos />,
+      },
+      {
+        path: "/dores",
+        element: <Dores />,
+      },
+    ],
+  },
+]);
