@@ -4,32 +4,37 @@ export default function Nichos() {
   const [selectedNicho, setSelectedNicho] = useState<string | null>(null)
 
   return (
-    <div className="min-h-screen w-full bg-neutral-50 text-neutral-900">
-      {/* Barra superior — placeholder estrutural B1 */}
-      <div className="w-full border-b border-neutral-200 bg-white">
-        <div className="mx-auto max-w-7xl px-6 py-4 text-sm font-medium text-neutral-700">
-          Barra de Comandos
+    <div className="min-h-screen w-full bg-neutral-100 text-neutral-900">
+      {/* Barra superior institucional */}
+      <div className="w-full border-b border-neutral-300 bg-white">
+        <div className="mx-auto flex h-14 max-w-7xl items-center px-8">
+          <span className="text-sm font-semibold tracking-wide text-neutral-800">
+            ROBÔ GLOBAL
+          </span>
+          <span className="ml-3 text-xs text-neutral-500">B1 · Nichos</span>
+
+          <div className="ml-auto text-xs font-medium text-neutral-500">
+            Barra de Comandos
+          </div>
         </div>
       </div>
 
-      {/* Container central — arquitetura base do Home */}
-      <main className="mx-auto max-w-7xl px-6 py-10">
+      {/* Conteúdo principal */}
+      <main className="mx-auto max-w-7xl px-8 py-16">
         {/* Cabeçalho */}
-        <header className="mb-10">
-          <h1 className="text-3xl font-semibold tracking-tight">
+        <header className="mb-16 max-w-3xl">
+          <h1 className="text-4xl font-semibold tracking-tight text-neutral-900">
             Nichos de Mercado
           </h1>
-          <p className="mt-2 max-w-2xl text-sm text-neutral-600">
-            Visualização institucional dos nichos atualmente disponíveis para
-            análise. Esta etapa apresenta apenas organização e leitura
-            estruturada.
+          <p className="mt-4 text-base leading-relaxed text-neutral-600">
+            Visualização institucional dos nichos disponíveis para análise.
+            Esta etapa apresenta exclusivamente organização e leitura
+            estruturada, sem qualquer inferência automatizada.
           </p>
         </header>
 
-        <div className="mb-8 h-px w-full bg-neutral-200" />
-
-        {/* Grid de nichos */}
-        <section className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Grid de Nichos */}
+        <section className="grid grid-cols-1 gap-10 md:grid-cols-2 xl:grid-cols-3">
           {NICHOS_BASE.map((nicho) => {
             const ativo = selectedNicho === nicho.id
 
@@ -37,33 +42,33 @@ export default function Nichos() {
               <div
                 key={nicho.id}
                 onClick={() => setSelectedNicho(nicho.id)}
-                className={`cursor-pointer rounded-xl border bg-white p-6 transition
+                className={`rounded-2xl border bg-white p-8 transition
                   ${
                     ativo
-                      ? "border-neutral-900 shadow-sm"
-                      : "border-neutral-200 hover:border-neutral-400"
+                      ? "border-neutral-900 shadow-xl"
+                      : "border-neutral-300 hover:shadow-md"
                   }`}
               >
-                <h2 className="text-lg font-medium tracking-tight">
+                <div className="mb-6 text-xs font-semibold uppercase tracking-wider text-neutral-500">
+                  {nicho.categoria}
+                </div>
+
+                <h2 className="text-xl font-semibold tracking-tight text-neutral-900">
                   {nicho.nome}
                 </h2>
 
-                <p className="mt-2 text-sm text-neutral-600">
+                <p className="mt-4 text-sm leading-relaxed text-neutral-600">
                   {nicho.descricao}
                 </p>
-
-                <div className="mt-4 text-xs font-medium text-neutral-500">
-                  Categoria: {nicho.categoria}
-                </div>
               </div>
             )
           })}
         </section>
 
-        {/* Rodapé institucional */}
-        <footer className="mt-14 max-w-3xl text-xs text-neutral-500">
-          Esta visualização faz parte do Bloco B1. Nenhuma inferência,
-          recomendação ou decisão automatizada ocorre nesta etapa.
+        {/* Rodapé */}
+        <footer className="mt-24 max-w-4xl border-t border-neutral-300 pt-6 text-xs text-neutral-500">
+          Bloco B1 — Nichos. Interface institucional sem lógica decisória,
+          ranking, sugestão ou leitura de performance.
         </footer>
       </main>
     </div>
@@ -77,7 +82,7 @@ export default function Nichos() {
 const NICHOS_BASE = [
   {
     id: "saude-bem-estar",
-    nome: "Saúde & Bem-Estar",
+    nome: "Saúde e Bem-Estar",
     descricao:
       "Produtos e soluções voltadas à qualidade de vida, hábitos saudáveis e bem-estar físico e mental.",
     categoria: "Lifestyle",
