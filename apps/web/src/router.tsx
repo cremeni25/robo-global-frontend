@@ -9,18 +9,9 @@ const router = createBrowserRouter([
   {
     element: <LayoutGlobal />,
     children: [
-      {
-        path: "/",
-        element: <Home />,
-      },
-      {
-        path: "/nichos",
-        element: <Nichos />,
-      },
-      {
-        path: "/dores",
-        element: <Dores />,
-      },
+      { path: "/", element: <Home /> },
+      { path: "/nichos", element: <Nichos /> },
+      { path: "/dores", element: <Dores /> },
     ],
   },
 ]);
