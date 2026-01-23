@@ -1,238 +1,148 @@
+// src/pages/Nichos.tsx
+
+import { Link } from "react-router-dom";
+
 export default function Nichos() {
   return (
-    <main style={{ width: "100%", backgroundColor: "#ffffff" }}>
+    <div style={{ width: "100%", backgroundColor: "#fff" }}>
+      {/* HEADER / NAV */}
+      <header
+        style={{
+          maxWidth: "1200px",
+          margin: "0 auto",
+          padding: "24px 16px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <strong>Robô Global™</strong>
+
+        <nav style={{ display: "flex", gap: "24px" }}>
+          <Link to="/">Início</Link>
+          <Link to="/nichos">Nichos</Link>
+          <Link to="/contextos">Contextos</Link>
+          <Link to="/sobre">Sobre</Link>
+        </nav>
+
+        <div style={{ display: "flex", gap: "8px", fontSize: "14px" }}>
+          <span>PT</span> | <span>EN</span> | <span>ES</span>
+        </div>
+      </header>
+
       {/* HERO */}
       <section
         style={{
           width: "100%",
           backgroundImage:
-            "linear-gradient(rgba(15,23,42,0.55), rgba(15,23,42,0.55)), url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80')",
+            "url(https://images.unsplash.com/photo-1521737604893-d14cc237f11d)",
           backgroundSize: "cover",
           backgroundPosition: "center",
-          padding: "110px 24px",
-          color: "#ffffff",
         }}
       >
         <div
           style={{
-            maxWidth: "1100px",
+            maxWidth: "1200px",
             margin: "0 auto",
+            padding: "120px 16px",
+            color: "#fff",
           }}
         >
-          <h1
-            style={{
-              fontSize: "48px",
-              fontWeight: 600,
-              marginBottom: "16px",
-              maxWidth: "720px",
-            }}
-          >
+          <h1 style={{ fontSize: "48px", marginBottom: "16px" }}>
             Cada pessoa vive um contexto diferente
           </h1>
-
-          <p
-            style={{
-              fontSize: "18px",
-              lineHeight: 1.6,
-              maxWidth: "640px",
-            }}
-          >
+          <p style={{ maxWidth: "600px", fontSize: "18px" }}>
             O <strong>Robô Global™</strong> organiza padrões de vida, decisões
             recorrentes e situações reais enfrentadas por pessoas comuns.
+            Nichos não são rótulos — são <strong>contextos humanos</strong>.
           </p>
         </div>
       </section>
 
-      {/* BLOCO EXPLICATIVO */}
-      <section style={{ padding: "72px 24px" }}>
-        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-          <h2
-            style={{
-              fontSize: "32px",
-              fontWeight: 600,
-              marginBottom: "12px",
-            }}
-          >
-            Nichos não são rótulos
-          </h2>
+      {/* CONTEÚDO */}
+      <main
+        style={{
+          maxWidth: "1200px",
+          margin: "0 auto",
+          padding: "80px 16px",
+        }}
+      >
+        <h2 style={{ marginBottom: "12px" }}>Nichos não são rótulos</h2>
+        <p style={{ maxWidth: "700px", marginBottom: "48px" }}>
+          Neste ambiente, nichos representam situações recorrentes onde
+          clareza, organização e leitura de cenário fazem diferença antes do
+          próximo passo.
+        </p>
 
-          <p
-            style={{
-              fontSize: "16px",
-              lineHeight: 1.6,
-              maxWidth: "720px",
-            }}
-          >
-            Neste ambiente, nichos são tratados como{" "}
-            <strong>contextos humanos</strong> — situações recorrentes onde
-            clareza, organização e leitura de cenário fazem diferença antes do
-            próximo passo.
-          </p>
-        </div>
-      </section>
-
-      {/* GRID DE CONTEXTOS */}
-      <section style={{ padding: "40px 24px" }}>
+        {/* CARDS */}
         <div
           style={{
-            maxWidth: "1100px",
-            margin: "0 auto",
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
             gap: "32px",
           }}
         >
           {/* CARD 1 */}
-          <div
-            style={{
-              border: "1px solid #e5e7eb",
-              borderRadius: "14px",
-              overflow: "hidden",
-              backgroundColor: "#ffffff",
-            }}
-          >
+          <div>
             <img
-              src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80"
-              alt="Pessoa reorganizando a própria vida"
-              style={{
-                width: "100%",
-                height: "180px",
-                objectFit: "cover",
-              }}
+              src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e"
+              alt="Pessoa reorganizando a vida"
+              style={{ width: "100%", borderRadius: "8px" }}
             />
-            <div style={{ padding: "20px" }}>
-              <h3
-                style={{
-                  fontSize: "20px",
-                  fontWeight: 600,
-                  marginBottom: "8px",
-                }}
-              >
-                Pessoas reorganizando a própria vida
-              </h3>
-              <p style={{ lineHeight: 1.6 }}>
-                Transições, recomeços e decisões importantes que exigem mais
-                clareza.
-              </p>
-            </div>
+            <h3 style={{ marginTop: "16px" }}>
+              Pessoas reorganizando a própria vida
+            </h3>
+            <p>
+              Transições pessoais, recomeços e decisões importantes que exigem
+              mais clareza antes do próximo movimento.
+            </p>
           </div>
 
           {/* CARD 2 */}
-          <div
-            style={{
-              border: "1px solid #e5e7eb",
-              borderRadius: "14px",
-              overflow: "hidden",
-              backgroundColor: "#ffffff",
-            }}
-          >
+          <div>
             <img
-              src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=80"
-              alt="Família lidando com responsabilidades"
-              style={{
-                width: "100%",
-                height: "180px",
-                objectFit: "cover",
-              }}
+              src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac"
+              alt="Famílias lidando com responsabilidades"
+              style={{ width: "100%", borderRadius: "8px" }}
             />
-            <div style={{ padding: "20px" }}>
-              <h3
-                style={{
-                  fontSize: "20px",
-                  fontWeight: 600,
-                  marginBottom: "8px",
-                }}
-              >
-                Famílias lidando com múltiplas responsabilidades
-              </h3>
-              <p style={{ lineHeight: 1.6 }}>
-                Organização do cotidiano e escolhas que impactam mais de uma
-                pessoa.
-              </p>
-            </div>
+            <h3 style={{ marginTop: "16px" }}>
+              Famílias lidando com múltiplas responsabilidades
+            </h3>
+            <p>
+              Organização do cotidiano e escolhas que impactam mais de uma
+              pessoa ao mesmo tempo.
+            </p>
           </div>
 
           {/* CARD 3 */}
-          <div
-            style={{
-              border: "1px solid #e5e7eb",
-              borderRadius: "14px",
-              overflow: "hidden",
-              backgroundColor: "#ffffff",
-            }}
-          >
+          <div>
             <img
-              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=80"
+              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c"
               alt="Ambiente profissional"
-              style={{
-                width: "100%",
-                height: "180px",
-                objectFit: "cover",
-              }}
+              style={{ width: "100%", borderRadius: "8px" }}
             />
-            <div style={{ padding: "20px" }}>
-              <h3
-                style={{
-                  fontSize: "20px",
-                  fontWeight: 600,
-                  marginBottom: "8px",
-                }}
-              >
-                Pessoas em ambientes profissionais
-              </h3>
-              <p style={{ lineHeight: 1.6 }}>
-                Pressões, decisões estratégicas e necessidade de leitura de
-                cenário.
-              </p>
-            </div>
+            <h3 style={{ marginTop: "16px" }}>
+              Pessoas em ambientes profissionais
+            </h3>
+            <p>
+              Pressões, decisões estratégicas e necessidade de leitura de
+              cenário antes de agir.
+            </p>
           </div>
         </div>
-      </section>
-
-      {/* BLOCO DE TRANSIÇÃO */}
-      <section
-        style={{
-          backgroundColor: "#f8fafc",
-          padding: "72px 24px",
-          marginTop: "72px",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "900px",
-            margin: "0 auto",
-            textAlign: "center",
-          }}
-        >
-          <h2
-            style={{
-              fontSize: "30px",
-              fontWeight: 600,
-              marginBottom: "16px",
-            }}
-          >
-            Entender o contexto muda a forma de decidir
-          </h2>
-          <p style={{ fontSize: "18px", lineHeight: 1.6 }}>
-            O <strong>Robô Global™</strong> existe para ajudar a organizar
-            informações, reduzir ruídos e apoiar decisões mais conscientes no
-            cotidiano.
-          </p>
-        </div>
-      </section>
+      </main>
 
       {/* FOOTER */}
       <footer
         style={{
-          padding: "32px 24px",
+          borderTop: "1px solid #eee",
+          padding: "32px 16px",
           textAlign: "center",
           fontSize: "14px",
-          color: "#475569",
-          borderTop: "1px solid #e5e7eb",
         }}
       >
-        Robô Global™ by CREMENIO
+        Robô Global™ by <strong>CREMENI</strong>
       </footer>
-    </main>
+    </div>
   );
 }
