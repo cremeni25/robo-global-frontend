@@ -1,88 +1,203 @@
 export default function Home() {
   return (
-    <main style={{ padding: "64px 24px", maxWidth: "1100px", margin: "0 auto" }}>
-      
-      {/* BLOCO 1 — ABERTURA HUMANA */}
-      <section style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "40px", alignItems: "center", marginBottom: "96px" }}>
-        <div>
-          <h1 style={{ fontSize: "40px", lineHeight: "1.2", marginBottom: "24px" }}>
-            Entender o contexto muda a forma de decidir
-          </h1>
+    <>
+      {/* HERO */}
+      <section style={styles.hero}>
+        <div style={styles.heroGrid}>
+          <div>
+            <h1 style={styles.heroTitle}>
+              Automação inteligente para decisões melhores.
+            </h1>
 
-          <p style={{ fontSize: "18px", lineHeight: "1.6", color: "#444" }}>
-            Todos os dias lidamos com escolhas — algumas simples, outras complexas.
-            O Robô Global existe para ajudar na leitura de cenários, organizando
-            informações e oferecendo clareza antes do próximo passo.
-          </p>
-        </div>
+            <p style={styles.heroSubtitle}>
+              Tecnologia que organiza informações, reduz incertezas e apoia
+              escolhas mais conscientes — para pessoas, profissionais e
+              organizações.
+            </p>
 
-        <div>
-          <img
-            src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe"
-            alt="Pessoa refletindo calmamente em ambiente cotidiano"
-            style={{ width: "100%", borderRadius: "12px" }}
-          />
+            <div style={styles.badges}>
+              <span style={styles.badge}>Clareza</span>
+              <span style={styles.badge}>Controle</span>
+              <span style={styles.badge}>Evolução contínua</span>
+            </div>
+          </div>
+
+          {/* Imagem abstrata institucional (placeholder visual) */}
+          <div style={styles.heroImage}>
+            <div style={styles.imagePlaceholder}>
+              Visual institucional abstrato
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* BLOCO 2 — O QUE É */}
-      <section style={{ marginBottom: "80px" }}>
-        <h2 style={{ fontSize: "28px", marginBottom: "16px" }}>
-          O que é o Robô Global
+      {/* PARA QUEM É */}
+      <section style={styles.sectionAlt}>
+        <h2 style={styles.sectionTitle}>
+          Projetado para diferentes realidades.
         </h2>
 
-        <p style={{ fontSize: "17px", lineHeight: "1.6", color: "#444", maxWidth: "760px" }}>
-          O Robô Global é um ambiente de leitura e organização de contextos.
-          Ele ajuda a identificar padrões, esclarecer situações e apoiar
-          decisões mais conscientes no dia a dia.
+        <p style={styles.sectionText}>
+          O Robô Global foi pensado para atender pessoas comuns, profissionais
+          técnicos, atletas e parceiros, respeitando diferentes níveis de
+          conhecimento e objetivos.
         </p>
-      </section>
 
-      {/* BLOCO 3 — PARA QUE SERVE */}
-      <section style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "48px", marginBottom: "96px", alignItems: "center" }}>
-        <div>
-          <h2 style={{ fontSize: "28px", marginBottom: "16px" }}>
-            Para que ele serve
-          </h2>
-
-          <ul style={{ fontSize: "17px", lineHeight: "1.8", color: "#444", paddingLeft: "18px" }}>
-            <li>Ajudar a entender situações antes de decidir</li>
-            <li>Organizar informações que parecem confusas</li>
-            <li>Perceber pressões invisíveis que influenciam escolhas</li>
-            <li>Refletir com mais calma sobre caminhos possíveis</li>
-          </ul>
-        </div>
-
-        <div>
-          <img
-            src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
-            alt="Pessoas conversando de forma tranquila em ambiente cotidiano"
-            style={{ width: "100%", borderRadius: "12px" }}
-          />
+        <div style={styles.cards}>
+          <div style={styles.card}>Pessoas físicas</div>
+          <div style={styles.card}>Profissionais técnicos</div>
+          <div style={styles.card}>Atletas e equipes</div>
+          <div style={styles.card}>Empreendedores e parceiros</div>
         </div>
       </section>
 
-      {/* BLOCO 4 — COMO UTILIZAR */}
-      <section style={{ marginBottom: "96px" }}>
-        <h2 style={{ fontSize: "28px", marginBottom: "16px" }}>
-          Como utilizar a plataforma
+      {/* O QUE FAZ */}
+      <section style={styles.section}>
+        <h2 style={styles.sectionTitle}>O que o Robô Global faz</h2>
+
+        <ul style={styles.list}>
+          <li>Organiza informações relevantes</li>
+          <li>Analisa padrões de forma contínua</li>
+          <li>Apoia decisões com base em dados</li>
+          <li>Reduz dependência de tentativa e erro</li>
+        </ul>
+      </section>
+
+      {/* CONFIANÇA */}
+      <section style={styles.trust}>
+        <h2 style={styles.trustTitle}>
+          Tecnologia deve gerar segurança, não confusão.
         </h2>
 
-        <p style={{ fontSize: "17px", lineHeight: "1.6", color: "#444", maxWidth: "760px" }}>
-          Você pode explorar contextos, refletir sobre situações e avançar
-          no seu próprio ritmo. Não há respostas prontas — apenas apoio
-          para decisões mais conscientes.
+        <p style={styles.trustText}>
+          O Robô Global foi desenvolvido com foco em clareza, ética operacional e
+          previsibilidade. Cada funcionalidade existe para simplificar processos
+          e apoiar decisões responsáveis.
         </p>
       </section>
 
-      {/* BLOCO 5 — FECHAMENTO */}
-      <section>
-        <p style={{ fontSize: "18px", lineHeight: "1.6", color: "#333", maxWidth: "760px" }}>
-          Cada pessoa vive um momento diferente.
-          Entender o contexto certo pode mudar completamente o próximo passo.
+      {/* CONTINUIDADE */}
+      <section style={styles.section}>
+        <p style={styles.sectionText}>
+          Explore as áreas de Nichos e Dores para entender como a plataforma se
+          adapta a diferentes contextos e necessidades.
         </p>
       </section>
-
-    </main>
+    </>
   );
 }
+
+/* =======================
+   ESTILOS (FIDELITY-LIKE)
+   ======================= */
+
+const styles: Record<string, React.CSSProperties> = {
+  hero: {
+    padding: "64px 0",
+  },
+  heroGrid: {
+    display: "grid",
+    gridTemplateColumns: "1.2fr 0.8fr",
+    gap: 48,
+    alignItems: "center",
+  },
+  heroTitle: {
+    fontSize: 40,
+    fontWeight: 600,
+    color: "#0B2A4A",
+    marginBottom: 16,
+  },
+  heroSubtitle: {
+    fontSize: 18,
+    color: "#2E2E2E",
+    lineHeight: 1.6,
+    maxWidth: 560,
+  },
+  badges: {
+    display: "flex",
+    gap: 12,
+    marginTop: 24,
+  },
+  badge: {
+    border: "1px solid #E0E4E8",
+    borderRadius: 20,
+    padding: "6px 14px",
+    fontSize: 14,
+    color: "#2E2E2E",
+    background: "#FFFFFF",
+  },
+  heroImage: {
+    display: "flex",
+    justifyContent: "center",
+  },
+  imagePlaceholder: {
+    width: "100%",
+    height: 220,
+    borderRadius: 8,
+    background: "#F4F6F8",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    color: "#8A8A8A",
+    fontSize: 14,
+  },
+  section: {
+    padding: "64px 0",
+  },
+  sectionAlt: {
+    padding: "64px 0",
+    background: "#F4F6F8",
+  },
+  sectionTitle: {
+    fontSize: 28,
+    fontWeight: 600,
+    color: "#0B2A4A",
+    marginBottom: 16,
+  },
+  sectionText: {
+    fontSize: 16,
+    color: "#2E2E2E",
+    maxWidth: 720,
+    lineHeight: 1.6,
+    marginBottom: 32,
+  },
+  cards: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+    gap: 24,
+  },
+  card: {
+    background: "#FFFFFF",
+    border: "1px solid #E0E4E8",
+    borderRadius: 8,
+    padding: 24,
+    textAlign: "center",
+    fontSize: 15,
+    color: "#2E2E2E",
+  },
+  list: {
+    fontSize: 16,
+    color: "#2E2E2E",
+    lineHeight: 2,
+    maxWidth: 600,
+    paddingLeft: 20,
+  },
+  trust: {
+    padding: "64px 0",
+    background: "#0B2A4A",
+    color: "#FFFFFF",
+    textAlign: "center",
+  },
+  trustTitle: {
+    fontSize: 28,
+    fontWeight: 600,
+    marginBottom: 16,
+  },
+  trustText: {
+    fontSize: 16,
+    lineHeight: 1.6,
+    maxWidth: 720,
+    margin: "0 auto",
+    color: "#E6EDF3",
+  },
+};
