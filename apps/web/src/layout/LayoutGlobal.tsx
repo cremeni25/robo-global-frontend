@@ -17,7 +17,7 @@ export default function LayoutGlobal({ children }: Props) {
             <Link to="/sobre">Sobre</Link>
           </nav>
 
-          <select style={styles.lang}>
+          <select style={styles.lang} defaultValue="pt">
             <option value="pt">PT</option>
             <option value="en">EN</option>
             <option value="es">ES</option>
