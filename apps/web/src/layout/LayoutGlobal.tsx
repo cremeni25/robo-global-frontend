@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 
 interface Props {
@@ -18,9 +18,9 @@ export default function LayoutGlobal({ children }: Props) {
           </nav>
 
           <select style={styles.lang}>
-            <option>PT</option>
-            <option>EN</option>
-            <option>ES</option>
+            <option value="pt">PT</option>
+            <option value="en">EN</option>
+            <option value="es">ES</option>
           </select>
         </div>
       </header>
@@ -34,6 +34,7 @@ const styles: Record<string, React.CSSProperties> = {
   header: {
     width: "100%",
     borderBottom: "1px solid #e5e7eb",
+    backgroundColor: "#ffffff",
   },
   headerInner: {
     maxWidth: 1280,
@@ -48,7 +49,8 @@ const styles: Record<string, React.CSSProperties> = {
     gap: 24,
   },
   lang: {
-    padding: 6,
+    padding: "6px 8px",
+    fontSize: 14,
   },
   container: {
     maxWidth: 1280,
