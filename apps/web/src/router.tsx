@@ -1,18 +1,20 @@
-// src/router.tsx
-import { createBrowserRouter } from "react-router-dom";
-import LayoutGlobal from "./components/LayoutGlobal";
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LayoutGlobal from "./layout/LayoutGlobal";
 import Home from "./pages/Home";
 import Nichos from "./pages/Nichos";
 import Dores from "./pages/Dores";
 
-export const router = createBrowserRouter([
-  {
-    element: <LayoutGlobal />,
-    children: [
-      { path: "/", element: <Home /> },
-      { path: "/nichos", element: <Nichos /> },
-      { path: "/dores", element: <Dores /> },
-    ],
-  },
-]);
+export default function Router() {
+  return (
+    <BrowserRouter>
+      <LayoutGlobal>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/nichos" element={<Nichos />} />
+          <Route path="/dores" element={<Dores />} />
+          <Route path="/sobre" element={<div>Sobre</div>} />
+        </Routes>
+      </LayoutGlobal>
+    </BrowserRouter>
+  );
+}
