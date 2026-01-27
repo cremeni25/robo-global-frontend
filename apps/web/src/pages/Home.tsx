@@ -10,79 +10,94 @@ export default function Home() {
       <section style={styles.hero}>
         <div style={styles.heroContainer}>
           <div>
-            <h1 style={styles.heroTitle}>{t("home.title")}</h1>
+            <h1 style={styles.heroTitle}>
+              {t("home.title")}
+            </h1>
 
-            <p style={styles.heroSubtitle}>{t("home.subtitle")}</p>
+            <p style={styles.heroSubtitle}>
+              {t("home.subtitle")}
+            </p>
 
             <div style={styles.pills}>
-              {t("home.pillars.0") && (
-                <>
-                  <span style={styles.pill}>{t("home.pillars.0")}</span>
-                  <span style={styles.pill}>{t("home.pillars.1")}</span>
-                  <span style={styles.pill}>{t("home.pillars.2")}</span>
-                </>
-              )}
+              <span style={styles.pill}>{t("home.pillars.0")}</span>
+              <span style={styles.pill}>{t("home.pillars.1")}</span>
+              <span style={styles.pill}>{t("home.pillars.2")}</span>
             </div>
           </div>
 
+          {/* IMAGEM */}
           <div style={styles.imageWrapper}>
             <img
               src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f"
-              alt="Decision moment"
+              alt="Pessoa analisando caminhos e decisões"
               style={styles.image}
             />
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section style={styles.section}>
-        <button style={styles.cta} onClick={() => navigate("/nichos")}>
-          {t("nav.nichos")}
-        </button>
+      {/* FRASE SOLTA */}
+      <section style={styles.quoteSection}>
+        <p style={styles.quote}>
+          {t("home.quote")}
+        </p>
       </section>
+
+      {/* COMO FUNCIONA */}
+      <section style={styles.section}>
+        <h2 style={styles.sectionTitle}>
+          {t("home.how.title")}
+        </h2>
+
+        <div style={styles.steps}>
+          <div style={styles.step}>
+            <span style={styles.stepNumber}>1</span>
+            <p>{t("home.how.steps.0")}</p>
+          </div>
+
+          <div style={styles.step}>
+            <span style={styles.stepNumber}>2</span>
+            <p>{t("home.how.steps.1")}</p>
+          </div>
+
+          <div style={styles.step}>
+            <span style={styles.stepNumber}>3</span>
+            <p>{t("home.how.steps.2")}</p>
+          </div>
+        </div>
+      </section>
+
+      {/* NICHOS */}
+      <section style={styles.sectionAlt}>
+        <h2 style={styles.sectionTitle}>
+          {t("home.niches.title")}
+        </h2>
+
+        <div style={styles.niches}>
+          <div style={styles.nicheCard} onClick={() => navigate("/nichos?area=financeiro")}>
+            💰 {t("home.niches.financeiro")}
+          </div>
+
+          <div style={styles.nicheCard} onClick={() => navigate("/nichos?area=saude")}>
+            🧠 {t("home.niches.saude")}
+          </div>
+
+          <div style={styles.nicheCard} onClick={() => navigate("/nichos?area=desempenho")}>
+            🏃 {t("home.niches.desempenho")}
+          </div>
+
+          <div style={styles.nicheCard} onClick={() => navigate("/nichos?area=organizacao")}>
+            ⏱️ {t("home.niches.organizacao")}
+          </div>
+        </div>
+      </section>
+
+      {/* RODAPÉ */}
+      <footer style={styles.footer}>
+        <p style={styles.footerText}>
+          {t("home.footer")}
+        </p>
+      </footer>
     </>
   );
 }
-
-const styles: Record<string, React.CSSProperties> = {
-  hero: { padding: "72px 24px" },
-  heroContainer: {
-    maxWidth: 1200,
-    margin: "0 auto",
-    display: "grid",
-    gridTemplateColumns: "1.2fr 0.8fr",
-    gap: 48,
-    alignItems: "center",
-  },
-  heroTitle: {
-    fontSize: 42,
-    fontWeight: 700,
-    color: "#0B2A4A",
-    marginBottom: 20,
-  },
-  heroSubtitle: {
-    fontSize: 18,
-    lineHeight: 1.6,
-    color: "#2E2E2E",
-  },
-  pills: { display: "flex", gap: 12, marginTop: 28 },
-  pill: {
-    background: "#E6EDF3",
-    padding: "8px 18px",
-    borderRadius: 24,
-    fontWeight: 600,
-  },
-  imageWrapper: { borderRadius: 14, overflow: "hidden" },
-  image: { width: "100%", height: "100%", objectFit: "cover" },
-  section: { textAlign: "center", padding: 48 },
-  cta: {
-    padding: "14px 28px",
-    borderRadius: 28,
-    border: "none",
-    background: "#0B2A4A",
-    color: "#FFF",
-    fontWeight: 600,
-    cursor: "pointer",
-  },
-};
