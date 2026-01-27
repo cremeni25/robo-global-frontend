@@ -1,72 +1,66 @@
+import { useNavigate } from "react-router-dom";
+
 export default function Home() {
+  const navigate = useNavigate();
+
   return (
     <>
+      {/* HEADER ÚNICO */}
+      <header style={styles.header}>
+        <div style={styles.headerContainer}>
+          <div style={styles.brand}>
+            <div style={styles.rg}>RG</div>
+          </div>
+
+          <nav style={styles.nav}>
+            <button style={{ ...styles.navItem, background: "#0B2A4A" }} onClick={() => navigate("/")}>
+              Lar
+            </button>
+            <button style={{ ...styles.navItem, background: "#3A7CA5" }} onClick={() => navigate("/nichos")}>
+              Nichos
+            </button>
+            <button style={{ ...styles.navItem, background: "#4A4A4A" }} onClick={() => navigate("/dores")}>
+              Dores
+            </button>
+            <button style={{ ...styles.navItem, background: "#7A7A7A" }} onClick={() => navigate("/sobre")}>
+              Sobre
+            </button>
+          </nav>
+
+          <div style={styles.lang}>PT</div>
+        </div>
+      </header>
+
       {/* HERO */}
       <section style={styles.hero}>
         <div style={styles.heroContainer}>
-          <header style={styles.topBar}>
-            <div style={styles.brand}>
-              <span style={styles.brandMark}>RG</span>
-              <span style={styles.brandText}>RoboGlobal™ by CREMENI</span>
-            </div>
+          <div>
+            <h1 style={styles.heroTitle}>
+              Um caminho claro para resolver o que hoje te incomoda.
+            </h1>
 
-            <nav style={styles.nav}>
-              <span style={{ ...styles.navItem, background: "#0B2A4A" }}>Home</span>
-              <span style={{ ...styles.navItem, background: "#3A7CA5" }}>Nichos</span>
-              <span style={{ ...styles.navItem, background: "#4A4A4A" }}>Dores</span>
-              <span style={{ ...styles.navItem, background: "#7A7A7A" }}>Sobre</span>
-            </nav>
+            <p style={styles.heroSubtitle}>
+              Aqui você não encontra promessas nem atalhos.  
+              Encontra orientação para reconhecer sua situação e seguir por
+              caminhos que façam sentido para a sua realidade.
+            </p>
 
-            <div style={styles.lang}>PT</div>
-          </header>
-
-          <div style={styles.heroGrid}>
-            <div>
-              <h1 style={styles.heroTitle}>
-                Um caminho claro para resolver o que hoje te incomoda.
-              </h1>
-
-              <p style={styles.heroSubtitle}>
-                Aqui você não encontra promessas nem atalhos.  
-                Encontra orientação para reconhecer sua situação e seguir por
-                caminhos que façam sentido para a sua realidade.
-              </p>
-
-              <div style={styles.pillGroup}>
-                <span style={{ ...styles.pill, background: "#E6EDF3" }}>Clareza</span>
-                <span style={{ ...styles.pill, background: "#D6E4EF" }}>Direção</span>
-                <span style={{ ...styles.pill, background: "#C6DBEB" }}>Confiança</span>
-              </div>
-            </div>
-
-            <div style={styles.heroVisual}>
-              <div style={styles.watermark}>RG</div>
+            <div style={styles.pills}>
+              <span style={styles.pill}>Clareza</span>
+              <span style={styles.pill}>Direção</span>
+              <span style={styles.pill}>Confiança</span>
             </div>
           </div>
+
+          <div style={styles.visual} />
         </div>
       </section>
 
-      {/* BLOCO DE RECONHECIMENTO */}
-      <section style={styles.sectionAlt}>
-        <div style={styles.sectionGrid}>
-          <div>
-            <h2 style={styles.sectionTitle}>
-              Pessoas diferentes vivem desafios diferentes.
-            </h2>
-
-            <p style={styles.sectionText}>
-              Antes de qualquer escolha, o passo mais importante é reconhecer
-              onde você está agora. A partir disso, fica mais simples seguir um
-              caminho coerente e responsável.
-            </p>
-          </div>
-
-          <div style={styles.symbolGrid}>
-            <div style={styles.symbolCard}>Equilíbrio</div>
-            <div style={styles.symbolCard}>Organização</div>
-            <div style={styles.symbolCard}>Direcionamento</div>
-          </div>
-        </div>
+      {/* CITAÇÃO */}
+      <section style={styles.quoteSection}>
+        <p style={styles.quote}>
+          “Decidir bem começa por reconhecer o que realmente está te afetando agora.”
+        </p>
       </section>
 
       {/* COMO FUNCIONA */}
@@ -76,61 +70,60 @@ export default function Home() {
         <div style={styles.steps}>
           <div style={styles.step}>
             <span style={styles.stepNumber}>1</span>
-            <p>Você escolhe a área da sua vida que deseja melhorar</p>
+            <p>Escolha a área da sua vida que deseja melhorar</p>
           </div>
 
           <div style={styles.step}>
             <span style={styles.stepNumber}>2</span>
-            <p>Identifica a situação que mais se parece com a sua</p>
+            <p>Identifique a situação que mais se parece com a sua</p>
           </div>
 
           <div style={styles.step}>
             <span style={styles.stepNumber}>3</span>
-            <p>É conduzido a um conteúdo que pode ajudar</p>
+            <p>Siga um caminho possível e coerente com sua realidade</p>
           </div>
         </div>
       </section>
 
-      {/* TRANSIÇÃO */}
-      <section style={styles.transition}>
-        <p style={styles.transitionText}>
-          O primeiro passo não é resolver tudo.  
-          É escolher por onde começar.
-        </p>
-      </section>
-
-      {/* NICHOS – CONVERSÃO DO HOME */}
+      {/* NICHOS – CONVERSÃO */}
       <section style={styles.sectionAlt}>
         <h2 style={styles.sectionTitle}>
           Escolha a área que mais faz sentido para você agora
         </h2>
 
         <div style={styles.niches}>
-          <div style={styles.nicheCard}>
+          <div style={styles.nicheCard} onClick={() => navigate("/nichos?area=financeiro")}>
             <span style={styles.nicheIcon}>💰</span>
             <h3>Organização Financeira</h3>
-            <p>Lidar melhor com dinheiro, gastos e planejamento.</p>
+            <p>Controle, planejamento e decisões mais seguras.</p>
           </div>
 
-          <div style={styles.nicheCard}>
+          <div style={styles.nicheCard} onClick={() => navigate("/nichos?area=saude")}>
             <span style={styles.nicheIcon}>🧠</span>
-            <h3>Saúde e bem-estar</h3>
-            <p>Buscar equilíbrio, disposição e qualidade de vida.</p>
+            <h3>Saúde e Bem-estar</h3>
+            <p>Equilíbrio emocional, físico e mental.</p>
           </div>
 
-          <div style={styles.nicheCard}>
+          <div style={styles.nicheCard} onClick={() => navigate("/nichos?area=desempenho")}>
             <span style={styles.nicheIcon}>🏃</span>
-            <h3>Corpo e desempenho</h3>
-            <p>Cuidar do corpo, energia e capacidade física.</p>
+            <h3>Corpo e Desempenho</h3>
+            <p>Energia, foco e evolução pessoal.</p>
           </div>
 
-          <div style={styles.nicheCard}>
+          <div style={styles.nicheCard} onClick={() => navigate("/nichos?area=organizacao")}>
             <span style={styles.nicheIcon}>⏱️</span>
-            <h3>Organização e foco</h3>
-            <p>Ter mais clareza, controle e produtividade.</p>
+            <h3>Organização e Foco</h3>
+            <p>Mais clareza, menos sobrecarga.</p>
           </div>
         </div>
       </section>
+
+      {/* RODAPÉ */}
+      <footer style={styles.footer}>
+        <p style={styles.footerText}>
+          Este produto foi desenvolvido por RoboGlobal™ by CREMENI.
+        </p>
+      </footer>
     </>
   );
 }
@@ -140,60 +133,52 @@ export default function Home() {
    ========================= */
 
 const styles: Record<string, React.CSSProperties> = {
-  hero: {
+  header: {
     background: "#FFFFFF",
-    padding: "48px 0 72px",
+    borderBottom: "1px solid #E6E6E6",
   },
-  heroContainer: {
+  headerContainer: {
     maxWidth: 1200,
     margin: "0 auto",
-    padding: "0 24px",
-  },
-  topBar: {
+    padding: "16px 24px",
     display: "flex",
-    justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 48,
+    justifyContent: "space-between",
   },
   brand: {
     display: "flex",
     alignItems: "center",
-    gap: 10,
   },
-  brandMark: {
-    width: 36,
-    height: 36,
-    borderRadius: "50%",
-    background: "#0B2A4A",
-    color: "#FFF",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontWeight: 700,
-  },
-  brandText: {
-    fontSize: 14,
-    color: "#2E2E2E",
+  rg: {
+    fontSize: 64,
+    fontWeight: 800,
+    color: "#0B2A4A",
+    opacity: 0.15,
   },
   nav: {
     display: "flex",
-    gap: 10,
+    gap: 12,
   },
   navItem: {
-    padding: "6px 14px",
+    padding: "8px 18px",
     borderRadius: 20,
+    border: "none",
     color: "#FFF",
     fontWeight: 700,
-    fontSize: 14,
     cursor: "pointer",
   },
   lang: {
-    border: "1px solid #CCC",
-    borderRadius: 6,
-    padding: "4px 8px",
     fontSize: 13,
+    border: "1px solid #CCC",
+    padding: "4px 8px",
+    borderRadius: 6,
   },
-  heroGrid: {
+  hero: {
+    padding: "72px 24px",
+  },
+  heroContainer: {
+    maxWidth: 1200,
+    margin: "0 auto",
     display: "grid",
     gridTemplateColumns: "1.2fr 0.8fr",
     gap: 48,
@@ -207,74 +192,51 @@ const styles: Record<string, React.CSSProperties> = {
   },
   heroSubtitle: {
     fontSize: 18,
-    color: "#2E2E2E",
     lineHeight: 1.6,
-    maxWidth: 560,
+    color: "#2E2E2E",
   },
-  pillGroup: {
+  pills: {
     display: "flex",
     gap: 12,
     marginTop: 28,
   },
   pill: {
+    background: "#E6EDF3",
     padding: "8px 18px",
     borderRadius: 24,
-    fontSize: 14,
     fontWeight: 600,
   },
-  heroVisual: {
-    position: "relative",
+  visual: {
     height: 260,
     background: "#F4F6F8",
-    borderRadius: 12,
+    borderRadius: 14,
   },
-  watermark: {
-    position: "absolute",
-    right: 24,
-    bottom: 24,
-    fontSize: 96,
-    fontWeight: 700,
-    color: "rgba(11,42,74,0.08)",
+  quoteSection: {
+    padding: "48px 24px",
+    textAlign: "center",
   },
-  section: {
-    padding: "72px 24px",
-    maxWidth: 1200,
+  quote: {
+    fontSize: 22,
+    fontStyle: "italic",
+    fontWeight: 600,
+    color: "#0B2A4A",
+    maxWidth: 720,
     margin: "0 auto",
   },
-  sectionAlt: {
+  section: {
+    maxWidth: 1200,
+    margin: "0 auto",
     padding: "72px 24px",
+  },
+  sectionAlt: {
     background: "#F4F6F8",
+    padding: "72px 24px",
   },
   sectionTitle: {
     fontSize: 30,
     fontWeight: 700,
     color: "#0B2A4A",
-    marginBottom: 24,
-  },
-  sectionText: {
-    fontSize: 16,
-    lineHeight: 1.6,
-    maxWidth: 640,
-    color: "#2E2E2E",
-  },
-  sectionGrid: {
-    maxWidth: 1200,
-    margin: "0 auto",
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr",
-    gap: 48,
-  },
-  symbolGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(3, 1fr)",
-    gap: 16,
-  },
-  symbolCard: {
-    background: "#FFF",
-    borderRadius: 12,
-    padding: 24,
-    textAlign: "center",
-    fontWeight: 600,
+    marginBottom: 32,
   },
   steps: {
     display: "grid",
@@ -282,10 +244,10 @@ const styles: Record<string, React.CSSProperties> = {
     gap: 32,
   },
   step: {
-    background: "#FFF",
-    border: "1px solid #E0E4E8",
+    background: "#FFFFFF",
     borderRadius: 12,
     padding: 32,
+    border: "1px solid #E0E4E8",
     textAlign: "center",
   },
   stepNumber: {
@@ -296,20 +258,8 @@ const styles: Record<string, React.CSSProperties> = {
     background: "#0B2A4A",
     color: "#FFF",
     fontWeight: 700,
-    marginBottom: 12,
     lineHeight: "36px",
-  },
-  transition: {
-    background: "#0B2A4A",
-    padding: "56px 24px",
-    textAlign: "center",
-  },
-  transitionText: {
-    color: "#FFF",
-    fontSize: 20,
-    maxWidth: 720,
-    margin: "0 auto",
-    lineHeight: 1.5,
+    marginBottom: 12,
   },
   niches: {
     maxWidth: 1200,
@@ -319,14 +269,24 @@ const styles: Record<string, React.CSSProperties> = {
     gap: 32,
   },
   nicheCard: {
-    background: "#FFF",
+    background: "#FFFFFF",
     borderRadius: 14,
     padding: 32,
     border: "1px solid #E0E4E8",
+    cursor: "pointer",
   },
   nicheIcon: {
     fontSize: 28,
-    display: "block",
     marginBottom: 12,
+    display: "block",
+  },
+  footer: {
+    padding: "24px",
+    textAlign: "center",
+    borderTop: "1px solid #E6E6E6",
+  },
+  footerText: {
+    fontSize: 12,
+    color: "#6A6A6A",
   },
 };
