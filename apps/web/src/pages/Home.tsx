@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { t } from "../i18n";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -11,82 +10,95 @@ export default function Home() {
         <div style={styles.heroContainer}>
           <div>
             <h1 style={styles.heroTitle}>
-              {t("home.title")}
+              Um caminho claro para resolver o que hoje te incomoda.
             </h1>
 
             <p style={styles.heroSubtitle}>
-              {t("home.subtitle")}
+              Aqui você não encontra promessas nem atalhos.
+              Encontra orientação para reconhecer sua situação e seguir por
+              caminhos que façam sentido para a sua realidade.
             </p>
 
             <div style={styles.pills}>
-              <span style={styles.pill}>{t("home.pillars.0")}</span>
-              <span style={styles.pill}>{t("home.pillars.1")}</span>
-              <span style={styles.pill}>{t("home.pillars.2")}</span>
+              <span style={styles.pill}>Clareza</span>
+              <span style={styles.pill}>Direção</span>
+              <span style={styles.pill}>Confiança</span>
             </div>
           </div>
 
+          {/* IMAGEM RELACIONADA AO TEXTO */}
           <div style={styles.imageWrapper}>
             <img
-              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f"
-              alt="Pessoa analisando caminhos e decisões"
+              src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70"
+              alt="Pessoa refletindo sobre escolhas e caminhos"
               style={styles.image}
             />
           </div>
         </div>
       </section>
 
-      {/* FRASE */}
+      {/* FRASE SOLTA */}
       <section style={styles.quoteSection}>
         <p style={styles.quote}>
-          {t("home.quote")}
+          “Decidir bem começa por reconhecer o que realmente está te afetando agora.”
         </p>
       </section>
 
       {/* COMO FUNCIONA */}
       <section style={styles.section}>
-        <h2 style={styles.sectionTitle}>
-          {t("home.how.title")}
-        </h2>
+        <h2 style={styles.sectionTitle}>Como funciona</h2>
 
         <div style={styles.steps}>
           <div style={styles.step}>
             <span style={styles.stepNumber}>1</span>
-            <p>{t("home.how.steps.0")}</p>
+            <p>Escolha a área da sua vida que deseja melhorar</p>
           </div>
 
           <div style={styles.step}>
             <span style={styles.stepNumber}>2</span>
-            <p>{t("home.how.steps.1")}</p>
+            <p>Identifique a situação que mais se parece com a sua</p>
           </div>
 
           <div style={styles.step}>
             <span style={styles.stepNumber}>3</span>
-            <p>{t("home.how.steps.2")}</p>
+            <p>Siga um caminho possível e coerente com sua realidade</p>
           </div>
         </div>
       </section>
 
-      {/* NICHOS */}
+      {/* NICHOS – CONVERSÃO */}
       <section style={styles.sectionAlt}>
         <h2 style={styles.sectionTitle}>
-          {t("home.niches.title")}
+          Escolha a área que mais faz sentido para você agora
         </h2>
 
         <div style={styles.niches}>
-          <div style={styles.nicheCard} onClick={() => navigate("/nichos?area=financeiro")}>
-            💰 {t("home.niches.financeiro")}
+          <div
+            style={styles.nicheCard}
+            onClick={() => navigate("/nichos?area=financeiro")}
+          >
+            💰 Organização Financeira
           </div>
 
-          <div style={styles.nicheCard} onClick={() => navigate("/nichos?area=saude")}>
-            🧠 {t("home.niches.saude")}
+          <div
+            style={styles.nicheCard}
+            onClick={() => navigate("/nichos?area=saude")}
+          >
+            🧠 Saúde e Bem-estar
           </div>
 
-          <div style={styles.nicheCard} onClick={() => navigate("/nichos?area=desempenho")}>
-            🏃 {t("home.niches.desempenho")}
+          <div
+            style={styles.nicheCard}
+            onClick={() => navigate("/nichos?area=desempenho")}
+          >
+            🏃 Corpo e Desempenho
           </div>
 
-          <div style={styles.nicheCard} onClick={() => navigate("/nichos?area=organizacao")}>
-            ⏱️ {t("home.niches.organizacao")}
+          <div
+            style={styles.nicheCard}
+            onClick={() => navigate("/nichos?area=organizacao")}
+          >
+            ⏱️ Organização e Foco
           </div>
         </div>
       </section>
@@ -94,7 +106,7 @@ export default function Home() {
       {/* RODAPÉ */}
       <footer style={styles.footer}>
         <p style={styles.footerText}>
-          {t("home.footer")}
+          Este produto foi desenvolvido por RoboGlobal™ by CREMENI.
         </p>
       </footer>
     </>
