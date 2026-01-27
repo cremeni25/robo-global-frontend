@@ -22,11 +22,6 @@ export default function Home() {
       {/* HERO */}
       <section style={styles.hero}>
         <div style={styles.heroContainer}>
-          {/* RG – BALÃO AZUL */}
-          <div style={styles.rgBubble}>
-            <span style={styles.rgText}>RG</span>
-          </div>
-
           <div>
             <h1 style={styles.heroTitle}>
               Um caminho claro para resolver o que hoje te incomoda.
@@ -44,10 +39,19 @@ export default function Home() {
               <span style={styles.pill}>Confiança</span>
             </div>
           </div>
+
+          {/* IMAGEM RELACIONADA AO TEXTO */}
+          <div style={styles.imageWrapper}>
+            <img
+              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f"
+              alt="Pessoa analisando caminhos e decisões"
+              style={styles.image}
+            />
+          </div>
         </div>
       </section>
 
-      {/* FRASE-EIXO */}
+      {/* FRASE SOLTA */}
       <section style={styles.quoteSection}>
         <p style={styles.quote}>
           “Decidir bem começa por reconhecer o que realmente está te afetando agora.”
@@ -113,8 +117,8 @@ export default function Home() {
 
 const styles: Record<string, React.CSSProperties> = {
   header: {
+    background: "#FFFFFF",
     borderBottom: "1px solid #E6E6E6",
-    background: "#FFF",
   },
   headerContainer: {
     maxWidth: 1200,
@@ -126,14 +130,14 @@ const styles: Record<string, React.CSSProperties> = {
   },
   nav: {
     display: "flex",
-    gap: 16,
+    gap: 14,
   },
   navItem: {
     background: "#0B2A4A",
     color: "#FFF",
     border: "none",
-    borderRadius: 20,
-    padding: "8px 18px",
+    borderRadius: 22,
+    padding: "8px 20px",
     fontWeight: 700,
     cursor: "pointer",
   },
@@ -150,23 +154,9 @@ const styles: Record<string, React.CSSProperties> = {
     maxWidth: 1200,
     margin: "0 auto",
     display: "grid",
-    gridTemplateColumns: "0.8fr 1.2fr",
+    gridTemplateColumns: "1.2fr 0.8fr",
     gap: 48,
     alignItems: "center",
-  },
-  rgBubble: {
-    width: 280,
-    height: 280,
-    borderRadius: "50%",
-    background: "#0B2A4A",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  rgText: {
-    fontSize: 96,
-    fontWeight: 800,
-    color: "#FFF",
   },
   heroTitle: {
     fontSize: 42,
@@ -189,6 +179,15 @@ const styles: Record<string, React.CSSProperties> = {
     padding: "8px 18px",
     borderRadius: 24,
     fontWeight: 600,
+  },
+  imageWrapper: {
+    borderRadius: 14,
+    overflow: "hidden",
+  },
+  image: {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
   },
   quoteSection: {
     padding: "40px 24px",
