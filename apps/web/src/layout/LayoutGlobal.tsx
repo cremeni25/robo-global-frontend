@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { getLang, setLang, t } from "../i18n";
 
 interface Props {
   children: ReactNode;
@@ -7,41 +8,54 @@ interface Props {
 
 export default function LayoutGlobal({ children }: Props) {
   const location = useLocation();
+  const lang = getLang();
 
   const navItems = [
-    { to: "/", label: "Home" },
-    { to: "/nichos", label: "Nichos" },
-    { to: "/dores", label: "Dores" },
-    { to: "/sobre", label: "Sobre" },
+    { to: "/", label: t("nav.home") },
+    { to: "/nichos", label: t("nav.nichos") },
+    { to: "/dores", label: t("nav.dores") },
+    { to: "/sobre", label: t("nav.sobre") },
   ];
+
+  function changeLang(l: "pt" | "en" | "es") {
+    setLang(l);
+    window.location.reload();
+  }
 
   return (
     <>
       <header style={styles.header}>
         <div style={styles.headerInner}>
           <nav style={styles.nav}>
-            {navItems.map((item) => {
-              const active = location.pathname === item.to;
-              return (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  style={{
-                    ...styles.navItem,
-                    ...(active ? styles.navItemActive : {}),
-                  }}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
+            {navItems.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                style={{
+                  ...styles.navItem,
+                  ...(location.pathname === item.to
+                    ? styles.navItemActive
+                    : {}),
+                }}
+              >
+                {item.label}
+              </Link>
+            ))}
           </nav>
 
-          {/* Idioma — visual apenas (infra já existe, consumo vem no Passo 3) */}
           <div style={styles.langGroup}>
-            <span style={styles.langActive}>PT</span>
-            <span style={styles.langDisabled}>EN</span>
-            <span style={styles.langDisabled}>ES</span>
+            {(["pt", "en", "es"] as const).map((l) => (
+              <button
+                key={l}
+                onClick={() => changeLang(l)}
+                style={{
+                  ...styles.langBtn,
+                  ...(lang === l ? styles.langActive : {}),
+                }}
+              >
+                {l.toUpperCase()}
+              </button>
+            ))}
           </div>
         </div>
       </header>
@@ -52,59 +66,37 @@ export default function LayoutGlobal({ children }: Props) {
 }
 
 const styles: Record<string, React.CSSProperties> = {
-  header: {
-    width: "100%",
-    backgroundColor: "#ffffff",
-    borderBottom: "1px solid #e5e7eb",
-  },
+  header: { borderBottom: "1px solid #e5e7eb" },
   headerInner: {
     maxWidth: 1280,
     margin: "0 auto",
     padding: "16px 24px",
     display: "flex",
     justifyContent: "space-between",
-    alignItems: "center",
   },
-  nav: {
-    display: "flex",
-    gap: 12,
-  },
+  nav: { display: "flex", gap: 12 },
   navItem: {
     padding: "8px 14px",
     borderRadius: 999,
-    fontSize: 14,
     textDecoration: "none",
-    color: "#374151",
-    backgroundColor: "#f9fafb",
     border: "1px solid #e5e7eb",
+    background: "#f9fafb",
+    color: "#374151",
   },
   navItemActive: {
-    backgroundColor: "#111827",
-    color: "#ffffff",
-    borderColor: "#111827",
+    background: "#111827",
+    color: "#fff",
   },
-  langGroup: {
-    display: "flex",
-    gap: 6,
+  langGroup: { display: "flex", gap: 6 },
+  langBtn: {
+    padding: "6px 10px",
+    borderRadius: 999,
+    border: "1px solid #e5e7eb",
+    background: "#f3f4f6",
   },
   langActive: {
-    padding: "6px 10px",
-    fontSize: 12,
-    borderRadius: 999,
-    backgroundColor: "#111827",
-    color: "#ffffff",
-    fontWeight: 600,
+    background: "#111827",
+    color: "#fff",
   },
-  langDisabled: {
-    padding: "6px 10px",
-    fontSize: 12,
-    borderRadius: 999,
-    backgroundColor: "#f3f4f6",
-    color: "#9ca3af",
-  },
-  container: {
-    maxWidth: 1280,
-    margin: "0 auto",
-    padding: "32px 24px",
-  },
+  container: { maxWidth: 1280, margin: "0 auto", padding: "32px 24px" },
 };
