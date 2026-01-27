@@ -1,220 +1,189 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Home() {
-  const navigate = useNavigate();
-
   return (
-    <>
+    <main style={{ width: "100%" }}>
       {/* HERO */}
-      <section style={styles.hero}>
-        <div style={styles.heroContainer}>
-          <div>
-            <h1 style={styles.heroTitle}>
-              Um caminho claro para resolver o que hoje te incomoda.
-            </h1>
+      <section
+        style={{
+          maxWidth: "1280px",
+          margin: "0 auto",
+          padding: "80px 24px",
+          display: "grid",
+          gridTemplateColumns: "1.1fr 0.9fr",
+          gap: "64px",
+          alignItems: "center",
+        }}
+      >
+        {/* TEXTO */}
+        <div>
+          <h1
+            style={{
+              fontSize: "48px",
+              lineHeight: "1.15",
+              fontWeight: 700,
+              color: "#0b2a4a",
+              marginBottom: "24px",
+            }}
+          >
+            Um caminho claro para resolver <br />
+            o que hoje te incomoda.
+          </h1>
 
-            <p style={styles.heroSubtitle}>
-              Aqui você não encontra promessas nem atalhos.
-              Encontra orientação para reconhecer sua situação e seguir por
-              caminhos que façam sentido para a sua realidade.
-            </p>
+          <p
+            style={{
+              fontSize: "18px",
+              lineHeight: "1.6",
+              color: "#3a3a3a",
+              maxWidth: "520px",
+              marginBottom: "32px",
+            }}
+          >
+            Aqui você não encontra promessas nem atalhos.  
+            Encontra orientação para reconhecer sua situação
+            e seguir por caminhos que façam sentido para a sua realidade.
+          </p>
 
-            <div style={styles.pills}>
-              <span style={styles.pill}>Clareza</span>
-              <span style={styles.pill}>Direção</span>
-              <span style={styles.pill}>Confiança</span>
-            </div>
+          {/* FRASE-ÂNCORA */}
+          <p
+            style={{
+              fontStyle: "italic",
+              fontWeight: 600,
+              color: "#0b2a4a",
+              marginBottom: "32px",
+            }}
+          >
+            “Decidir bem começa por entender o problema certo.”
+          </p>
+
+          {/* PILARES */}
+          <div
+            style={{
+              display: "flex",
+              gap: "12px",
+              flexWrap: "wrap",
+            }}
+          >
+            {["Clareza", "Direção", "Confiança"].map((item) => (
+              <span
+                key={item}
+                style={{
+                  padding: "10px 18px",
+                  borderRadius: "999px",
+                  backgroundColor: "#eef3f8",
+                  fontWeight: 600,
+                  color: "#0b2a4a",
+                  fontSize: "14px",
+                }}
+              >
+                {item}
+              </span>
+            ))}
           </div>
+        </div>
 
-          {/* IMAGEM RELACIONADA AO TEXTO */}
-          <div style={styles.imageWrapper}>
-            <img
-              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f"
-              alt="Pessoa analisando caminhos e decisões"
-              style={styles.image}
-            />
-          </div>
+        {/* IMAGEM */}
+        <div
+          style={{
+            width: "100%",
+            height: "420px",
+            borderRadius: "24px",
+            backgroundImage:
+              "url(https://images.unsplash.com/photo-1529333166437-7750a6dd5a70)",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+      </section>
+
+      {/* TRANSIÇÃO */}
+      <section
+        style={{
+          backgroundColor: "#f5f7fa",
+          padding: "80px 24px",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: "960px",
+            margin: "0 auto",
+            textAlign: "center",
+          }}
+        >
+          <h2
+            style={{
+              fontSize: "32px",
+              fontWeight: 700,
+              color: "#0b2a4a",
+              marginBottom: "16px",
+            }}
+          >
+            Pessoas diferentes. Situações diferentes.
+          </h2>
+
+          <p
+            style={{
+              fontSize: "17px",
+              lineHeight: "1.6",
+              color: "#4a4a4a",
+            }}
+          >
+            O primeiro passo não é comprar algo —
+            é entender onde você está e qual área da sua vida
+            merece atenção agora.
+          </p>
         </div>
       </section>
 
-      {/* FRASE SOLTA */}
-      <section style={styles.quoteSection}>
-        <p style={styles.quote}>
-          “Decidir bem começa por reconhecer o que realmente está te afetando agora.”
-        </p>
+      {/* DIRECIONAMENTO PARA NICHOS */}
+      <section
+        style={{
+          maxWidth: "1280px",
+          margin: "0 auto",
+          padding: "80px 24px",
+          textAlign: "center",
+        }}
+      >
+        <h3
+          style={{
+            fontSize: "28px",
+            fontWeight: 700,
+            color: "#0b2a4a",
+            marginBottom: "24px",
+          }}
+        >
+          Comece escolhendo a área que mais faz sentido para você
+        </h3>
+
+        <Link
+          to="/nichos"
+          style={{
+            display: "inline-block",
+            padding: "16px 36px",
+            borderRadius: "999px",
+            backgroundColor: "#0b2a4a",
+            color: "#ffffff",
+            fontWeight: 700,
+            fontSize: "16px",
+            textDecoration: "none",
+          }}
+        >
+          Explorar Nichos
+        </Link>
       </section>
 
-      {/* COMO FUNCIONA */}
-      <section style={styles.section}>
-        <h2 style={styles.sectionTitle}>Como funciona</h2>
-
-        <div style={styles.steps}>
-          <div style={styles.step}>
-            <span style={styles.stepNumber}>1</span>
-            <p>Escolha a área da sua vida que deseja melhorar</p>
-          </div>
-
-          <div style={styles.step}>
-            <span style={styles.stepNumber}>2</span>
-            <p>Identifique a situação que mais se parece com a sua</p>
-          </div>
-
-          <div style={styles.step}>
-            <span style={styles.stepNumber}>3</span>
-            <p>Siga um caminho possível e coerente com sua realidade</p>
-          </div>
-        </div>
-      </section>
-
-      {/* NICHOS – CONVERSÃO */}
-      <section style={styles.sectionAlt}>
-        <h2 style={styles.sectionTitle}>
-          Escolha a área que mais faz sentido para você agora
-        </h2>
-
-        <div style={styles.niches}>
-          <div style={styles.nicheCard} onClick={() => navigate("/nichos?area=financeiro")}>
-            💰 Organização Financeira
-          </div>
-
-          <div style={styles.nicheCard} onClick={() => navigate("/nichos?area=saude")}>
-            🧠 Saúde e Bem-estar
-          </div>
-
-          <div style={styles.nicheCard} onClick={() => navigate("/nichos?area=desempenho")}>
-            🏃 Corpo e Desempenho
-          </div>
-
-          <div style={styles.nicheCard} onClick={() => navigate("/nichos?area=organizacao")}>
-            ⏱️ Organização e Foco
-          </div>
-        </div>
-      </section>
-
-      {/* RODAPÉ */}
-      <footer style={styles.footer}>
-        <p style={styles.footerText}>
-          Este produto foi desenvolvido por RoboGlobal™ by CREMENI.
-        </p>
+      {/* RODAPÉ INSTITUCIONAL */}
+      <footer
+        style={{
+          padding: "40px 24px",
+          textAlign: "center",
+          fontSize: "12px",
+          color: "#7a7a7a",
+        }}
+      >
+        RoboGlobal™ by CREMENI — Este site conduz pessoas a caminhos,
+        não realiza vendas diretas.
       </footer>
-    </>
+    </main>
   );
 }
-
-const styles: Record<string, React.CSSProperties> = {
-  hero: {
-    padding: "72px 24px",
-  },
-  heroContainer: {
-    maxWidth: 1200,
-    margin: "0 auto",
-    display: "grid",
-    gridTemplateColumns: "1.2fr 0.8fr",
-    gap: 48,
-    alignItems: "center",
-  },
-  heroTitle: {
-    fontSize: 42,
-    fontWeight: 700,
-    color: "#0B2A4A",
-    marginBottom: 20,
-  },
-  heroSubtitle: {
-    fontSize: 18,
-    lineHeight: 1.6,
-    color: "#2E2E2E",
-  },
-  pills: {
-    display: "flex",
-    gap: 12,
-    marginTop: 28,
-  },
-  pill: {
-    background: "#E6EDF3",
-    padding: "8px 18px",
-    borderRadius: 24,
-    fontWeight: 600,
-  },
-  imageWrapper: {
-    borderRadius: 14,
-    overflow: "hidden",
-  },
-  image: {
-    width: "100%",
-    height: "100%",
-    objectFit: "cover",
-  },
-  quoteSection: {
-    padding: "40px 24px",
-    textAlign: "center",
-  },
-  quote: {
-    fontSize: 20,
-    fontStyle: "italic",
-    fontWeight: 600,
-    color: "#0B2A4A",
-  },
-  section: {
-    maxWidth: 1200,
-    margin: "0 auto",
-    padding: "72px 24px",
-  },
-  sectionAlt: {
-    background: "#F4F6F8",
-    padding: "72px 24px",
-  },
-  sectionTitle: {
-    fontSize: 30,
-    fontWeight: 700,
-    color: "#0B2A4A",
-    marginBottom: 32,
-  },
-  steps: {
-    display: "grid",
-    gridTemplateColumns: "repeat(3, 1fr)",
-    gap: 32,
-  },
-  step: {
-    background: "#FFF",
-    border: "1px solid #E0E4E8",
-    borderRadius: 12,
-    padding: 32,
-    textAlign: "center",
-  },
-  stepNumber: {
-    width: 36,
-    height: 36,
-    borderRadius: "50%",
-    background: "#0B2A4A",
-    color: "#FFF",
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 12,
-    fontWeight: 700,
-  },
-  niches: {
-    maxWidth: 1200,
-    margin: "0 auto",
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-    gap: 24,
-  },
-  nicheCard: {
-    background: "#FFF",
-    border: "1px solid #E0E4E8",
-    borderRadius: 14,
-    padding: 28,
-    cursor: "pointer",
-    fontWeight: 600,
-  },
-  footer: {
-    borderTop: "1px solid #E6E6E6",
-    padding: 24,
-    textAlign: "center",
-  },
-  footerText: {
-    fontSize: 12,
-    color: "#6A6A6A",
-  },
-};
