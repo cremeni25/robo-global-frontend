@@ -5,20 +5,6 @@ export default function Home() {
 
   return (
     <>
-      {/* HEADER ÚNICO */}
-      <header style={styles.header}>
-        <div style={styles.headerContainer}>
-          <nav style={styles.nav}>
-            <button style={styles.navItem} onClick={() => navigate("/")}>Lar</button>
-            <button style={styles.navItem} onClick={() => navigate("/nichos")}>Nichos</button>
-            <button style={styles.navItem} onClick={() => navigate("/dores")}>Dores</button>
-            <button style={styles.navItem} onClick={() => navigate("/sobre")}>Sobre</button>
-          </nav>
-
-          <div style={styles.lang}>PT</div>
-        </div>
-      </header>
-
       {/* HERO */}
       <section style={styles.hero}>
         <div style={styles.heroContainer}>
@@ -116,37 +102,6 @@ export default function Home() {
 }
 
 const styles: Record<string, React.CSSProperties> = {
-  header: {
-    background: "#FFFFFF",
-    borderBottom: "1px solid #E6E6E6",
-  },
-  headerContainer: {
-    maxWidth: 1200,
-    margin: "0 auto",
-    padding: "16px 24px",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  nav: {
-    display: "flex",
-    gap: 14,
-  },
-  navItem: {
-    background: "#0B2A4A",
-    color: "#FFF",
-    border: "none",
-    borderRadius: 22,
-    padding: "8px 20px",
-    fontWeight: 700,
-    cursor: "pointer",
-  },
-  lang: {
-    fontSize: 13,
-    border: "1px solid #CCC",
-    padding: "4px 8px",
-    borderRadius: 6,
-  },
   hero: {
     padding: "72px 24px",
   },
