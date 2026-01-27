@@ -8,23 +8,11 @@ export default function Home() {
       {/* HEADER ÚNICO */}
       <header style={styles.header}>
         <div style={styles.headerContainer}>
-          <div style={styles.brand}>
-            <div style={styles.rg}>RG</div>
-          </div>
-
           <nav style={styles.nav}>
-            <button style={{ ...styles.navItem, background: "#0B2A4A" }} onClick={() => navigate("/")}>
-              Lar
-            </button>
-            <button style={{ ...styles.navItem, background: "#3A7CA5" }} onClick={() => navigate("/nichos")}>
-              Nichos
-            </button>
-            <button style={{ ...styles.navItem, background: "#4A4A4A" }} onClick={() => navigate("/dores")}>
-              Dores
-            </button>
-            <button style={{ ...styles.navItem, background: "#7A7A7A" }} onClick={() => navigate("/sobre")}>
-              Sobre
-            </button>
+            <button style={styles.navItem} onClick={() => navigate("/")}>Lar</button>
+            <button style={styles.navItem} onClick={() => navigate("/nichos")}>Nichos</button>
+            <button style={styles.navItem} onClick={() => navigate("/dores")}>Dores</button>
+            <button style={styles.navItem} onClick={() => navigate("/sobre")}>Sobre</button>
           </nav>
 
           <div style={styles.lang}>PT</div>
@@ -34,13 +22,18 @@ export default function Home() {
       {/* HERO */}
       <section style={styles.hero}>
         <div style={styles.heroContainer}>
+          {/* RG – BALÃO AZUL */}
+          <div style={styles.rgBubble}>
+            <span style={styles.rgText}>RG</span>
+          </div>
+
           <div>
             <h1 style={styles.heroTitle}>
               Um caminho claro para resolver o que hoje te incomoda.
             </h1>
 
             <p style={styles.heroSubtitle}>
-              Aqui você não encontra promessas nem atalhos.  
+              Aqui você não encontra promessas nem atalhos.
               Encontra orientação para reconhecer sua situação e seguir por
               caminhos que façam sentido para a sua realidade.
             </p>
@@ -51,12 +44,10 @@ export default function Home() {
               <span style={styles.pill}>Confiança</span>
             </div>
           </div>
-
-          <div style={styles.visual} />
         </div>
       </section>
 
-      {/* CITAÇÃO */}
+      {/* FRASE-EIXO */}
       <section style={styles.quoteSection}>
         <p style={styles.quote}>
           “Decidir bem começa por reconhecer o que realmente está te afetando agora.”
@@ -93,27 +84,19 @@ export default function Home() {
 
         <div style={styles.niches}>
           <div style={styles.nicheCard} onClick={() => navigate("/nichos?area=financeiro")}>
-            <span style={styles.nicheIcon}>💰</span>
-            <h3>Organização Financeira</h3>
-            <p>Controle, planejamento e decisões mais seguras.</p>
+            💰 Organização Financeira
           </div>
 
           <div style={styles.nicheCard} onClick={() => navigate("/nichos?area=saude")}>
-            <span style={styles.nicheIcon}>🧠</span>
-            <h3>Saúde e Bem-estar</h3>
-            <p>Equilíbrio emocional, físico e mental.</p>
+            🧠 Saúde e Bem-estar
           </div>
 
           <div style={styles.nicheCard} onClick={() => navigate("/nichos?area=desempenho")}>
-            <span style={styles.nicheIcon}>🏃</span>
-            <h3>Corpo e Desempenho</h3>
-            <p>Energia, foco e evolução pessoal.</p>
+            🏃 Corpo e Desempenho
           </div>
 
           <div style={styles.nicheCard} onClick={() => navigate("/nichos?area=organizacao")}>
-            <span style={styles.nicheIcon}>⏱️</span>
-            <h3>Organização e Foco</h3>
-            <p>Mais clareza, menos sobrecarga.</p>
+            ⏱️ Organização e Foco
           </div>
         </div>
       </section>
@@ -128,42 +111,29 @@ export default function Home() {
   );
 }
 
-/* =========================
-   ESTILOS — PADRÃO MÃE
-   ========================= */
-
 const styles: Record<string, React.CSSProperties> = {
   header: {
-    background: "#FFFFFF",
     borderBottom: "1px solid #E6E6E6",
+    background: "#FFF",
   },
   headerContainer: {
     maxWidth: 1200,
     margin: "0 auto",
     padding: "16px 24px",
     display: "flex",
-    alignItems: "center",
     justifyContent: "space-between",
-  },
-  brand: {
-    display: "flex",
     alignItems: "center",
-  },
-  rg: {
-    fontSize: 64,
-    fontWeight: 800,
-    color: "#0B2A4A",
-    opacity: 0.15,
   },
   nav: {
     display: "flex",
-    gap: 12,
+    gap: 16,
   },
   navItem: {
-    padding: "8px 18px",
-    borderRadius: 20,
-    border: "none",
+    background: "#0B2A4A",
     color: "#FFF",
+    border: "none",
+    borderRadius: 20,
+    padding: "8px 18px",
     fontWeight: 700,
     cursor: "pointer",
   },
@@ -180,9 +150,23 @@ const styles: Record<string, React.CSSProperties> = {
     maxWidth: 1200,
     margin: "0 auto",
     display: "grid",
-    gridTemplateColumns: "1.2fr 0.8fr",
+    gridTemplateColumns: "0.8fr 1.2fr",
     gap: 48,
     alignItems: "center",
+  },
+  rgBubble: {
+    width: 280,
+    height: 280,
+    borderRadius: "50%",
+    background: "#0B2A4A",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  rgText: {
+    fontSize: 96,
+    fontWeight: 800,
+    color: "#FFF",
   },
   heroTitle: {
     fontSize: 42,
@@ -206,22 +190,15 @@ const styles: Record<string, React.CSSProperties> = {
     borderRadius: 24,
     fontWeight: 600,
   },
-  visual: {
-    height: 260,
-    background: "#F4F6F8",
-    borderRadius: 14,
-  },
   quoteSection: {
-    padding: "48px 24px",
+    padding: "40px 24px",
     textAlign: "center",
   },
   quote: {
-    fontSize: 22,
+    fontSize: 20,
     fontStyle: "italic",
     fontWeight: 600,
     color: "#0B2A4A",
-    maxWidth: 720,
-    margin: "0 auto",
   },
   section: {
     maxWidth: 1200,
@@ -244,46 +221,43 @@ const styles: Record<string, React.CSSProperties> = {
     gap: 32,
   },
   step: {
-    background: "#FFFFFF",
+    background: "#FFF",
+    border: "1px solid #E0E4E8",
     borderRadius: 12,
     padding: 32,
-    border: "1px solid #E0E4E8",
     textAlign: "center",
   },
   stepNumber: {
-    display: "inline-block",
     width: 36,
     height: 36,
     borderRadius: "50%",
     background: "#0B2A4A",
     color: "#FFF",
-    fontWeight: 700,
-    lineHeight: "36px",
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
     marginBottom: 12,
+    fontWeight: 700,
   },
   niches: {
     maxWidth: 1200,
     margin: "0 auto",
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-    gap: 32,
+    gap: 24,
   },
   nicheCard: {
-    background: "#FFFFFF",
-    borderRadius: 14,
-    padding: 32,
+    background: "#FFF",
     border: "1px solid #E0E4E8",
+    borderRadius: 14,
+    padding: 28,
     cursor: "pointer",
-  },
-  nicheIcon: {
-    fontSize: 28,
-    marginBottom: 12,
-    display: "block",
+    fontWeight: 600,
   },
   footer: {
-    padding: "24px",
-    textAlign: "center",
     borderTop: "1px solid #E6E6E6",
+    padding: 24,
+    textAlign: "center",
   },
   footerText: {
     fontSize: 12,
