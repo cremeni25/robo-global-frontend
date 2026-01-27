@@ -1,22 +1,18 @@
 import type { ReactNode } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { useI18n } from "@/i18n/useI18n";
-import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Props {
   children: ReactNode;
 }
 
 export default function LayoutGlobal({ children }: Props) {
-  const { t } = useI18n();
-  const { language, setLanguage } = useLanguage();
   const location = useLocation();
 
   const navItems = [
-    { to: "/", label: t("nav.home") },
-    { to: "/nichos", label: t("nav.nichos") },
-    { to: "/dores", label: t("nav.dores") },
-    { to: "/sobre", label: t("nav.sobre") },
+    { to: "/", label: "Home" },
+    { to: "/nichos", label: "Nichos" },
+    { to: "/dores", label: "Dores" },
+    { to: "/sobre", label: "Sobre" },
   ];
 
   return (
@@ -41,34 +37,11 @@ export default function LayoutGlobal({ children }: Props) {
             })}
           </nav>
 
+          {/* Idioma — visual apenas (infra já existe, consumo vem no Passo 3) */}
           <div style={styles.langGroup}>
-            <button
-              onClick={() => setLanguage("pt")}
-              style={{
-                ...styles.langButton,
-                ...(language === "pt" ? styles.langActive : {}),
-              }}
-            >
-              PT
-            </button>
-            <button
-              onClick={() => setLanguage("en")}
-              style={{
-                ...styles.langButton,
-                ...(language === "en" ? styles.langActive : {}),
-              }}
-            >
-              EN
-            </button>
-            <button
-              onClick={() => setLanguage("es")}
-              style={{
-                ...styles.langButton,
-                ...(language === "es" ? styles.langActive : {}),
-              }}
-            >
-              ES
-            </button>
+            <span style={styles.langActive}>PT</span>
+            <span style={styles.langDisabled}>EN</span>
+            <span style={styles.langDisabled}>ES</span>
           </div>
         </div>
       </header>
@@ -104,7 +77,6 @@ const styles: Record<string, React.CSSProperties> = {
     color: "#374151",
     backgroundColor: "#f9fafb",
     border: "1px solid #e5e7eb",
-    transition: "all 0.15s ease",
   },
   navItemActive: {
     backgroundColor: "#111827",
@@ -115,19 +87,20 @@ const styles: Record<string, React.CSSProperties> = {
     display: "flex",
     gap: 6,
   },
-  langButton: {
+  langActive: {
     padding: "6px 10px",
     fontSize: 12,
     borderRadius: 999,
-    border: "1px solid #e5e7eb",
-    backgroundColor: "#ffffff",
-    cursor: "pointer",
-    color: "#374151",
-  },
-  langActive: {
     backgroundColor: "#111827",
     color: "#ffffff",
-    borderColor: "#111827",
+    fontWeight: 600,
+  },
+  langDisabled: {
+    padding: "6px 10px",
+    fontSize: 12,
+    borderRadius: 999,
+    backgroundColor: "#f3f4f6",
+    color: "#9ca3af",
   },
   container: {
     maxWidth: 1280,
