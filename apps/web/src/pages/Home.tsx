@@ -25,7 +25,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* IMAGEM */}
           <div style={styles.imageWrapper}>
             <img
               src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f"
@@ -36,7 +35,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FRASE SOLTA */}
+      {/* FRASE */}
       <section style={styles.quoteSection}>
         <p style={styles.quote}>
           {t("home.quote")}
@@ -101,3 +100,121 @@ export default function Home() {
     </>
   );
 }
+
+const styles: Record<string, React.CSSProperties> = {
+  hero: {
+    padding: "72px 24px",
+  },
+  heroContainer: {
+    maxWidth: 1200,
+    margin: "0 auto",
+    display: "grid",
+    gridTemplateColumns: "1.2fr 0.8fr",
+    gap: 48,
+    alignItems: "center",
+  },
+  heroTitle: {
+    fontSize: 42,
+    fontWeight: 700,
+    color: "#0B2A4A",
+    marginBottom: 20,
+  },
+  heroSubtitle: {
+    fontSize: 18,
+    lineHeight: 1.6,
+    color: "#2E2E2E",
+  },
+  pills: {
+    display: "flex",
+    gap: 12,
+    marginTop: 28,
+  },
+  pill: {
+    background: "#E6EDF3",
+    padding: "8px 18px",
+    borderRadius: 24,
+    fontWeight: 600,
+  },
+  imageWrapper: {
+    borderRadius: 14,
+    overflow: "hidden",
+  },
+  image: {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+  },
+  quoteSection: {
+    padding: "40px 24px",
+    textAlign: "center",
+  },
+  quote: {
+    fontSize: 20,
+    fontStyle: "italic",
+    fontWeight: 600,
+    color: "#0B2A4A",
+  },
+  section: {
+    maxWidth: 1200,
+    margin: "0 auto",
+    padding: "72px 24px",
+  },
+  sectionAlt: {
+    background: "#F4F6F8",
+    padding: "72px 24px",
+  },
+  sectionTitle: {
+    fontSize: 30,
+    fontWeight: 700,
+    color: "#0B2A4A",
+    marginBottom: 32,
+  },
+  steps: {
+    display: "grid",
+    gridTemplateColumns: "repeat(3, 1fr)",
+    gap: 32,
+  },
+  step: {
+    background: "#FFF",
+    border: "1px solid #E0E4E8",
+    borderRadius: 12,
+    padding: 32,
+    textAlign: "center",
+  },
+  stepNumber: {
+    width: 36,
+    height: 36,
+    borderRadius: "50%",
+    background: "#0B2A4A",
+    color: "#FFF",
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 12,
+    fontWeight: 700,
+  },
+  niches: {
+    maxWidth: 1200,
+    margin: "0 auto",
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+    gap: 24,
+  },
+  nicheCard: {
+    background: "#FFF",
+    border: "1px solid #E0E4E8",
+    borderRadius: 14,
+    padding: 28,
+    cursor: "pointer",
+    fontWeight: 600,
+  },
+  footer: {
+    borderTop: "1px solid #E6E6E6",
+    padding: 24,
+    textAlign: "center",
+  },
+  footerText: {
+    fontSize: 12,
+    color: "#6A6A6A",
+  },
+};
