@@ -36,15 +36,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FRASE ÂNCORA */}
-      <section style={styles.quoteSection}>
+      {/* BLOCO CENTRAL — FRASE + COMO FUNCIONA */}
+      <section style={styles.centerBlock}>
         <p style={styles.quote}>
           {t("home.anchor")}
         </p>
-      </section>
 
-      {/* COMO FUNCIONA */}
-      <section style={styles.section}>
         <h2 style={styles.sectionTitle}>
           {t("home.howItWorks.title")}
         </h2>
@@ -67,7 +64,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* DIRECIONAMENTOS – HOME */}
+      {/* DIRECIONAMENTOS */}
       <section style={styles.sectionAlt}>
         <h2 style={styles.sectionTitle}>
           {t("home.nichesTitle")}
@@ -157,32 +154,27 @@ const styles: Record<string, React.CSSProperties> = {
     height: "100%",
     objectFit: "cover",
   },
-  quoteSection: {
-    padding: "32px 24px",
+
+  /* 🔑 BLOCO CENTRAL */
+  centerBlock: {
+    maxWidth: 1100,
+    margin: "0 auto",
+    padding: "56px 24px 72px",
     textAlign: "center",
   },
   quote: {
-    fontSize: 24,
+    fontSize: 28,
     fontStyle: "italic",
     fontWeight: 600,
     color: "#0B2A4A",
-    maxWidth: 900,
-    margin: "0 auto",
-  },
-  section: {
-    maxWidth: 1200,
-    margin: "0 auto",
-    padding: "56px 24px",
-  },
-  sectionAlt: {
-    background: "#F4F6F8",
-    padding: "64px 24px",
+    marginBottom: 32,
   },
   sectionTitle: {
-    fontSize: 26,
+    fontSize: 24,
     fontWeight: 700,
     color: "#0B2A4A",
-    marginBottom: 28,
+    marginBottom: 32,
+    textAlign: "left",
   },
   steps: {
     display: "grid",
@@ -207,6 +199,11 @@ const styles: Record<string, React.CSSProperties> = {
     justifyContent: "center",
     marginBottom: 12,
     fontWeight: 700,
+  },
+
+  sectionAlt: {
+    background: "#F4F6F8",
+    padding: "64px 24px",
   },
   niches: {
     maxWidth: 1200,
