@@ -8,70 +8,32 @@ export default {
 
   home: {
     hero: {
-      title: "A clear starting point for navigating what matters most right now.",
+      title: "A clear way to move forward from what’s holding you back today.",
       subtitle:
-        "No promises. No shortcuts. Just structured guidance to help you understand your situation and move forward with clarity.",
+        "No promises. No shortcuts. Just guidance to help you understand your situation and move in a direction that makes sense for your reality.",
       pills: ["Clarity", "Direction", "Confidence"],
     },
 
-    anchor: "Before choosing a direction, understand the full context.",
+    anchor: "Before choosing a path, understand the landscape.",
 
     howItWorks: {
       title: "How it works",
       steps: [
-        "Select the area of your life that requires attention at this moment",
-        "Identify the situation that most closely reflects your current state",
-        "Move forward with a path that is realistic, coherent, and responsible",
+        "Choose the area of your life that needs attention right now",
+        "Identify the situation that best reflects where you are",
+        "Follow a realistic, responsible path forward",
       ],
     },
 
-    nichesTitle:
-      "Select the area that best aligns with your current priorities",
+    nichesTitle: "Choose the area that makes the most sense for you right now",
 
     niches: [
-      "Financial Structure",
-      "Health & Well-being",
-      "Physical Performance",
-      "Focus & Organization",
+      "Health & Vitality",
+      "Skills & Personal Growth",
+      "Digital Life & Daily Routine",
+      "Life & Relationships",
     ],
   },
 
-  /* =======================
-     B1 — NICHES
-     ======================= */
-
-  nichos: {
-    hero: {
-      title: "Everyone experiences life through a different context",
-      subtitle:
-        "Niches are not labels. They represent recurring situations where clarity, perspective, and organization matter before taking the next step.",
-    },
-
-    context: {
-      title: "Niches are not labels",
-      description:
-        "Here, niches represent recurring situations faced by everyday people. These are human contexts where decisions require clarity rather than impulse.",
-    },
-
-    cards: [
-      {
-        title: "Personal transitions and fresh starts",
-        description:
-          "Moments of change, life reorganization, and important decisions that call for clarity before moving forward.",
-      },
-      {
-        title: "Shared responsibilities",
-        description:
-          "Family or collective contexts where decisions affect more than one person at the same time.",
-      },
-      {
-        title: "Professional environments and performance pressure",
-        description:
-          "Situations where strategic decisions demand a clear understanding of the scenario before any action.",
-      },
-    ],
-  },
-
-  footer:
-    "This product was developed by RoboGlobal™ by CREMENI.",
+  footer: "This product was developed by RoboGlobal™ by CREMENI.",
 };
