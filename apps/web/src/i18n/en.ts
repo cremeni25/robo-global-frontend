@@ -14,8 +14,7 @@ export default {
       pills: ["Clarity", "Direction", "Confidence"],
     },
 
-    anchor:
-      "Before choosing a direction, understand the full context.",
+    anchor: "Before choosing a direction, understand the full context.",
 
     howItWorks: {
       title: "How it works",
@@ -34,6 +33,42 @@ export default {
       "Health & Well-being",
       "Physical Performance",
       "Focus & Organization",
+    ],
+  },
+
+  /* =======================
+     B1 — NICHES
+     ======================= */
+
+  nichos: {
+    hero: {
+      title: "Everyone experiences life through a different context",
+      subtitle:
+        "Niches are not labels. They represent recurring situations where clarity, perspective, and organization matter before taking the next step.",
+    },
+
+    context: {
+      title: "Niches are not labels",
+      description:
+        "Here, niches represent recurring situations faced by everyday people. These are human contexts where decisions require clarity rather than impulse.",
+    },
+
+    cards: [
+      {
+        title: "Personal transitions and fresh starts",
+        description:
+          "Moments of change, life reorganization, and important decisions that call for clarity before moving forward.",
+      },
+      {
+        title: "Shared responsibilities",
+        description:
+          "Family or collective contexts where decisions affect more than one person at the same time.",
+      },
+      {
+        title: "Professional environments and performance pressure",
+        description:
+          "Situations where strategic decisions demand a clear understanding of the scenario before any action.",
+      },
     ],
   },
 
