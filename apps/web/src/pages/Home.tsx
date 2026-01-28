@@ -26,7 +26,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* IMAGEM RELACIONADA AO TEXTO */}
           <div style={styles.imageWrapper}>
             <img
               src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70"
@@ -68,7 +67,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* NICHOS – CONVERSÃO */}
+      {/* DIRECIONAMENTOS – HOME */}
       <section style={styles.sectionAlt}>
         <h2 style={styles.sectionTitle}>
           {t("home.nichesTitle")}
@@ -77,30 +76,30 @@ export default function Home() {
         <div style={styles.niches}>
           <div
             style={styles.nicheCard}
-            onClick={() => navigate("/nichos?area=financeiro")}
+            onClick={() => navigate("/nichos?area=saude")}
           >
-            💰 {t("home.niches.0")}
+            🌱 {t("home.niches.0")}
           </div>
 
           <div
             style={styles.nicheCard}
-            onClick={() => navigate("/nichos?area=saude")}
+            onClick={() => navigate("/nichos?area=habilidades")}
           >
             🧠 {t("home.niches.1")}
           </div>
 
           <div
             style={styles.nicheCard}
-            onClick={() => navigate("/nichos?area=desempenho")}
+            onClick={() => navigate("/nichos?area=digital")}
           >
-            🏃 {t("home.niches.2")}
+            💻 {t("home.niches.2")}
           </div>
 
           <div
             style={styles.nicheCard}
-            onClick={() => navigate("/nichos?area=organizacao")}
+            onClick={() => navigate("/nichos?area=vida")}
           >
-            ⏱️ {t("home.niches.3")}
+            🤝 {t("home.niches.3")}
           </div>
         </div>
       </section>
