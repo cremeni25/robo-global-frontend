@@ -116,7 +116,7 @@ export default function Home() {
 
 const styles: Record<string, React.CSSProperties> = {
   hero: {
-    padding: "72px 24px",
+    padding: "64px 24px",
   },
   heroContainer: {
     maxWidth: 1200,
@@ -140,7 +140,7 @@ const styles: Record<string, React.CSSProperties> = {
   pills: {
     display: "flex",
     gap: 12,
-    marginTop: 28,
+    marginTop: 24,
   },
   pill: {
     background: "#E6EDF3",
@@ -158,29 +158,31 @@ const styles: Record<string, React.CSSProperties> = {
     objectFit: "cover",
   },
   quoteSection: {
-    padding: "40px 24px",
+    padding: "32px 24px",
     textAlign: "center",
   },
   quote: {
-    fontSize: 20,
+    fontSize: 24,
     fontStyle: "italic",
     fontWeight: 600,
     color: "#0B2A4A",
+    maxWidth: 900,
+    margin: "0 auto",
   },
   section: {
     maxWidth: 1200,
     margin: "0 auto",
-    padding: "72px 24px",
+    padding: "56px 24px",
   },
   sectionAlt: {
     background: "#F4F6F8",
-    padding: "72px 24px",
+    padding: "64px 24px",
   },
   sectionTitle: {
-    fontSize: 30,
+    fontSize: 26,
     fontWeight: 700,
     color: "#0B2A4A",
-    marginBottom: 32,
+    marginBottom: 28,
   },
   steps: {
     display: "grid",
