@@ -2,39 +2,41 @@ export default {
   nav: {
     home: "Inicio",
     niches: "Nichos",
-    pains: "Dificultades",
+    pains: "Desafíos",
     about: "Acerca de",
   },
 
   home: {
     hero: {
-      title: "Una forma clara de avanzar frente a lo que hoy te preocupa.",
+      title: "Un punto claro para comprender lo que hoy requiere tu atención.",
       subtitle:
-        "Sin promesas ni atajos. Solo orientación para comprender tu situación y avanzar de una manera coherente con tu realidad.",
+        "Sin promesas ni atajos. Solo una orientación estructurada para analizar tu situación y avanzar con claridad.",
       pills: ["Claridad", "Dirección", "Confianza"],
     },
 
-    anchor: "Antes de elegir un camino, comprende el escenario.",
+    anchor:
+      "Antes de definir un rumbo, comprende el contexto completo.",
 
     howItWorks: {
       title: "Cómo funciona",
       steps: [
-        "Elige el área de tu vida que hoy necesita más atención",
-        "Reconoce la situación que más se parece a la tuya",
-        "Avanza por un camino posible, responsable y realista",
+        "Selecciona el área de tu vida que hoy necesita atención",
+        "Identifica la situación que mejor representa tu momento actual",
+        "Avanza con un camino realista, coherente y responsable",
       ],
     },
 
     nichesTitle:
-      "Elige el área que más sentido tiene para ti en este momento",
+      "Selecciona el área que mejor se alinea con tus prioridades actuales",
 
     niches: [
-      "Organización Financiera",
+      "Estructura Financiera",
       "Salud y Bienestar",
-      "Cuerpo y Rendimiento",
-      "Organización y Enfoque",
+      "Rendimiento Físico",
+      "Enfoque y Organización",
     ],
   },
 
-  footer: "Este producto fue desarrollado por RoboGlobal™ by CREMENI.",
+  footer:
+    "Este producto fue desarrollado por RoboGlobal™ by CREMENI.",
 };
