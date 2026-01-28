@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
+import { useI18n } from "../i18n";
 
 export default function Home() {
   const navigate = useNavigate();
+  const { t } = useI18n();
 
   return (
     <>
@@ -10,19 +12,17 @@ export default function Home() {
         <div style={styles.heroContainer}>
           <div>
             <h1 style={styles.heroTitle}>
-              Um caminho claro para resolver o que hoje te incomoda.
+              {t("home.hero.title")}
             </h1>
 
             <p style={styles.heroSubtitle}>
-              Aqui você não encontra promessas nem atalhos.
-              Encontra orientação para reconhecer sua situação e seguir por
-              caminhos que façam sentido para a sua realidade.
+              {t("home.hero.subtitle")}
             </p>
 
             <div style={styles.pills}>
-              <span style={styles.pill}>Clareza</span>
-              <span style={styles.pill}>Direção</span>
-              <span style={styles.pill}>Confiança</span>
+              <span style={styles.pill}>{t("home.hero.pills.0")}</span>
+              <span style={styles.pill}>{t("home.hero.pills.1")}</span>
+              <span style={styles.pill}>{t("home.hero.pills.2")}</span>
             </div>
           </div>
 
@@ -37,31 +37,33 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FRASE SOLTA */}
+      {/* FRASE ÂNCORA */}
       <section style={styles.quoteSection}>
         <p style={styles.quote}>
-          “Decidir bem começa por reconhecer o que realmente está te afetando agora.”
+          {t("home.anchor")}
         </p>
       </section>
 
       {/* COMO FUNCIONA */}
       <section style={styles.section}>
-        <h2 style={styles.sectionTitle}>Como funciona</h2>
+        <h2 style={styles.sectionTitle}>
+          {t("home.howItWorks.title")}
+        </h2>
 
         <div style={styles.steps}>
           <div style={styles.step}>
             <span style={styles.stepNumber}>1</span>
-            <p>Escolha a área da sua vida que deseja melhorar</p>
+            <p>{t("home.howItWorks.steps.0")}</p>
           </div>
 
           <div style={styles.step}>
             <span style={styles.stepNumber}>2</span>
-            <p>Identifique a situação que mais se parece com a sua</p>
+            <p>{t("home.howItWorks.steps.1")}</p>
           </div>
 
           <div style={styles.step}>
             <span style={styles.stepNumber}>3</span>
-            <p>Siga um caminho possível e coerente com sua realidade</p>
+            <p>{t("home.howItWorks.steps.2")}</p>
           </div>
         </div>
       </section>
@@ -69,7 +71,7 @@ export default function Home() {
       {/* NICHOS – CONVERSÃO */}
       <section style={styles.sectionAlt}>
         <h2 style={styles.sectionTitle}>
-          Escolha a área que mais faz sentido para você agora
+          {t("home.nichesTitle")}
         </h2>
 
         <div style={styles.niches}>
@@ -77,28 +79,28 @@ export default function Home() {
             style={styles.nicheCard}
             onClick={() => navigate("/nichos?area=financeiro")}
           >
-            💰 Organização Financeira
+            💰 {t("home.niches.0")}
           </div>
 
           <div
             style={styles.nicheCard}
             onClick={() => navigate("/nichos?area=saude")}
           >
-            🧠 Saúde e Bem-estar
+            🧠 {t("home.niches.1")}
           </div>
 
           <div
             style={styles.nicheCard}
             onClick={() => navigate("/nichos?area=desempenho")}
           >
-            🏃 Corpo e Desempenho
+            🏃 {t("home.niches.2")}
           </div>
 
           <div
             style={styles.nicheCard}
             onClick={() => navigate("/nichos?area=organizacao")}
           >
-            ⏱️ Organização e Foco
+            ⏱️ {t("home.niches.3")}
           </div>
         </div>
       </section>
@@ -106,7 +108,7 @@ export default function Home() {
       {/* RODAPÉ */}
       <footer style={styles.footer}>
         <p style={styles.footerText}>
-          Este produto foi desenvolvido por RoboGlobal™ by CREMENI.
+          {t("footer")}
         </p>
       </footer>
     </>
