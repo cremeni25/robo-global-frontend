@@ -28,46 +28,10 @@ export default {
     nichesTitle: "Escolha a área que mais faz sentido para você agora",
 
     niches: [
-      "Organização Financeira",
-      "Saúde e Bem-estar",
-      "Corpo e Desempenho",
-      "Organização e Foco",
-    ],
-  },
-
-  /* =======================
-     B1 — NICHOS
-     ======================= */
-
-  nichos: {
-    hero: {
-      title: "Cada pessoa vive um contexto diferente",
-      subtitle:
-        "Nichos não são rótulos. São contextos recorrentes onde clareza, leitura de cenário e organização fazem diferença antes do próximo passo.",
-    },
-
-    context: {
-      title: "Nichos não são rótulos",
-      description:
-        "Aqui, nichos representam situações recorrentes enfrentadas por pessoas comuns. São contextos humanos onde decisões precisam ser tomadas com mais clareza e menos impulso.",
-    },
-
-    cards: [
-      {
-        title: "Transições pessoais e recomeços",
-        description:
-          "Momentos de mudança, reorganização de vida e decisões importantes que pedem mais clareza antes de seguir adiante.",
-      },
-      {
-        title: "Responsabilidades compartilhadas",
-        description:
-          "Contextos familiares ou coletivos onde escolhas impactam mais de uma pessoa ao mesmo tempo.",
-      },
-      {
-        title: "Ambientes profissionais e pressão por resultado",
-        description:
-          "Situações onde decisões estratégicas exigem leitura de cenário antes de qualquer movimento.",
-      },
+      "Saúde e Vitalidade",
+      "Habilidades e Evolução",
+      "Mundo Digital e Rotina",
+      "Vida e Relações",
     ],
   },
 
