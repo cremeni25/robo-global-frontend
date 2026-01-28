@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import pt from "./pt";
 import en from "./en";
 import es from "./es";
@@ -12,8 +13,12 @@ function resolve(obj: any, path: string): string {
 export function useI18n() {
   const { lang } = useLanguage();
 
+  const dictionary = useMemo(() => {
+    return dictionaries[lang];
+  }, [lang]);
+
   function t(key: string): string {
-    return resolve(dictionaries[lang], key);
+    return resolve(dictionary, key);
   }
 
   return { t, lang };
