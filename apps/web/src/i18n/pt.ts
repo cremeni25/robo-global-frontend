@@ -1,4 +1,4 @@
-export const pt = {
+export default {
   nav: {
     home: "Home",
     niches: "Nichos",
@@ -14,8 +14,7 @@ export const pt = {
       pills: ["Clareza", "Direção", "Confiança"],
     },
 
-    anchor:
-      "Antes de escolher um caminho, entenda o cenário.",
+    anchor: "Antes de escolher um caminho, entenda o cenário.",
 
     howItWorks: {
       title: "Como funciona",
@@ -26,8 +25,7 @@ export const pt = {
       ],
     },
 
-    nichesTitle:
-      "Escolha a área que mais faz sentido para você agora",
+    nichesTitle: "Escolha a área que mais faz sentido para você agora",
 
     niches: [
       "Organização Financeira",
@@ -37,6 +35,5 @@ export const pt = {
     ],
   },
 
-  footer:
-    "Este produto foi desenvolvido por RoboGlobal™ by CREMENI.",
+  footer: "Este produto foi desenvolvido por RoboGlobal™ by CREMENI.",
 };
