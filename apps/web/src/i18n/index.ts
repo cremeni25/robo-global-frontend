@@ -1,6 +1,6 @@
-import { pt } from "./pt";
-import { en } from "./en";
-import { es } from "./es";
+import pt from "./pt";
+import en from "./en";
+import es from "./es";
 import { useLanguage } from "../contexts/LanguageContext";
 
 const dictionaries = { pt, en, es };
