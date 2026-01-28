@@ -8,33 +8,35 @@ export default {
 
   home: {
     hero: {
-      title: "A clear way to move forward from what’s holding you back today.",
+      title: "A clear starting point for navigating what matters most right now.",
       subtitle:
-        "No promises. No shortcuts. Just guidance to help you understand your situation and move in a direction that makes sense for your reality.",
+        "No promises. No shortcuts. Just structured guidance to help you understand your situation and move forward with clarity.",
       pills: ["Clarity", "Direction", "Confidence"],
     },
 
-    anchor: "Before choosing a path, understand the landscape.",
+    anchor:
+      "Before choosing a direction, understand the full context.",
 
     howItWorks: {
       title: "How it works",
       steps: [
-        "Choose the area of your life that needs attention right now",
-        "Identify the situation that best reflects where you are",
-        "Follow a realistic, responsible path forward",
+        "Select the area of your life that requires attention at this moment",
+        "Identify the situation that most closely reflects your current state",
+        "Move forward with a path that is realistic, coherent, and responsible",
       ],
     },
 
     nichesTitle:
-      "Choose the area that makes the most sense for you right now",
+      "Select the area that best aligns with your current priorities",
 
     niches: [
-      "Financial Organization",
+      "Financial Structure",
       "Health & Well-being",
-      "Body & Performance",
+      "Physical Performance",
       "Focus & Organization",
     ],
   },
 
-  footer: "This product was developed by RoboGlobal™ by CREMENI.",
+  footer:
+    "This product was developed by RoboGlobal™ by CREMENI.",
 };
