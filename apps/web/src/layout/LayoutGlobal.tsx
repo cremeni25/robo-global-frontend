@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useLanguage } from "../contexts/LanguageContext";
+import { useI18n } from "../i18n";
 
 interface Props {
   children: ReactNode;
@@ -7,12 +9,14 @@ interface Props {
 
 export default function LayoutGlobal({ children }: Props) {
   const location = useLocation();
+  const { lang, setLang } = useLanguage();
+  const { t } = useI18n();
 
   const navItems = [
-    { to: "/", label: "Home" },
-    { to: "/nichos", label: "Nichos" },
-    { to: "/dores", label: "Dores" },
-    { to: "/sobre", label: "Sobre" },
+    { to: "/", label: t("nav.home") },
+    { to: "/nichos", label: t("nav.nichos") },
+    { to: "/dores", label: t("nav.dores") },
+    { to: "/sobre", label: t("nav.sobre") },
   ];
 
   return (
@@ -38,9 +42,24 @@ export default function LayoutGlobal({ children }: Props) {
           </nav>
 
           <div style={styles.langGroup}>
-            <span style={styles.langPill}>PT</span>
-            <span style={styles.langPillDisabled}>EN</span>
-            <span style={styles.langPillDisabled}>ES</span>
+            <span
+              style={lang === "pt" ? styles.langPill : styles.langPillDisabled}
+              onClick={() => setLang("pt")}
+            >
+              PT
+            </span>
+            <span
+              style={lang === "en" ? styles.langPill : styles.langPillDisabled}
+              onClick={() => setLang("en")}
+            >
+              EN
+            </span>
+            <span
+              style={lang === "es" ? styles.langPill : styles.langPillDisabled}
+              onClick={() => setLang("es")}
+            >
+              ES
+            </span>
           </div>
         </div>
       </header>
@@ -93,6 +112,7 @@ const styles: Record<string, React.CSSProperties> = {
     backgroundColor: "#111827",
     color: "#ffffff",
     fontWeight: 600,
+    cursor: "pointer",
   },
   langPillDisabled: {
     padding: "6px 10px",
@@ -100,6 +120,7 @@ const styles: Record<string, React.CSSProperties> = {
     borderRadius: 999,
     backgroundColor: "#f3f4f6",
     color: "#9ca3af",
+    cursor: "pointer",
   },
   container: {
     maxWidth: 1280,
