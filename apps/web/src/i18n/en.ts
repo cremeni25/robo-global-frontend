@@ -1,4 +1,4 @@
-export const en = {
+export default {
   nav: {
     home: "Home",
     niches: "Niches",
@@ -14,8 +14,7 @@ export const en = {
       pills: ["Clarity", "Direction", "Confidence"],
     },
 
-    anchor:
-      "Before choosing a path, understand the landscape.",
+    anchor: "Before choosing a path, understand the landscape.",
 
     howItWorks: {
       title: "How it works",
@@ -37,6 +36,5 @@ export const en = {
     ],
   },
 
-  footer:
-    "This product was developed by RoboGlobal™ by CREMENI.",
+  footer: "This product was developed by RoboGlobal™ by CREMENI.",
 };
