@@ -1,35 +1,20 @@
 import { pt } from "./pt";
 import { en } from "./en";
 import { es } from "./es";
-
-export type Lang = "pt" | "en" | "es";
+import { useLanguage } from "../contexts/LanguageContext";
 
 const dictionaries = { pt, en, es };
 
-let currentLang: Lang =
-  (localStorage.getItem("lang") as Lang) ||
-  (navigator.language.startsWith("en")
-    ? "en"
-    : navigator.language.startsWith("es")
-    ? "es"
-    : "pt");
-
-export function setLang(lang: Lang) {
-  currentLang = lang;
-  localStorage.setItem("lang", lang);
+function resolve(obj: any, path: string): string {
+  return path.split(".").reduce((acc, part) => acc?.[part], obj) ?? path;
 }
 
-export function getLang(): Lang {
-  return currentLang;
-}
+export function useI18n() {
+  const { lang } = useLanguage();
 
-export function t(path: string): string {
-  const keys = path.split(".");
-  let value: any = dictionaries[currentLang];
-
-  for (const key of keys) {
-    value = value?.[key];
+  function t(key: string): string {
+    return resolve(dictionaries[lang], key);
   }
 
-  return value ?? path;
+  return { t, lang };
 }
