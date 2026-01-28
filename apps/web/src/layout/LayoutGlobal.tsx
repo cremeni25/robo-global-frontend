@@ -14,9 +14,9 @@ export default function LayoutGlobal({ children }: Props) {
 
   const navItems = [
     { to: "/", label: t("nav.home") },
-    { to: "/nichos", label: t("nav.nichos") },
-    { to: "/dores", label: t("nav.dores") },
-    { to: "/sobre", label: t("nav.sobre") },
+    { to: "/nichos", label: t("nav.niches") },
+    { to: "/dores", label: t("nav.pains") },
+    { to: "/sobre", label: t("nav.about") },
   ];
 
   return (
