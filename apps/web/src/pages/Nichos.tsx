@@ -34,10 +34,17 @@ export default function Nichos() {
   return (
     <div style={{ width: "100%", backgroundColor: "#F9FAFB" }}>
       <section style={styles.hero}>
-        <h1 style={styles.title}>{dict.home.nichesTitle}</h1>
-        <p style={styles.subtitle}>
-          Nichos organizam contextos humanos observáveis. Eles não rotulam
-          pessoas — apenas ajudam a reconhecer cenários recorrentes.
+        <p style={styles.heroLine}>
+          Nichos organizam contextos humanos observáveis.
+        </p>
+
+        <p style={styles.heroLine}>
+          Eles não rotulam pessoas — apenas ajudam a reconhecer cenários
+          recorrentes.
+        </p>
+
+        <p style={styles.heroLine}>
+          {dict.home.nichesTitle}
         </p>
       </section>
 
@@ -50,7 +57,6 @@ export default function Nichos() {
               borderColor: colors[i],
             }}
           >
-            {/* Cabeçalho colorido */}
             <div
               style={{
                 ...styles.balloonHeader,
@@ -60,7 +66,6 @@ export default function Nichos() {
               {niche.title.toUpperCase()}
             </div>
 
-            {/* Sub nichos */}
             <ul style={styles.subList}>
               {niche.sub.map((item: string, idx: number) => (
                 <li key={idx} style={styles.subItem}>
@@ -84,15 +89,10 @@ const styles: any = {
     textAlign: "center",
   },
 
-  title: {
-    fontSize: 42,
-    fontWeight: 700,
-    marginBottom: 16,
-  },
-
-  subtitle: {
-    fontSize: 18,
-    opacity: 0.8,
+  heroLine: {
+    fontFamily: "Arial Black, Arial, sans-serif",
+    fontSize: 32,
+    marginBottom: 10,
   },
 
   grid: {
