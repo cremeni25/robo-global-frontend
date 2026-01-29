@@ -34,15 +34,7 @@ export default function Nichos() {
   return (
     <div style={{ width: "100%", backgroundColor: "#F9FAFB" }}>
       <section style={styles.hero}>
-        <p style={styles.heroLine}>
-          Nichos organizam contextos humanos observáveis.
-        </p>
-
-        <p style={styles.heroLineNoBreak}>
-          Eles não rotulam pessoas — apenas ajudam a reconhecer cenários recorrentes.
-        </p>
-
-        <p style={styles.heroLine}>
+        <p style={styles.heroCall}>
           {dict.home.nichesTitle}
         </p>
       </section>
@@ -84,21 +76,15 @@ export default function Nichos() {
 const styles: any = {
   hero: {
     maxWidth: 900,
-    margin: "80px auto 40px",
+    margin: "80px auto 30px",
     textAlign: "center",
   },
 
-  heroLine: {
+  heroCall: {
     fontFamily: "Arial Black, Arial, sans-serif",
-    fontSize: 32,
+    fontSize: 40,
+    fontWeight: 900,
     marginBottom: 10,
-  },
-
-  heroLineNoBreak: {
-    fontFamily: "Arial Black, Arial, sans-serif",
-    fontSize: 32,
-    marginBottom: 10,
-    whiteSpace: "nowrap",
   },
 
   grid: {
