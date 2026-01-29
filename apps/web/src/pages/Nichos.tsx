@@ -1,20 +1,19 @@
 // src/pages/Nichos.tsx
 
 import { Link } from "react-router-dom";
-import * as i18n from "../i18n";
+import { useI18n } from "../i18n";
 
 export default function Nichos() {
-  const t = i18n.t;
-  const niches = t("niches", { returnObjects: true }) as any;
+  const { t } = useI18n();
 
   const nicheList = [
-    niches.health,
-    niches.food,
-    niches.education,
-    niches.relationships,
-    niches.tech,
-    niches.work,
-    niches.finance,
+    t("niches.health"),
+    t("niches.food"),
+    t("niches.education"),
+    t("niches.relationships"),
+    t("niches.tech"),
+    t("niches.work"),
+    t("niches.finance"),
   ];
 
   return (
@@ -79,24 +78,32 @@ export default function Nichos() {
             gap: "32px",
           }}
         >
-          {nicheList.map((niche: any, i: number) => (
-            <div
-              key={i}
-              style={{
-                border: "1px solid #eee",
-                borderRadius: "12px",
-                padding: "24px",
-              }}
-            >
-              <h3 style={{ marginBottom: "12px" }}>{niche.title}</h3>
+          {nicheList.map((title: string, i: number) => {
+            const sub = [
+              t(`niches.${["health","food","education","relationships","tech","work","finance"][i]}.sub.0`),
+              t(`niches.${["health","food","education","relationships","tech","work","finance"][i]}.sub.1`),
+              t(`niches.${["health","food","education","relationships","tech","work","finance"][i]}.sub.2`)
+            ];
 
-              <ul style={{ paddingLeft: "18px", lineHeight: "1.6" }}>
-                {niche.sub.map((item: string, index: number) => (
-                  <li key={index}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
+            return (
+              <div
+                key={i}
+                style={{
+                  border: "1px solid #eee",
+                  borderRadius: "12px",
+                  padding: "24px",
+                }}
+              >
+                <h3 style={{ marginBottom: "12px" }}>{title}</h3>
+
+                <ul style={{ paddingLeft: "18px", lineHeight: "1.6" }}>
+                  {sub.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
         </div>
       </main>
 
