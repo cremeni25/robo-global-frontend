@@ -7,6 +7,11 @@ import es from "../i18n/es";
 
 import healthImg from "../assets/Nichos/health.jpg";
 import foodImg from "../assets/Nichos/food.jpg";
+import educationImg from "../assets/Nichos/education.jpg";
+import relationshipsImg from "../assets/Nichos/relationships.jpg";
+import techImg from "../assets/Nichos/tech.jpg";
+import workImg from "../assets/Nichos/work.jpg";
+import financeImg from "../assets/Nichos/finance.jpg";
 
 const dictionaries: any = { pt, en, es };
 
@@ -23,11 +28,11 @@ const colors = [
 const images = [
   healthImg,
   foodImg,
-  null,
-  null,
-  null,
-  null,
-  null,
+  educationImg,
+  relationshipsImg,
+  techImg,
+  workImg,
+  financeImg,
 ];
 
 export default function Nichos() {
@@ -71,11 +76,9 @@ export default function Nichos() {
 function EditorialCard({ niche, color, image }: any) {
   return (
     <div style={styles.card}>
-      {image && (
-        <div style={styles.imageWrap}>
-          <img src={image} style={styles.image} />
-        </div>
-      )}
+      <div style={styles.imageWrap}>
+        <img src={image} style={styles.image} />
+      </div>
 
       <div style={{ ...styles.cardBody, borderColor: color }}>
         <div style={{ ...styles.cardHeader, background: color }}>
