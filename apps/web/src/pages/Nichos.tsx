@@ -6,6 +6,7 @@ import en from "../i18n/en";
 import es from "../i18n/es";
 
 import healthImg from "../assets/Nichos/health.jpg";
+import foodImg from "../assets/Nichos/food.jpg";
 
 const dictionaries: any = { pt, en, es };
 
@@ -19,7 +20,15 @@ const colors = [
   "#3F8F6B",
 ];
 
-const images = [healthImg, null, null, null, null, null, null];
+const images = [
+  healthImg,
+  foodImg,
+  null,
+  null,
+  null,
+  null,
+  null,
+];
 
 export default function Nichos() {
   const { lang } = useLanguage();
@@ -43,7 +52,7 @@ export default function Nichos() {
         </p>
       </section>
 
-      <div style={styles.flow}>
+      <div style={styles.grid}>
         {nicheList.map((niche: any, i: number) => (
           <EditorialCard
             key={i}
@@ -98,16 +107,16 @@ const styles: any = {
     fontWeight: 900,
   },
 
-  flow: {
-    display: "flex",
-    flexDirection: "column",
-    gap: 60,
+  grid: {
+    maxWidth: 1200,
+    margin: "0 auto",
     padding: "0 16px 80px",
+    display: "grid",
+    gridTemplateColumns: "repeat(2, 1fr)",
+    gap: 40,
   },
 
   card: {
-    maxWidth: 820,
-    margin: "0 auto",
     borderRadius: 26,
     overflow: "hidden",
     background: "#fff",
