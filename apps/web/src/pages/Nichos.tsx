@@ -8,6 +8,16 @@ import es from "../i18n/es";
 
 const dictionaries: any = { pt, en, es };
 
+const colors = [
+  "#5FA777", // saúde
+  "#E39C4A", // alimentação
+  "#4C78A8", // educação
+  "#8B6FAF", // relações
+  "#6C7A89", // tecnologia
+  "#8C6B58", // trabalho
+  "#3F8F6B", // finanças
+];
+
 export default function Nichos() {
   const { lang } = useLanguage();
   const dict = dictionaries[lang];
@@ -23,95 +33,116 @@ export default function Nichos() {
   ];
 
   return (
-    <div style={{ width: "100%", backgroundColor: "#fff" }}>
-      <header
-        style={{
-          maxWidth: "1200px",
-          margin: "0 auto",
-          padding: "24px 16px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
+    <div style={{ width: "100%", backgroundColor: "#F9FAFB" }}>
+      {/* HEADER */}
+      <header style={styles.header}>
         <strong>Robô Global™</strong>
 
-        <nav style={{ display: "flex", gap: "24px" }}>
+        <nav style={styles.nav}>
           <Link to="/">{dict.nav.home}</Link>
           <Link to="/nichos">{dict.nav.niches}</Link>
           <Link to="/contextos">{dict.nav.pains}</Link>
           <Link to="/sobre">{dict.nav.about}</Link>
         </nav>
-
-        <div style={{ display: "flex", gap: "8px", fontSize: "14px" }}>
-          <span>PT</span> | <span>EN</span> | <span>ES</span>
-        </div>
       </header>
 
-      <section style={{ width: "100%", backgroundColor: "#f5f5f5" }}>
-        <div
-          style={{
-            maxWidth: "1200px",
-            margin: "0 auto",
-            padding: "100px 16px",
-          }}
-        >
-          <h1 style={{ fontSize: "42px", marginBottom: "16px" }}>
-            {dict.home.nichesTitle}
-          </h1>
-
-          <p style={{ maxWidth: "600px", fontSize: "18px" }}>
-            Nichos organizam contextos humanos observáveis. Eles não rotulam
-            pessoas — apenas ajudam a reconhecer cenários recorrentes.
-          </p>
-        </div>
+      {/* HERO */}
+      <section style={styles.hero}>
+        <h1 style={styles.title}>{dict.home.nichesTitle}</h1>
+        <p style={styles.subtitle}>
+          Nichos organizam contextos humanos observáveis. Eles não rotulam
+          pessoas — apenas ajudam a reconhecer cenários recorrentes.
+        </p>
       </section>
 
-      <main
-        style={{
-          maxWidth: "1200px",
-          margin: "0 auto",
-          padding: "80px 16px",
-        }}
-      >
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-            gap: "32px",
-          }}
-        >
-          {nicheList.map((niche: any, i: number) => (
-            <div
-              key={i}
-              style={{
-                border: "1px solid #eee",
-                borderRadius: "12px",
-                padding: "24px",
-              }}
-            >
-              <h3 style={{ marginBottom: "12px" }}>{niche.title}</h3>
+      {/* BALÕES */}
+      <main style={styles.grid}>
+        {nicheList.map((niche: any, i: number) => (
+          <div
+            key={i}
+            style={{
+              ...styles.balloon,
+              background: colors[i],
+            }}
+          >
+            <h3 style={styles.balloonTitle}>{niche.title}</h3>
 
-              <ul style={{ paddingLeft: "18px", lineHeight: "1.6" }}>
-                {niche.sub.map((item: string, index: number) => (
-                  <li key={index}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
+            <ul style={styles.balloonList}>
+              {niche.sub.map((item: string, idx: number) => (
+                <li key={idx}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </main>
 
-      <footer
-        style={{
-          borderTop: "1px solid #eee",
-          padding: "32px 16px",
-          textAlign: "center",
-          fontSize: "14px",
-        }}
-      >
-        {dict.footer}
-      </footer>
+      {/* FOOTER */}
+      <footer style={styles.footer}>{dict.footer}</footer>
     </div>
   );
 }
+
+const styles: any = {
+  header: {
+    maxWidth: 1200,
+    margin: "0 auto",
+    padding: "24px 16px",
+    display: "flex",
+    justifyContent: "space-between",
+  },
+
+  nav: {
+    display: "flex",
+    gap: 24,
+  },
+
+  hero: {
+    maxWidth: 900,
+    margin: "80px auto 40px",
+    textAlign: "center",
+  },
+
+  title: {
+    fontSize: 42,
+    fontWeight: 700,
+    marginBottom: 16,
+  },
+
+  subtitle: {
+    fontSize: 18,
+    opacity: 0.8,
+  },
+
+  grid: {
+    maxWidth: 1200,
+    margin: "0 auto",
+    padding: "40px 16px 80px",
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+    gap: 28,
+  },
+
+  balloon: {
+    borderRadius: 28,
+    padding: 28,
+    color: "#fff",
+    boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
+  },
+
+  balloonTitle: {
+    fontSize: 20,
+    fontWeight: 700,
+    marginBottom: 12,
+  },
+
+  balloonList: {
+    paddingLeft: 18,
+    lineHeight: 1.6,
+  },
+
+  footer: {
+    textAlign: "center",
+    padding: 32,
+    opacity: 0.6,
+  },
+};
