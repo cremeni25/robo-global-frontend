@@ -19,6 +19,8 @@ const colors = [
   "#3F8F6B",
 ];
 
+const images = [healthImg, null, null, null, null, null, null];
+
 export default function Nichos() {
   const { lang } = useLanguage();
   const dict = dictionaries[lang];
@@ -33,9 +35,6 @@ export default function Nichos() {
     dict.niches.finance,
   ];
 
-  const firstRow = nicheList.slice(0, 4);
-  const secondRow = nicheList.slice(4);
-
   return (
     <div style={{ width: "100%", backgroundColor: "#F9FAFB" }}>
       <section style={styles.hero}>
@@ -44,15 +43,15 @@ export default function Nichos() {
         </p>
       </section>
 
-      <div style={styles.row4}>
-        {firstRow.map((niche: any, i: number) => (
-          <Balloon key={i} niche={niche} color={colors[i]} index={i} />
-        ))}
-      </div>
-
-      <div style={styles.row3}>
-        {secondRow.map((niche: any, i: number) => (
-          <Balloon key={i} niche={niche} color={colors[i + 4]} index={i + 4} />
+      <div style={styles.flow}>
+        {nicheList.map((niche: any, i: number) => (
+          <NarrativeBlock
+            key={i}
+            niche={niche}
+            color={colors[i]}
+            image={images[i]}
+            reverse={i % 2 !== 0}
+          />
         ))}
       </div>
 
@@ -61,18 +60,15 @@ export default function Nichos() {
   );
 }
 
-function Balloon({ niche, color, index }: any) {
-  const image = index === 0 ? healthImg : null;
-
+function NarrativeBlock({ niche, color, image, reverse }: any) {
   return (
-    <div style={{ ...styles.wrapper }}>
-      {image && (
-        <img
-          src={image}
-          alt="Saúde e bem-estar"
-          style={styles.image}
-        />
-      )}
+    <div
+      style={{
+        ...styles.block,
+        flexDirection: reverse ? "row-reverse" : "row",
+      }}
+    >
+      {image && <img src={image} style={styles.image} />}
 
       <div style={{ ...styles.balloon, borderColor: color }}>
         <div style={{ ...styles.balloonHeader, background: color }}>
@@ -94,7 +90,7 @@ function Balloon({ niche, color, index }: any) {
 const styles: any = {
   hero: {
     maxWidth: 1200,
-    margin: "80px auto 30px",
+    margin: "80px auto 40px",
     textAlign: "center",
   },
 
@@ -102,42 +98,32 @@ const styles: any = {
     fontFamily: "Arial Black, Arial, sans-serif",
     fontSize: 40,
     fontWeight: 900,
-    whiteSpace: "nowrap",
   },
 
-  row4: {
-    maxWidth: 1200,
-    margin: "0 auto",
-    padding: "40px 16px 20px",
-    display: "grid",
-    gridTemplateColumns: "repeat(4, 1fr)",
-    gap: 28,
-  },
-
-  row3: {
-    maxWidth: 900,
-    margin: "0 auto",
-    padding: "0 16px 80px",
-    display: "grid",
-    gridTemplateColumns: "repeat(3, 1fr)",
-    gap: 28,
-  },
-
-  wrapper: {
+  flow: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
-    gap: 12,
+    gap: 60,
+    padding: "0 16px 80px",
+  },
+
+  block: {
+    maxWidth: 1200,
+    margin: "0 auto",
+    display: "flex",
+    gap: 30,
+    alignItems: "stretch",
   },
 
   image: {
-    width: 120,
-    height: 120,
-    borderRadius: "50%",
+    width: 280,
+    height: 220,
     objectFit: "cover",
+    borderRadius: 20,
   },
 
   balloon: {
+    flex: 1,
     borderRadius: 28,
     background: "#ffffff",
     border: "3px solid",
