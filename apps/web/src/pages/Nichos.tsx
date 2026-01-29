@@ -1,11 +1,10 @@
 // src/pages/Nichos.tsx
 
 import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import i18n from "../i18n"; // ajuste se o caminho for diferente
 
 export default function Nichos() {
-  const { t } = useTranslation();
-
+  const t = i18n.t.bind(i18n);
   const niches = t("niches", { returnObjects: true }) as any;
 
   const nicheList = [
@@ -46,12 +45,7 @@ export default function Nichos() {
       </header>
 
       {/* HERO */}
-      <section
-        style={{
-          width: "100%",
-          backgroundColor: "#f5f5f5",
-        }}
-      >
+      <section style={{ width: "100%", backgroundColor: "#f5f5f5" }}>
         <div
           style={{
             maxWidth: "1200px",
