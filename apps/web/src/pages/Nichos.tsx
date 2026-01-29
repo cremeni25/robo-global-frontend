@@ -38,9 +38,8 @@ export default function Nichos() {
           Nichos organizam contextos humanos observáveis.
         </p>
 
-        <p style={styles.heroLine}>
-          Eles não rotulam pessoas — apenas ajudam a reconhecer cenários
-          recorrentes.
+        <p style={styles.heroLineNoBreak}>
+          Eles não rotulam pessoas — apenas ajudam a reconhecer cenários recorrentes.
         </p>
 
         <p style={styles.heroLine}>
@@ -93,6 +92,13 @@ const styles: any = {
     fontFamily: "Arial Black, Arial, sans-serif",
     fontSize: 32,
     marginBottom: 10,
+  },
+
+  heroLineNoBreak: {
+    fontFamily: "Arial Black, Arial, sans-serif",
+    fontSize: 32,
+    marginBottom: 10,
+    whiteSpace: "nowrap",
   },
 
   grid: {
