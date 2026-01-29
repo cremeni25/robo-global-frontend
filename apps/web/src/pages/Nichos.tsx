@@ -31,51 +31,57 @@ export default function Nichos() {
     dict.niches.finance,
   ];
 
+  const firstRow = nicheList.slice(0, 4);
+  const secondRow = nicheList.slice(4);
+
   return (
     <div style={{ width: "100%", backgroundColor: "#F9FAFB" }}>
       <section style={styles.hero}>
         <p style={styles.heroCall}>
-          {dict.home.nichesTitle}
+          {dict.home.nichesTitle.replace(" agora", "") + ":"}
         </p>
       </section>
 
-      <main style={styles.grid}>
-        {nicheList.map((niche: any, i: number) => (
-          <div
-            key={i}
-            style={{
-              ...styles.balloon,
-              borderColor: colors[i],
-            }}
-          >
-            <div
-              style={{
-                ...styles.balloonHeader,
-                background: colors[i],
-              }}
-            >
-              {niche.title.toUpperCase()}
-            </div>
-
-            <ul style={styles.subList}>
-              {niche.sub.map((item: string, idx: number) => (
-                <li key={idx} style={styles.subItem}>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
+      {/* PRIMEIRA LINHA — 4 BALÕES */}
+      <div style={styles.row4}>
+        {firstRow.map((niche: any, i: number) => (
+          <Balloon key={i} niche={niche} color={colors[i]} />
         ))}
-      </main>
+      </div>
+
+      {/* SEGUNDA LINHA — 3 BALÕES CENTRALIZADOS */}
+      <div style={styles.row3}>
+        {secondRow.map((niche: any, i: number) => (
+          <Balloon key={i} niche={niche} color={colors[i + 4]} />
+        ))}
+      </div>
 
       <footer style={styles.footer}>{dict.footer}</footer>
     </div>
   );
 }
 
+function Balloon({ niche, color }: any) {
+  return (
+    <div style={{ ...styles.balloon, borderColor: color }}>
+      <div style={{ ...styles.balloonHeader, background: color }}>
+        {niche.title.toUpperCase()}
+      </div>
+
+      <ul style={styles.subList}>
+        {niche.sub.map((item: string, idx: number) => (
+          <li key={idx} style={styles.subItem}>
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 const styles: any = {
   hero: {
-    maxWidth: 900,
+    maxWidth: 1200,
     margin: "80px auto 30px",
     textAlign: "center",
   },
@@ -84,15 +90,24 @@ const styles: any = {
     fontFamily: "Arial Black, Arial, sans-serif",
     fontSize: 40,
     fontWeight: 900,
-    marginBottom: 10,
+    whiteSpace: "nowrap",
   },
 
-  grid: {
+  row4: {
     maxWidth: 1200,
     margin: "0 auto",
-    padding: "40px 16px 80px",
+    padding: "40px 16px 20px",
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+    gridTemplateColumns: "repeat(4, 1fr)",
+    gap: 28,
+  },
+
+  row3: {
+    maxWidth: 900,
+    margin: "0 auto",
+    padding: "0 16px 80px",
+    display: "grid",
+    gridTemplateColumns: "repeat(3, 1fr)",
     gap: 28,
   },
 
