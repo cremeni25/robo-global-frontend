@@ -100,7 +100,7 @@ function EditorialCard({ niche, color, image }: any) {
 const styles: any = {
   hero: {
     maxWidth: 1200,
-    margin: "80px auto 40px",
+    margin: "30px auto 20px", // ← reduzido
     textAlign: "center",
   },
 
