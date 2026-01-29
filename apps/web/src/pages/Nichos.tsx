@@ -5,6 +5,8 @@ import pt from "../i18n/pt";
 import en from "../i18n/en";
 import es from "../i18n/es";
 
+import healthImg from "../assets/Nichos/health.jpg";
+
 const dictionaries: any = { pt, en, es };
 
 const colors = [
@@ -42,17 +44,15 @@ export default function Nichos() {
         </p>
       </section>
 
-      {/* PRIMEIRA LINHA — 4 BALÕES */}
       <div style={styles.row4}>
         {firstRow.map((niche: any, i: number) => (
-          <Balloon key={i} niche={niche} color={colors[i]} />
+          <Balloon key={i} niche={niche} color={colors[i]} index={i} />
         ))}
       </div>
 
-      {/* SEGUNDA LINHA — 3 BALÕES CENTRALIZADOS */}
       <div style={styles.row3}>
         {secondRow.map((niche: any, i: number) => (
-          <Balloon key={i} niche={niche} color={colors[i + 4]} />
+          <Balloon key={i} niche={niche} color={colors[i + 4]} index={i + 4} />
         ))}
       </div>
 
@@ -61,20 +61,32 @@ export default function Nichos() {
   );
 }
 
-function Balloon({ niche, color }: any) {
-  return (
-    <div style={{ ...styles.balloon, borderColor: color }}>
-      <div style={{ ...styles.balloonHeader, background: color }}>
-        {niche.title.toUpperCase()}
-      </div>
+function Balloon({ niche, color, index }: any) {
+  const image = index === 0 ? healthImg : null;
 
-      <ul style={styles.subList}>
-        {niche.sub.map((item: string, idx: number) => (
-          <li key={idx} style={styles.subItem}>
-            {item}
-          </li>
-        ))}
-      </ul>
+  return (
+    <div style={{ ...styles.wrapper }}>
+      {image && (
+        <img
+          src={image}
+          alt="Saúde e bem-estar"
+          style={styles.image}
+        />
+      )}
+
+      <div style={{ ...styles.balloon, borderColor: color }}>
+        <div style={{ ...styles.balloonHeader, background: color }}>
+          {niche.title.toUpperCase()}
+        </div>
+
+        <ul style={styles.subList}>
+          {niche.sub.map((item: string, idx: number) => (
+            <li key={idx} style={styles.subItem}>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
@@ -109,6 +121,20 @@ const styles: any = {
     display: "grid",
     gridTemplateColumns: "repeat(3, 1fr)",
     gap: 28,
+  },
+
+  wrapper: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: 12,
+  },
+
+  image: {
+    width: 120,
+    height: 120,
+    borderRadius: "50%",
+    objectFit: "cover",
   },
 
   balloon: {
