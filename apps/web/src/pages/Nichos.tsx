@@ -1,10 +1,10 @@
 // src/pages/Nichos.tsx
 
 import { Link } from "react-router-dom";
-import i18n from "../i18n"; // ajuste se o caminho for diferente
+import * as i18n from "../i18n";
 
 export default function Nichos() {
-  const t = i18n.t.bind(i18n);
+  const t = i18n.t;
   const niches = t("niches", { returnObjects: true }) as any;
 
   const nicheList = [
