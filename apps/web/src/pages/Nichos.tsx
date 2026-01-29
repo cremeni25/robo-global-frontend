@@ -45,12 +45,11 @@ export default function Nichos() {
 
       <div style={styles.flow}>
         {nicheList.map((niche: any, i: number) => (
-          <NarrativeBlock
+          <EditorialCard
             key={i}
             niche={niche}
             color={colors[i]}
             image={images[i]}
-            reverse={i % 2 !== 0}
           />
         ))}
       </div>
@@ -60,18 +59,17 @@ export default function Nichos() {
   );
 }
 
-function NarrativeBlock({ niche, color, image, reverse }: any) {
+function EditorialCard({ niche, color, image }: any) {
   return (
-    <div
-      style={{
-        ...styles.block,
-        flexDirection: reverse ? "row-reverse" : "row",
-      }}
-    >
-      {image && <img src={image} style={styles.image} />}
+    <div style={styles.card}>
+      {image && (
+        <div style={styles.imageWrap}>
+          <img src={image} style={styles.image} />
+        </div>
+      )}
 
-      <div style={{ ...styles.balloon, borderColor: color }}>
-        <div style={{ ...styles.balloonHeader, background: color }}>
+      <div style={{ ...styles.cardBody, borderColor: color }}>
+        <div style={{ ...styles.cardHeader, background: color }}>
           {niche.title.toUpperCase()}
         </div>
 
@@ -107,31 +105,32 @@ const styles: any = {
     padding: "0 16px 80px",
   },
 
-  block: {
-    maxWidth: 1200,
+  card: {
+    maxWidth: 820,
     margin: "0 auto",
-    display: "flex",
-    gap: 30,
-    alignItems: "stretch",
+    borderRadius: 26,
+    overflow: "hidden",
+    background: "#fff",
+    boxShadow: "0 15px 40px rgba(0,0,0,0.08)",
+  },
+
+  imageWrap: {
+    width: "100%",
+    height: 260,
+    overflow: "hidden",
   },
 
   image: {
-    width: 280,
-    height: 220,
+    width: "100%",
+    height: "100%",
     objectFit: "cover",
-    borderRadius: 20,
   },
 
-  balloon: {
-    flex: 1,
-    borderRadius: 28,
-    background: "#ffffff",
-    border: "3px solid",
-    overflow: "hidden",
-    boxShadow: "0 10px 30px rgba(0,0,0,0.06)",
+  cardBody: {
+    borderTop: "3px solid",
   },
 
-  balloonHeader: {
+  cardHeader: {
     padding: "18px 20px",
     color: "#fff",
     fontWeight: 800,
@@ -149,7 +148,7 @@ const styles: any = {
   },
 
   subItem: {
-    padding: "8px 10px",
+    padding: "10px 12px",
     borderRadius: 10,
     background: "#F3F4F6",
     fontSize: 15,
