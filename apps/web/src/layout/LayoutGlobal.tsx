@@ -12,6 +12,8 @@ export default function LayoutGlobal({ children }: Props) {
   const { lang, setLang } = useLanguage();
   const { t } = useI18n();
 
+  const hideHeader = location.pathname.startsWith("/nichos");
+
   const navItems = [
     { to: "/", label: t("nav.home") },
     { to: "/nichos", label: t("nav.niches") },
@@ -21,48 +23,50 @@ export default function LayoutGlobal({ children }: Props) {
 
   return (
     <>
-      <header style={styles.header}>
-        <div style={styles.headerInner}>
-          <nav style={styles.nav}>
-            {navItems.map((item) => {
-              const active = location.pathname === item.to;
-              return (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  style={{
-                    ...styles.navItem,
-                    ...(active ? styles.navItemActive : {}),
-                  }}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-          </nav>
+      {!hideHeader && (
+        <header style={styles.header}>
+          <div style={styles.headerInner}>
+            <nav style={styles.nav}>
+              {navItems.map((item) => {
+                const active = location.pathname === item.to;
+                return (
+                  <Link
+                    key={item.to}
+                    to={item.to}
+                    style={{
+                      ...styles.navItem,
+                      ...(active ? styles.navItemActive : {}),
+                    }}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </nav>
 
-          <div style={styles.langGroup}>
-            <span
-              style={lang === "pt" ? styles.langPill : styles.langPillDisabled}
-              onClick={() => setLang("pt")}
-            >
-              PT
-            </span>
-            <span
-              style={lang === "en" ? styles.langPill : styles.langPillDisabled}
-              onClick={() => setLang("en")}
-            >
-              EN
-            </span>
-            <span
-              style={lang === "es" ? styles.langPill : styles.langPillDisabled}
-              onClick={() => setLang("es")}
-            >
-              ES
-            </span>
+            <div style={styles.langGroup}>
+              <span
+                style={lang === "pt" ? styles.langPill : styles.langPillDisabled}
+                onClick={() => setLang("pt")}
+              >
+                PT
+              </span>
+              <span
+                style={lang === "en" ? styles.langPill : styles.langPillDisabled}
+                onClick={() => setLang("en")}
+              >
+                EN
+              </span>
+              <span
+                style={lang === "es" ? styles.langPill : styles.langPillDisabled}
+                onClick={() => setLang("es")}
+              >
+                ES
+              </span>
+            </div>
           </div>
-        </div>
-      </header>
+        </header>
+      )}
 
       <main style={styles.container}>{children}</main>
     </>
