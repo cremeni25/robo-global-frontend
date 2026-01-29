@@ -1,6 +1,5 @@
 // src/pages/Nichos.tsx
 
-import { Link } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
 import pt from "../i18n/pt";
 import en from "../i18n/en";
@@ -34,18 +33,6 @@ export default function Nichos() {
 
   return (
     <div style={{ width: "100%", backgroundColor: "#F9FAFB" }}>
-      {/* HEADER */}
-      <header style={styles.header}>
-        <strong>Robô Global™</strong>
-
-        <nav style={styles.nav}>
-          <Link to="/">{dict.nav.home}</Link>
-          <Link to="/nichos">{dict.nav.niches}</Link>
-          <Link to="/contextos">{dict.nav.pains}</Link>
-          <Link to="/sobre">{dict.nav.about}</Link>
-        </nav>
-      </header>
-
       {/* HERO */}
       <section style={styles.hero}>
         <h1 style={styles.title}>{dict.home.nichesTitle}</h1>
@@ -83,19 +70,6 @@ export default function Nichos() {
 }
 
 const styles: any = {
-  header: {
-    maxWidth: 1200,
-    margin: "0 auto",
-    padding: "24px 16px",
-    display: "flex",
-    justifyContent: "space-between",
-  },
-
-  nav: {
-    display: "flex",
-    gap: 24,
-  },
-
   hero: {
     maxWidth: 900,
     margin: "80px auto 40px",
