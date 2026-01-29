@@ -8,13 +8,13 @@ import es from "../i18n/es";
 const dictionaries: any = { pt, en, es };
 
 const colors = [
-  "#5FA777", // saúde
-  "#E39C4A", // alimentação
-  "#4C78A8", // educação
-  "#8B6FAF", // relações
-  "#6C7A89", // tecnologia
-  "#8C6B58", // trabalho
-  "#3F8F6B", // finanças
+  "#5FA777",
+  "#E39C4A",
+  "#4C78A8",
+  "#8B6FAF",
+  "#6C7A89",
+  "#8C6B58",
+  "#3F8F6B",
 ];
 
 export default function Nichos() {
@@ -33,7 +33,6 @@ export default function Nichos() {
 
   return (
     <div style={{ width: "100%", backgroundColor: "#F9FAFB" }}>
-      {/* HERO */}
       <section style={styles.hero}>
         <h1 style={styles.title}>{dict.home.nichesTitle}</h1>
         <p style={styles.subtitle}>
@@ -42,28 +41,37 @@ export default function Nichos() {
         </p>
       </section>
 
-      {/* BALÕES */}
       <main style={styles.grid}>
         {nicheList.map((niche: any, i: number) => (
           <div
             key={i}
             style={{
               ...styles.balloon,
-              background: colors[i],
+              borderColor: colors[i],
             }}
           >
-            <h3 style={styles.balloonTitle}>{niche.title}</h3>
+            {/* Cabeçalho colorido */}
+            <div
+              style={{
+                ...styles.balloonHeader,
+                background: colors[i],
+              }}
+            >
+              {niche.title.toUpperCase()}
+            </div>
 
-            <ul style={styles.balloonList}>
+            {/* Sub nichos */}
+            <ul style={styles.subList}>
               {niche.sub.map((item: string, idx: number) => (
-                <li key={idx}>{item}</li>
+                <li key={idx} style={styles.subItem}>
+                  {item}
+                </li>
               ))}
             </ul>
           </div>
         ))}
       </main>
 
-      {/* FOOTER */}
       <footer style={styles.footer}>{dict.footer}</footer>
     </div>
   );
@@ -98,20 +106,34 @@ const styles: any = {
 
   balloon: {
     borderRadius: 28,
-    padding: 28,
+    background: "#ffffff",
+    border: "3px solid",
+    overflow: "hidden",
+    boxShadow: "0 10px 30px rgba(0,0,0,0.06)",
+  },
+
+  balloonHeader: {
+    padding: "18px 20px",
     color: "#fff",
-    boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
+    fontWeight: 800,
+    fontSize: 16,
+    letterSpacing: 1,
   },
 
-  balloonTitle: {
-    fontSize: 20,
-    fontWeight: 700,
-    marginBottom: 12,
+  subList: {
+    listStyle: "none",
+    padding: "18px 22px 22px",
+    margin: 0,
+    display: "flex",
+    flexDirection: "column",
+    gap: 10,
   },
 
-  balloonList: {
-    paddingLeft: 18,
-    lineHeight: 1.6,
+  subItem: {
+    padding: "8px 10px",
+    borderRadius: 10,
+    background: "#F3F4F6",
+    fontSize: 15,
   },
 
   footer: {
