@@ -1,5 +1,3 @@
-// src/pages/Nichos.tsx
-
 import { useLanguage } from "../contexts/LanguageContext";
 import pt from "../i18n/pt";
 import en from "../i18n/en";
@@ -12,6 +10,10 @@ import relationshipsImg from "../assets/Nichos/relationships.jpg";
 import techImg from "../assets/Nichos/tech.jpg";
 import workImg from "../assets/Nichos/work.jpg";
 import financeImg from "../assets/Nichos/finance.jpg";
+
+import { getSubnichosByNiche } from "../data/subnichosMap";
+import { navigateToDores } from "../navigation/goToDores";
+import { useNavigate } from "react-router-dom";
 
 const dictionaries: any = { pt, en, es };
 
@@ -34,6 +36,16 @@ const images = [
   workImg,
   financeImg,
 ];
+
+const nicheKeys = [
+  "health",
+  "food",
+  "education",
+  "relationships",
+  "technology",
+  "work",
+  "finance",
+] as const;
 
 export default function Nichos() {
   const { lang } = useLanguage();
@@ -64,6 +76,7 @@ export default function Nichos() {
             niche={niche}
             color={colors[i]}
             image={images[i]}
+            nicheKey={nicheKeys[i]}
           />
         ))}
       </div>
@@ -73,7 +86,10 @@ export default function Nichos() {
   );
 }
 
-function EditorialCard({ niche, color, image }: any) {
+function EditorialCard({ niche, color, image, nicheKey }: any) {
+  const navigate = useNavigate();
+  const subnichos = getSubnichosByNiche(nicheKey);
+
   return (
     <div style={styles.card}>
       <div style={styles.imageWrap}>
@@ -86,9 +102,14 @@ function EditorialCard({ niche, color, image }: any) {
         </div>
 
         <ul style={styles.subList}>
-          {niche.sub.map((item: string, idx: number) => (
-            <li key={idx} style={styles.subItem}>
-              {item}
+          {subnichos.map((item: any) => (
+            <li key={item.id} style={styles.subItem}>
+              <button
+                onClick={() => navigateToDores(navigate, item)}
+                style={styles.button}
+              >
+                {item.sub}
+              </button>
             </li>
           ))}
         </ul>
@@ -100,7 +121,7 @@ function EditorialCard({ niche, color, image }: any) {
 const styles: any = {
   hero: {
     maxWidth: 1200,
-    margin: "30px auto 20px", // ← reduzido
+    margin: "30px auto 20px",
     textAlign: "center",
   },
 
@@ -160,10 +181,18 @@ const styles: any = {
   },
 
   subItem: {
-    padding: "10px 12px",
     borderRadius: 10,
     background: "#F3F4F6",
+  },
+
+  button: {
+    width: "100%",
+    padding: "10px 12px",
+    border: "none",
+    background: "transparent",
     fontSize: 15,
+    textAlign: "left",
+    cursor: "pointer",
   },
 
   footer: {
