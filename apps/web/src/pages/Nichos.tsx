@@ -1,3 +1,5 @@
+// src/pages/Nichos.tsx
+
 import { useLanguage } from "../contexts/LanguageContext";
 import pt from "../i18n/pt";
 import en from "../i18n/en";
@@ -11,9 +13,8 @@ import techImg from "../assets/Nichos/tech.jpg";
 import workImg from "../assets/Nichos/work.jpg";
 import financeImg from "../assets/Nichos/finance.jpg";
 
-import { getSubnichosByNiche } from "../data/subnichosMap";
-import { navigateToDores } from "../navigation/goToDores";
 import { useNavigate } from "react-router-dom";
+import { navigateToDores } from "../navigation/goToDores";
 
 const dictionaries: any = { pt, en, es };
 
@@ -88,7 +89,6 @@ export default function Nichos() {
 
 function EditorialCard({ niche, color, image, nicheKey }: any) {
   const navigate = useNavigate();
-  const subnichos = getSubnichosByNiche(nicheKey);
 
   return (
     <div style={styles.card}>
@@ -102,13 +102,18 @@ function EditorialCard({ niche, color, image, nicheKey }: any) {
         </div>
 
         <ul style={styles.subList}>
-          {subnichos.map((item: any) => (
-            <li key={item.id} style={styles.subItem}>
+          {niche.sub.map((item: string, idx: number) => (
+            <li key={idx} style={styles.subItem}>
               <button
-                onClick={() => navigateToDores(navigate, item)}
                 style={styles.button}
+                onClick={() =>
+                  navigateToDores(navigate, {
+                    niche: nicheKey,
+                    index: idx,
+                  })
+                }
               >
-                {item.sub}
+                {item}
               </button>
             </li>
           ))}
