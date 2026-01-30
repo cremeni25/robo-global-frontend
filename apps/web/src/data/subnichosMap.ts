@@ -1,222 +1,145 @@
 // src/data/subnichosMap.ts
-// Arquivo central de verdade dos sub-nichos
-// B1 → DORES arquitetura de navegação
+// Arquivo central blindado B1 → DORES
 
 // ==============================
-// Tipos base
+// Niches oficiais do sistema
 // ==============================
 
 export type NicheKey =
-  | "saude"
-  | "alimentacao"
-  | "relacoes"
-  | "financeiro"
-  | "carreira"
-  | "mental"
-  | "rotina"
-  | "corpo";
+  | "health"
+  | "food"
+  | "education"
+  | "relationships"
+  | "technology"
+  | "work"
+  | "finance";
+
+// ==============================
+// Contrato de sub-nicho
+// ==============================
 
 export interface SubnichoEntry {
-  id: string;         // identificador interno único
-  niche: NicheKey;    // nicho pai
-  sub: string;        // texto exibido ao usuário
-  slug: string;       // rota pública
-  dor_key: string;    // referência lógica da dor
+  id: string;
+  niche: NicheKey;
+  sub: string;
+  slug: string;
+  dor_key: string;
 }
 
 // ==============================
-// Funções internas de segurança
+// Assets obrigatórios por niche
 // ==============================
 
-function validateUniqueIds(entries: SubnichoEntry[]) {
-  const seen = new Set<string>();
+export const NICHE_ASSET_MAP: Record<NicheKey, string> = {
+  health: "health.jpg",
+  food: "food.jpg",
+  education: "education.jpg",
+  relationships: "relationships.jpg",
+  technology: "tech.jpg",
+  work: "work.jpg",
+  finance: "finance.jpg",
+};
 
-  for (const e of entries) {
-    if (seen.has(e.id)) {
-      throw new Error(`ID duplicado detectado em subnichosMap: ${e.id}`);
-    }
-    seen.add(e.id);
-  }
-}
-
-function validateSlugs(entries: SubnichoEntry[]) {
-  const seen = new Set<string>();
-
-  for (const e of entries) {
-    if (seen.has(e.slug)) {
-      throw new Error(`Slug duplicado detectado em subnichosMap: ${e.slug}`);
-    }
-    seen.add(e.slug);
-  }
-}
+// ==============================
+// Validações internas
+// ==============================
 
 function freeze<T>(obj: T): Readonly<T> {
   return Object.freeze(obj);
 }
 
+function validateUnique(entries: SubnichoEntry[]) {
+  const ids = new Set<string>();
+  const slugs = new Set<string>();
+
+  for (const e of entries) {
+    if (ids.has(e.id)) throw new Error(`ID duplicado: ${e.id}`);
+    if (slugs.has(e.slug)) throw new Error(`Slug duplicado: ${e.slug}`);
+
+    ids.add(e.id);
+    slugs.add(e.slug);
+  }
+}
+
 // ==============================
-// Base de dados principal
+// Sub-nichos reais
 // ==============================
 
 const RAW_SUBNICHOS: SubnichoEntry[] = [
 
-  // ==========================
-  // SAÚDE
-  // ==========================
-
+  // HEALTH
   {
-    id: "health_anxiety",
-    niche: "saude",
-    sub: "Ansiedade",
-    slug: "/dores/saude/ansiedade",
-    dor_key: "anxiety_core",
+    id: "health_routine",
+    niche: "health",
+    sub: "Daily routines affecting well-being",
+    slug: "/dores/health/routine",
+    dor_key: "health_routine_core",
   },
   {
-    id: "health_insomnia",
-    niche: "saude",
-    sub: "Insônia",
-    slug: "/dores/saude/insonia",
-    dor_key: "sleep_disorder_core",
-  },
-  {
-    id: "health_fatigue",
-    niche: "saude",
-    sub: "Cansaço constante",
-    slug: "/dores/saude/cansaco",
-    dor_key: "fatigue_core",
+    id: "health_selfcare",
+    niche: "health",
+    sub: "Personal care pushed aside",
+    slug: "/dores/health/selfcare",
+    dor_key: "health_selfcare_core",
   },
 
-  // ==========================
-  // ALIMENTAÇÃO
-  // ==========================
-
+  // FOOD
   {
-    id: "food_excess",
-    niche: "alimentacao",
-    sub: "Excesso alimentar",
-    slug: "/dores/alimentacao/excesso",
-    dor_key: "food_excess_core",
-  },
-  {
-    id: "food_compulsion",
-    niche: "alimentacao",
-    sub: "Compulsão",
-    slug: "/dores/alimentacao/compulsao",
-    dor_key: "food_compulsion_core",
+    id: "food_patterns",
+    niche: "food",
+    sub: "Disorganized eating patterns",
+    slug: "/dores/food/patterns",
+    dor_key: "food_patterns_core",
   },
 
-  // ==========================
-  // RELAÇÕES
-  // ==========================
-
+  // EDUCATION
   {
-    id: "rel_conflict",
-    niche: "relacoes",
-    sub: "Conflitos",
-    slug: "/dores/relacoes/conflitos",
-    dor_key: "relationship_conflict_core",
-  },
-  {
-    id: "rel_loneliness",
-    niche: "relacoes",
-    sub: "Solidão",
-    slug: "/dores/relacoes/solidao",
-    dor_key: "loneliness_core",
+    id: "education_skills",
+    niche: "education",
+    sub: "Outdated or lagging skills",
+    slug: "/dores/education/skills",
+    dor_key: "education_skills_core",
   },
 
-  // ==========================
-  // FINANCEIRO
-  // ==========================
-
+  // RELATIONSHIPS
   {
-    id: "fin_debt",
-    niche: "financeiro",
-    sub: "Dívidas",
-    slug: "/dores/financeiro/dividas",
-    dor_key: "debt_core",
-  },
-  {
-    id: "fin_instability",
-    niche: "financeiro",
-    sub: "Instabilidade",
-    slug: "/dores/financeiro/instabilidade",
-    dor_key: "financial_instability_core",
+    id: "relationships_conflict",
+    niche: "relationships",
+    sub: "Energy-draining relationships",
+    slug: "/dores/relationships/conflict",
+    dor_key: "relationships_conflict_core",
   },
 
-  // ==========================
-  // CARREIRA
-  // ==========================
-
+  // TECHNOLOGY
   {
-    id: "career_stagnation",
-    niche: "carreira",
-    sub: "Estagnação",
-    slug: "/dores/carreira/estagnacao",
-    dor_key: "career_stagnation_core",
-  },
-  {
-    id: "career_burnout",
-    niche: "carreira",
-    sub: "Burnout",
-    slug: "/dores/carreira/burnout",
-    dor_key: "burnout_core",
+    id: "technology_overload",
+    niche: "technology",
+    sub: "Digital overload",
+    slug: "/dores/technology/overload",
+    dor_key: "technology_overload_core",
   },
 
-  // ==========================
-  // MENTAL
-  // ==========================
-
+  // WORK
   {
-    id: "mental_overthinking",
-    niche: "mental",
-    sub: "Pensamento excessivo",
-    slug: "/dores/mental/overthinking",
-    dor_key: "overthinking_core",
-  },
-  {
-    id: "mental_insecurity",
-    niche: "mental",
-    sub: "Insegurança",
-    slug: "/dores/mental/inseguranca",
-    dor_key: "insecurity_core",
+    id: "work_stagnation",
+    niche: "work",
+    sub: "Career stagnation",
+    slug: "/dores/work/stagnation",
+    dor_key: "work_stagnation_core",
   },
 
-  // ==========================
-  // ROTINA
-  // ==========================
-
+  // FINANCE
   {
-    id: "routine_disorganization",
-    niche: "rotina",
-    sub: "Desorganização",
-    slug: "/dores/rotina/desorganizacao",
-    dor_key: "routine_chaos_core",
-  },
-
-  // ==========================
-  // CORPO
-  // ==========================
-
-  {
-    id: "body_selfimage",
-    niche: "corpo",
-    sub: "Autoimagem",
-    slug: "/dores/corpo/autoimagem",
-    dor_key: "self_image_core",
+    id: "finance_pressure",
+    niche: "finance",
+    sub: "Constant financial pressure",
+    slug: "/dores/finance/pressure",
+    dor_key: "finance_pressure_core",
   },
 
 ];
 
-// ==============================
-// Validação estrutural
-// ==============================
-
-validateUniqueIds(RAW_SUBNICHOS);
-validateSlugs(RAW_SUBNICHOS);
-
-// ==============================
-// Export congelado
-// ==============================
+validateUnique(RAW_SUBNICHOS);
 
 export const SUBNICHOS_MAP = freeze(RAW_SUBNICHOS);
 
@@ -224,14 +147,18 @@ export const SUBNICHOS_MAP = freeze(RAW_SUBNICHOS);
 // Helpers públicos
 // ==============================
 
-export function getSubnichoBySlug(slug: string): SubnichoEntry | undefined {
+export function getSubnichoBySlug(slug: string) {
   return SUBNICHOS_MAP.find(e => e.slug === slug);
 }
 
-export function getSubnichosByNiche(niche: NicheKey): SubnichoEntry[] {
+export function getSubnichosByNiche(niche: NicheKey) {
   return SUBNICHOS_MAP.filter(e => e.niche === niche);
 }
 
-export function listAllSubnichos(): readonly SubnichoEntry[] {
+export function listAllSubnichos() {
   return SUBNICHOS_MAP;
+}
+
+export function getNicheAsset(niche: NicheKey) {
+  return NICHE_ASSET_MAP[niche];
 }
