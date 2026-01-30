@@ -1,32 +1,24 @@
-import type { DoresNavigationContext } from "../contracts/navigation";
-import type { SubnichoEntry } from "../data/subnichosMap";
 import type { NavigateFunction } from "react-router-dom";
 
-// ==============================
-// Builder de contexto
-// ==============================
-
-export function buildDoresContext(entry: SubnichoEntry): DoresNavigationContext {
-  return {
-    niche: entry.niche,
-    subId: entry.id,
-    dorKey: entry.dor_key,
-    timestamp: Date.now(),
-    source: "B1",
-  };
+export interface DoresClickContext {
+  niche: string;
+  index: number;
+  timestamp: number;
+  source: "B1";
 }
-
-// ==============================
-// Navegação segura
-// ==============================
 
 export function navigateToDores(
   navigate: NavigateFunction,
-  entry: SubnichoEntry
+  payload: { niche: string; index: number }
 ) {
-  const ctx = buildDoresContext(entry);
+  const ctx: DoresClickContext = {
+    niche: payload.niche,
+    index: payload.index,
+    timestamp: Date.now(),
+    source: "B1",
+  };
 
-  navigate(entry.slug, {
+  navigate(`/dores/${payload.niche}/${payload.index}`, {
     state: ctx,
   });
 }
