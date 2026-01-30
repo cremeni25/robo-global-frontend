@@ -1,6 +1,10 @@
-import { DoresNavigationContext } from "../contracts/navigation";
-import { SubnichoEntry } from "../data/subnichosMap";
-import { useRouter } from "next/router";
+import type { DoresNavigationContext } from "../contracts/navigation";
+import type { SubnichoEntry } from "../data/subnichosMap";
+import type { NavigateFunction } from "react-router-dom";
+
+// ==============================
+// Builder de contexto
+// ==============================
 
 export function buildDoresContext(entry: SubnichoEntry): DoresNavigationContext {
   return {
@@ -12,11 +16,17 @@ export function buildDoresContext(entry: SubnichoEntry): DoresNavigationContext 
   };
 }
 
-export function navigateToDores(router: ReturnType<typeof useRouter>, entry: SubnichoEntry) {
+// ==============================
+// Navegação segura
+// ==============================
+
+export function navigateToDores(
+  navigate: NavigateFunction,
+  entry: SubnichoEntry
+) {
   const ctx = buildDoresContext(entry);
 
-  router.push({
-    pathname: entry.slug,
-    query: { ctx: JSON.stringify(ctx) },
+  navigate(entry.slug, {
+    state: ctx,
   });
 }
