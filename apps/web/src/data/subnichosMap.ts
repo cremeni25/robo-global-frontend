@@ -1,10 +1,3 @@
-// src/data/subnichosMap.ts
-// Arquivo central blindado B1 → DORES
-
-// ==============================
-// Niches oficiais do sistema
-// ==============================
-
 export type NicheKey =
   | "health"
   | "food"
@@ -14,151 +7,46 @@ export type NicheKey =
   | "work"
   | "finance";
 
-// ==============================
-// Contrato de sub-nicho
-// ==============================
-
 export interface SubnichoEntry {
   id: string;
   niche: NicheKey;
-  sub: string;
+  dictKey: string; // chave do i18n
   slug: string;
   dor_key: string;
 }
 
-// ==============================
-// Assets obrigatórios por niche
-// ==============================
-
-export const NICHE_ASSET_MAP: Record<NicheKey, string> = {
-  health: "health.jpg",
-  food: "food.jpg",
-  education: "education.jpg",
-  relationships: "relationships.jpg",
-  technology: "tech.jpg",
-  work: "work.jpg",
-  finance: "finance.jpg",
-};
-
-// ==============================
-// Validações internas
-// ==============================
-
-function freeze<T>(obj: T): Readonly<T> {
-  return Object.freeze(obj);
-}
-
-function validateUnique(entries: SubnichoEntry[]) {
-  const ids = new Set<string>();
-  const slugs = new Set<string>();
-
-  for (const e of entries) {
-    if (ids.has(e.id)) throw new Error(`ID duplicado: ${e.id}`);
-    if (slugs.has(e.slug)) throw new Error(`Slug duplicado: ${e.slug}`);
-
-    ids.add(e.id);
-    slugs.add(e.slug);
-  }
-}
-
-// ==============================
-// Sub-nichos reais
-// ==============================
-
 const RAW_SUBNICHOS: SubnichoEntry[] = [
 
-  // HEALTH
-  {
-    id: "health_routine",
-    niche: "health",
-    sub: "Daily routines affecting well-being",
-    slug: "/dores/health/routine",
-    dor_key: "health_routine_core",
-  },
-  {
-    id: "health_selfcare",
-    niche: "health",
-    sub: "Personal care pushed aside",
-    slug: "/dores/health/selfcare",
-    dor_key: "health_selfcare_core",
-  },
+  { id: "health_1", niche: "health", dictKey: "health.sub1", slug: "/dores/health/1", dor_key: "health_1" },
+  { id: "health_2", niche: "health", dictKey: "health.sub2", slug: "/dores/health/2", dor_key: "health_2" },
+  { id: "health_3", niche: "health", dictKey: "health.sub3", slug: "/dores/health/3", dor_key: "health_3" },
 
-  // FOOD
-  {
-    id: "food_patterns",
-    niche: "food",
-    sub: "Disorganized eating patterns",
-    slug: "/dores/food/patterns",
-    dor_key: "food_patterns_core",
-  },
+  { id: "food_1", niche: "food", dictKey: "food.sub1", slug: "/dores/food/1", dor_key: "food_1" },
+  { id: "food_2", niche: "food", dictKey: "food.sub2", slug: "/dores/food/2", dor_key: "food_2" },
+  { id: "food_3", niche: "food", dictKey: "food.sub3", slug: "/dores/food/3", dor_key: "food_3" },
 
-  // EDUCATION
-  {
-    id: "education_skills",
-    niche: "education",
-    sub: "Outdated or lagging skills",
-    slug: "/dores/education/skills",
-    dor_key: "education_skills_core",
-  },
+  { id: "education_1", niche: "education", dictKey: "education.sub1", slug: "/dores/education/1", dor_key: "education_1" },
+  { id: "education_2", niche: "education", dictKey: "education.sub2", slug: "/dores/education/2", dor_key: "education_2" },
+  { id: "education_3", niche: "education", dictKey: "education.sub3", slug: "/dores/education/3", dor_key: "education_3" },
 
-  // RELATIONSHIPS
-  {
-    id: "relationships_conflict",
-    niche: "relationships",
-    sub: "Energy-draining relationships",
-    slug: "/dores/relationships/conflict",
-    dor_key: "relationships_conflict_core",
-  },
+  { id: "relationships_1", niche: "relationships", dictKey: "relationships.sub1", slug: "/dores/relationships/1", dor_key: "relationships_1" },
+  { id: "relationships_2", niche: "relationships", dictKey: "relationships.sub2", slug: "/dores/relationships/2", dor_key: "relationships_2" },
+  { id: "relationships_3", niche: "relationships", dictKey: "relationships.sub3", slug: "/dores/relationships/3", dor_key: "relationships_3" },
 
-  // TECHNOLOGY
-  {
-    id: "technology_overload",
-    niche: "technology",
-    sub: "Digital overload",
-    slug: "/dores/technology/overload",
-    dor_key: "technology_overload_core",
-  },
+  { id: "technology_1", niche: "technology", dictKey: "technology.sub1", slug: "/dores/technology/1", dor_key: "technology_1" },
+  { id: "technology_2", niche: "technology", dictKey: "technology.sub2", slug: "/dores/technology/2", dor_key: "technology_2" },
+  { id: "technology_3", niche: "technology", dictKey: "technology.sub3", slug: "/dores/technology/3", dor_key: "technology_3" },
 
-  // WORK
-  {
-    id: "work_stagnation",
-    niche: "work",
-    sub: "Career stagnation",
-    slug: "/dores/work/stagnation",
-    dor_key: "work_stagnation_core",
-  },
+  { id: "work_1", niche: "work", dictKey: "work.sub1", slug: "/dores/work/1", dor_key: "work_1" },
+  { id: "work_2", niche: "work", dictKey: "work.sub2", slug: "/dores/work/2", dor_key: "work_2" },
+  { id: "work_3", niche: "work", dictKey: "work.sub3", slug: "/dores/work/3", dor_key: "work_3" },
 
-  // FINANCE
-  {
-    id: "finance_pressure",
-    niche: "finance",
-    sub: "Constant financial pressure",
-    slug: "/dores/finance/pressure",
-    dor_key: "finance_pressure_core",
-  },
+  { id: "finance_1", niche: "finance", dictKey: "finance.sub1", slug: "/dores/finance/1", dor_key: "finance_1" },
+  { id: "finance_2", niche: "finance", dictKey: "finance.sub2", slug: "/dores/finance/2", dor_key: "finance_2" },
+  { id: "finance_3", niche: "finance", dictKey: "finance.sub3", slug: "/dores/finance/3", dor_key: "finance_3" },
 
 ];
 
-validateUnique(RAW_SUBNICHOS);
-
-export const SUBNICHOS_MAP = freeze(RAW_SUBNICHOS);
-
-// ==============================
-// Helpers públicos
-// ==============================
-
-export function getSubnichoBySlug(slug: string) {
-  return SUBNICHOS_MAP.find(e => e.slug === slug);
-}
-
 export function getSubnichosByNiche(niche: NicheKey) {
-  return SUBNICHOS_MAP.filter(e => e.niche === niche);
-}
-
-export function listAllSubnichos() {
-  return SUBNICHOS_MAP;
-}
-
-export function getNicheAsset(niche: NicheKey) {
-  return NICHE_ASSET_MAP[niche];
+  return RAW_SUBNICHOS.filter(e => e.niche === niche);
 }
