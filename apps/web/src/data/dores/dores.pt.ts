@@ -1,5 +1,5 @@
-// Fonte externa inicial de DORES — B1
-// Estado: implementação mínima segura
+// src/data/dores/dores.pt.ts
+// CENÁRIO REAL — TESTE CONTROLADO (1 dor / 1 produto / ATIVO)
 
 export type DorProductStatus =
   | "RASCUNHO"
@@ -14,16 +14,18 @@ export interface DorData {
   narrative: string;
   ctaText: string;
   productStatus: DorProductStatus;
+  productSlug: string;
 }
 
 export const doresPT: DorData[] = [
   {
-    id: "dor-pt-001",
+    id: "dor-real-001",
     niche: "emagrecimento",
-    title: "Você faz tudo certo, mas o peso não baixa",
+    title: "Você está fazendo esforço demais para resultados de menos",
     narrative:
-      "Você corta açúcar, tenta manter a rotina, começa a semana motivado… mas o resultado nunca acompanha o esforço. Isso não é falta de disciplina — é desgaste emocional acumulado.",
-    ctaText: "Quero entender por que isso acontece",
-    productStatus: "PREPARADO",
+      "Quando disciplina não vira resultado, o problema não é força de vontade. É método, contexto e direção. Este é o ponto de virada.",
+    ctaText: "Prosseguir",
+    productStatus: "ATIVO",
+    productSlug: "info-produto-real-001",
   },
 ];
