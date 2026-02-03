@@ -19,6 +19,7 @@ type DorExterna = {
   narrative: string;
   ctaText: string;
   productStatus: ProdutoStatus;
+  productSlug: string;
 };
 
 function resolverDorExterna(
@@ -34,7 +35,8 @@ function resolverDorExterna(
       d.title &&
       d.narrative &&
       d.ctaText &&
-      d.productStatus
+      d.productStatus &&
+      d.productSlug
   );
 
   if (!doresDoNicho.length) return null;
@@ -70,7 +72,6 @@ export default function Dores() {
   }
 
   const idx = Number(index);
-
   const dorExterna = resolverDorExterna(niche, idx);
 
   const doresEngine = dorExterna
@@ -79,7 +80,7 @@ export default function Dores() {
         narrative: [dorExterna.narrative],
         produto: {
           status: dorExterna.productStatus,
-          slug: "produto-exemplo",
+          slug: dorExterna.productSlug,
         },
         ctaText: dorExterna.ctaText,
       }
