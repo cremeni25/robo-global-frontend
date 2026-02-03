@@ -3,7 +3,7 @@
 // Arquitetura congelada | Governança ativa | Conteúdo evolutivo
 
 import { useParams, useNavigate } from "react-router-dom";
-import { doresPT } from "@/data/dores/dores.pt";
+import { doresPT } from "../data/dores/dores.pt";
 
 type DoresParams = {
   niche?: string;
@@ -21,9 +21,6 @@ type DorExterna = {
   productStatus: ProdutoStatus;
 };
 
-// ===============================
-// Resolver dor externa com fallback
-// ===============================
 function resolverDorExterna(
   niche: string,
   index: number
@@ -49,9 +46,6 @@ export default function Dores() {
   const { niche, index } = useParams<DoresParams>();
   const navigate = useNavigate();
 
-  // ===============================
-  // Validação mínima de rota
-  // ===============================
   if (!niche || index === undefined || isNaN(Number(index))) {
     return (
       <main className="min-h-screen w-full bg-white flex justify-center">
@@ -77,9 +71,6 @@ export default function Dores() {
 
   const idx = Number(index);
 
-  // ===============================
-  // ENGINE — fonte externa + fallback
-  // ===============================
   const dorExterna = resolverDorExterna(niche, idx);
 
   const doresEngine = dorExterna
@@ -88,7 +79,7 @@ export default function Dores() {
         narrative: [dorExterna.narrative],
         produto: {
           status: dorExterna.productStatus,
-          slug: "produto-exemplo", // real no futuro
+          slug: "produto-exemplo",
         },
         ctaText: dorExterna.ctaText,
       }
@@ -108,9 +99,6 @@ export default function Dores() {
 
   const podeProsseguir = doresEngine.produto.status === "ATIVO";
 
-  // ===============================
-  // RENDER (inalterado)
-  // ===============================
   return (
     <main className="min-h-screen w-full bg-white flex justify-center">
       <section className="w-full max-w-3xl px-6 py-24 flex flex-col gap-16">
