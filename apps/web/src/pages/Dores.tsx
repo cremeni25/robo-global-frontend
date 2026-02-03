@@ -3,6 +3,7 @@
 // Arquitetura congelada | Governança ativa | Conteúdo evolutivo
 
 import { useParams, useNavigate } from "react-router-dom";
+import { doresPT } from "@/data/dores/dores.pt";
 
 type DoresParams = {
   niche?: string;
@@ -10,6 +11,39 @@ type DoresParams = {
 };
 
 type ProdutoStatus = "RASCUNHO" | "PREPARADO" | "ATIVO" | "SUSPENSO";
+
+type DorExterna = {
+  id: string;
+  niche: string;
+  title: string;
+  narrative: string;
+  ctaText: string;
+  productStatus: ProdutoStatus;
+};
+
+// ===============================
+// Resolver dor externa com fallback
+// ===============================
+function resolverDorExterna(
+  niche: string,
+  index: number
+): DorExterna | null {
+  if (!Array.isArray(doresPT)) return null;
+
+  const doresDoNicho = doresPT.filter(
+    (d) =>
+      d.niche === niche &&
+      d.id &&
+      d.title &&
+      d.narrative &&
+      d.ctaText &&
+      d.productStatus
+  );
+
+  if (!doresDoNicho.length) return null;
+
+  return doresDoNicho[index] ?? null;
+}
 
 export default function Dores() {
   const { niche, index } = useParams<DoresParams>();
@@ -41,27 +75,41 @@ export default function Dores() {
     );
   }
 
+  const idx = Number(index);
+
   // ===============================
-  // ENGINE MÍNIMA — PLACEHOLDER CONTROLADO
-  // (conteúdo será externo no futuro)
+  // ENGINE — fonte externa + fallback
   // ===============================
-  const doresEngine = {
-    title: "Todo contexto carrega tensões invisíveis.",
-    narrative: [
-      "Mesmo em cenários aparentemente estáveis, existem forças atuando em segundo plano — pressões, dúvidas e necessidades de ajuste.",
-      "Reconhecer essas tensões não significa fragilidade. Significa maturidade diante da realidade.",
-      "Este espaço não oferece respostas imediatas. Ele existe para permitir leitura, consciência e preparação para o próximo passo."
-    ],
-    produto: {
-      status: "PREPARADO" as ProdutoStatus,
-      slug: "produto-exemplo" // real no futuro, inativo agora
-    }
-  };
+  const dorExterna = resolverDorExterna(niche, idx);
+
+  const doresEngine = dorExterna
+    ? {
+        title: dorExterna.title,
+        narrative: [dorExterna.narrative],
+        produto: {
+          status: dorExterna.productStatus,
+          slug: "produto-exemplo", // real no futuro
+        },
+        ctaText: dorExterna.ctaText,
+      }
+    : {
+        title: "Todo contexto carrega tensões invisíveis.",
+        narrative: [
+          "Mesmo em cenários aparentemente estáveis, existem forças atuando em segundo plano — pressões, dúvidas e necessidades de ajuste.",
+          "Reconhecer essas tensões não significa fragilidade. Significa maturidade diante da realidade.",
+          "Este espaço não oferece respostas imediatas. Ele existe para permitir leitura, consciência e preparação para o próximo passo.",
+        ],
+        produto: {
+          status: "PREPARADO" as ProdutoStatus,
+          slug: "produto-exemplo",
+        },
+        ctaText: "Prosseguir",
+      };
 
   const podeProsseguir = doresEngine.produto.status === "ATIVO";
 
   // ===============================
-  // RENDER
+  // RENDER (inalterado)
   // ===============================
   return (
     <main className="min-h-screen w-full bg-white flex justify-center">
@@ -104,7 +152,7 @@ export default function Dores() {
                 : "text-gray-400 cursor-not-allowed"
             }`}
           >
-            Prosseguir
+            {doresEngine.ctaText}
           </button>
 
           {!podeProsseguir && (
