@@ -6,19 +6,12 @@ import pt from "../i18n/pt";
 import en from "../i18n/en";
 import es from "../i18n/es";
 
-import healthImg from "../assets/Nichos/health.jpg";
-import foodImg from "../assets/Nichos/food.jpg";
-import educationImg from "../assets/Nichos/education.jpg";
-import relationshipsImg from "../assets/Nichos/relationships.jpg";
-import techImg from "../assets/Nichos/tech.jpg";
-import workImg from "../assets/Nichos/work.jpg";
-import financeImg from "../assets/Nichos/finance.jpg";
-
 import { useNavigate } from "react-router-dom";
 import { navigateToDores } from "../navigation/goToDores";
 
 const dictionaries: any = { pt, en, es };
 
+// cores continuam editoriais (não vêm do CMS)
 const colors = [
   "#5FA777",
   "#E39C4A",
@@ -29,71 +22,32 @@ const colors = [
   "#3F8F6B",
 ];
 
-const images = [
-  healthImg,
-  foodImg,
-  educationImg,
-  relationshipsImg,
-  techImg,
-  workImg,
-  financeImg,
-];
-
-const nicheKeys = [
-  "health",
-  "food",
-  "education",
-  "relationships",
-  "technology",
-  "work",
-  "finance",
-] as const;
+// URL do Directus (já deployado)
+const CMS_URL = "https://robo-global-cms.onrender.com";
 
 export default function Nichos() {
   const { lang } = useLanguage();
   const dict = dictionaries[lang];
+  const navigate = useNavigate();
 
-  const [cmsNichos, setCmsNichos] = useState<any[]>([]);
+  const [nichos, setNichos] = useState<any[]>([]);
 
-  // 🔥 B1 V8.1 — leitura do Directus (SEM alterar estrutura)
   useEffect(() => {
-    async function loadNichos() {
+    async function carregarNichos() {
       try {
-        const res = await fetch(
-          "https://robo-global-cms.onrender.com/items/nichos"
-        );
+        const res = await fetch(`${CMS_URL}/items/nichos`);
         const json = await res.json();
-        setCmsNichos(json.data || []);
-      } catch (err) {
-        console.error("Erro ao carregar nichos do CMS", err);
+
+        if (json?.data) {
+          setNichos(json.data);
+        }
+      } catch (e) {
+        console.error("Erro ao carregar nichos do CMS", e);
       }
     }
 
-    loadNichos();
+    carregarNichos();
   }, []);
-
-  // mantém estrutura original
-  const nicheList = [
-    dict.niches.health,
-    dict.niches.food,
-    dict.niches.education,
-    dict.niches.relationships,
-    dict.niches.tech,
-    dict.niches.work,
-    dict.niches.finance,
-  ];
-
-  // 🔥 injeta dados do CMS SEM quebrar nada
-  const mergedList = nicheList.map((niche: any, i: number) => {
-    const cms = cmsNichos[i];
-    if (!cms) return niche;
-
-    return {
-      ...niche,
-      title: cms.title || niche.title,
-      description: cms.description || niche.description,
-    };
-  });
 
   return (
     <div style={{ width: "100%", backgroundColor: "#F9FAFB" }}>
@@ -104,13 +58,12 @@ export default function Nichos() {
       </section>
 
       <div style={styles.grid}>
-        {mergedList.map((niche: any, i: number) => (
+        {nichos.map((niche: any, i: number) => (
           <EditorialCard
-            key={i}
+            key={niche.id}
             niche={niche}
-            color={colors[i]}
-            image={images[i]}
-            nicheKey={nicheKeys[i]}
+            color={colors[i % colors.length]}
+            navigate={navigate}
           />
         ))}
       </div>
@@ -120,36 +73,39 @@ export default function Nichos() {
   );
 }
 
-function EditorialCard({ niche, color, image, nicheKey }: any) {
-  const navigate = useNavigate();
+function EditorialCard({ niche, color, navigate }: any) {
+  // imagem agora vem do CMS
+  const imageUrl = niche.image
+    ? `${CMS_URL}/assets/${niche.image}`
+    : "https://placehold.co/600x400";
 
   return (
     <div style={styles.card}>
       <div style={styles.imageWrap}>
-        <img src={image} style={styles.image} />
+        <img src={imageUrl} style={styles.image} />
       </div>
 
       <div style={{ ...styles.cardBody, borderColor: color }}>
         <div style={{ ...styles.cardHeader, background: color }}>
-          {niche.title.toUpperCase()}
+          {String(niche.title).toUpperCase()}
         </div>
 
+        {/* enquanto subnichos ainda não existem no CMS,
+            mostramos apenas descrição editorial */}
         <ul style={styles.subList}>
-          {niche.sub.map((item: string, idx: number) => (
-            <li key={idx} style={styles.subItem}>
-              <button
-                style={styles.button}
-                onClick={() =>
-                  navigateToDores(navigate, {
-                    niche: nicheKey,
-                    index: idx,
-                  })
-                }
-              >
-                {item}
-              </button>
-            </li>
-          ))}
+          <li style={styles.subItem}>
+            <button
+              style={styles.button}
+              onClick={() =>
+                navigateToDores(navigate, {
+                  niche: niche.slug,
+                  index: 0,
+                })
+              }
+            >
+              {niche.description}
+            </button>
+          </li>
         </ul>
       </div>
     </div>
