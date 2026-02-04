@@ -1,5 +1,6 @@
 // src/pages/Nichos.tsx
 
+import { useEffect, useState } from "react";
 import { useLanguage } from "../contexts/LanguageContext";
 import pt from "../i18n/pt";
 import en from "../i18n/en";
@@ -52,6 +53,26 @@ export default function Nichos() {
   const { lang } = useLanguage();
   const dict = dictionaries[lang];
 
+  const [cmsNichos, setCmsNichos] = useState<any[]>([]);
+
+  // 🔥 B1 V8.1 — leitura do Directus (SEM alterar estrutura)
+  useEffect(() => {
+    async function loadNichos() {
+      try {
+        const res = await fetch(
+          "https://robo-global-cms.onrender.com/items/nichos"
+        );
+        const json = await res.json();
+        setCmsNichos(json.data || []);
+      } catch (err) {
+        console.error("Erro ao carregar nichos do CMS", err);
+      }
+    }
+
+    loadNichos();
+  }, []);
+
+  // mantém estrutura original
   const nicheList = [
     dict.niches.health,
     dict.niches.food,
@@ -62,6 +83,18 @@ export default function Nichos() {
     dict.niches.finance,
   ];
 
+  // 🔥 injeta dados do CMS SEM quebrar nada
+  const mergedList = nicheList.map((niche: any, i: number) => {
+    const cms = cmsNichos[i];
+    if (!cms) return niche;
+
+    return {
+      ...niche,
+      title: cms.title || niche.title,
+      description: cms.description || niche.description,
+    };
+  });
+
   return (
     <div style={{ width: "100%", backgroundColor: "#F9FAFB" }}>
       <section style={styles.hero}>
@@ -71,7 +104,7 @@ export default function Nichos() {
       </section>
 
       <div style={styles.grid}>
-        {nicheList.map((niche: any, i: number) => (
+        {mergedList.map((niche: any, i: number) => (
           <EditorialCard
             key={i}
             niche={niche}
