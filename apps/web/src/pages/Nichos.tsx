@@ -11,7 +11,7 @@ import { navigateToDores } from "../navigation/goToDores";
 
 const dictionaries: any = { pt, en, es };
 
-// cores continuam editoriais (não vêm do CMS)
+// cores continuam editoriais
 const colors = [
   "#5FA777",
   "#E39C4A",
@@ -22,8 +22,13 @@ const colors = [
   "#3F8F6B",
 ];
 
-// URL do Directus (já deployado)
-const CMS_URL = "https://robo-global-cms.onrender.com";
+/*
+=====================================================
+🔥 AGORA USAMOS SUPABASE DIRETO (SEM DIRECTUS)
+=====================================================
+*/
+const SUPABASE_URL = "https://lnftqpxrnuushzkuuete.supabase.co/rest/v1";
+const SUPABASE_ANON_KEY = "COLE_AQUI_SUA_ANON_PUBLIC_KEY";
 
 export default function Nichos() {
   const { lang } = useLanguage();
@@ -35,14 +40,23 @@ export default function Nichos() {
   useEffect(() => {
     async function carregarNichos() {
       try {
-        const res = await fetch(`${CMS_URL}/items/nichos`);
+        const res = await fetch(
+          `${SUPABASE_URL}/nichos?select=*`,
+          {
+            headers: {
+              apikey: SUPABASE_ANON_KEY,
+              Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+            },
+          }
+        );
+
         const json = await res.json();
 
-        if (json?.data) {
-          setNichos(json.data);
+        if (Array.isArray(json)) {
+          setNichos(json);
         }
       } catch (e) {
-        console.error("Erro ao carregar nichos do CMS", e);
+        console.error("Erro ao carregar nichos do Supabase", e);
       }
     }
 
@@ -74,10 +88,8 @@ export default function Nichos() {
 }
 
 function EditorialCard({ niche, color, navigate }: any) {
-  // imagem agora vem do CMS
-  const imageUrl = niche.image
-    ? `${CMS_URL}/assets/${niche.image}`
-    : "https://placehold.co/600x400";
+  // 🔥 agora não existe mais image do Directus
+  const imageUrl = "https://placehold.co/600x400";
 
   return (
     <div style={styles.card}>
@@ -90,8 +102,6 @@ function EditorialCard({ niche, color, navigate }: any) {
           {String(niche.title).toUpperCase()}
         </div>
 
-        {/* enquanto subnichos ainda não existem no CMS,
-            mostramos apenas descrição editorial */}
         <ul style={styles.subList}>
           <li style={styles.subItem}>
             <button
