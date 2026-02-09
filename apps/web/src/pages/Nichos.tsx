@@ -41,7 +41,7 @@ export default function Nichos() {
     async function carregarNichos() {
       try {
         const res = await fetch(
-          `${SUPABASE_URL}/nichos?select=*`,
+          `${SUPABASE_URL}/robo_global.nichos?select=*`,
           {
             headers: {
               apikey: SUPABASE_ANON_KEY,
