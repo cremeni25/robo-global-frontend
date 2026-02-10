@@ -1,18 +1,43 @@
 // =====================================================
 // ROBÔ GLOBAL™ — APP (EXPO)
-// CAMADA B2 — LOGIN
-// Espelhamento literal do SITE
-//
-// Regras:
-// - Nenhuma lógica de negócio
-// - Nenhum mock financeiro
-// - Nenhuma decisão
-// - Apenas estrutura operacional
+// CAMADA B2 — LOGIN REAL (SUPABASE)
 // =====================================================
 
-import { View, Text, TextInput, Pressable } from "react-native";
+import { View, Text, TextInput, Pressable, Alert } from "react-native";
+import { useState } from "react";
+import { useRouter } from "expo-router";
+import { supabase } from "../../lib/supabase";
 
 export default function B2LoginScreen() {
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function handleLogin() {
+    if (!email || !password) {
+      Alert.alert("Erro", "Informe email e senha");
+      return;
+    }
+
+    setLoading(true);
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    setLoading(false);
+
+    if (error) {
+      Alert.alert("Falha no login", error.message);
+      return;
+    }
+
+    // Login OK → entra no B2 (por enquanto)
+    router.replace("/b2");
+  }
+
   return (
     <View
       style={{
@@ -35,7 +60,11 @@ export default function B2LoginScreen() {
 
       <Text style={{ color: "#cfcfcf", marginBottom: 6 }}>Email</Text>
       <TextInput
-        placeholder="—"
+        value={email}
+        onChangeText={setEmail}
+        autoCapitalize="none"
+        keyboardType="email-address"
+        placeholder="email@exemplo.com"
         placeholderTextColor="#666"
         style={{
           borderWidth: 1,
@@ -49,8 +78,10 @@ export default function B2LoginScreen() {
 
       <Text style={{ color: "#cfcfcf", marginBottom: 6 }}>Senha</Text>
       <TextInput
+        value={password}
+        onChangeText={setPassword}
         secureTextEntry
-        placeholder="—"
+        placeholder="••••••••"
         placeholderTextColor="#666"
         style={{
           borderWidth: 1,
@@ -63,9 +94,11 @@ export default function B2LoginScreen() {
       />
 
       <Pressable
+        onPress={handleLogin}
+        disabled={loading}
         style={{
           padding: 14,
-          backgroundColor: "#2563eb",
+          backgroundColor: loading ? "#444" : "#2563eb",
           borderRadius: 6,
         }}
       >
@@ -76,7 +109,7 @@ export default function B2LoginScreen() {
             fontWeight: "600",
           }}
         >
-          Entrar
+          {loading ? "Entrando..." : "Entrar"}
         </Text>
       </Pressable>
     </View>
