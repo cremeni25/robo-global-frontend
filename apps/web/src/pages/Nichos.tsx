@@ -1,13 +1,14 @@
-// src/pages/Nichos.tsx
+// apps/web/src/pages/Nichos.tsx
 
 import { useEffect, useState } from "react";
 import { useLanguage } from "../contexts/LanguageContext";
 import pt from "../i18n/pt";
 import en from "../i18n/en";
 import es from "../i18n/es";
-
 import { useNavigate } from "react-router-dom";
 import { navigateToDores } from "../navigation/goToDores";
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 const dictionaries: any = { pt, en, es };
 
@@ -21,9 +22,6 @@ const colors = [
   "#3F8F6B",
 ];
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
-
 export default function Nichos() {
   const { lang } = useLanguage();
   const dict = dictionaries[lang];
@@ -34,23 +32,14 @@ export default function Nichos() {
   useEffect(() => {
     async function carregarNichos() {
       try {
-        const res = await fetch(
-          `${SUPABASE_URL}/robo_global.nichos?select=*`,
-          {
-            headers: {
-              apikey: SUPABASE_ANON_KEY,
-              Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-            },
-          }
-        );
-
+        const res = await fetch(`${API_URL}/public/nichos`);
         const json = await res.json();
 
-        if (Array.isArray(json)) {
-          setNichos(json);
+        if (json?.data) {
+          setNichos(json.data);
         }
       } catch (e) {
-        console.error("Erro ao carregar nichos do Supabase", e);
+        console.error("Erro ao carregar nichos via API", e);
       }
     }
 
@@ -121,13 +110,11 @@ const styles: any = {
     margin: "30px auto 20px",
     textAlign: "center",
   },
-
   heroCall: {
     fontFamily: "Arial Black, Arial, sans-serif",
     fontSize: 40,
     fontWeight: 900,
   },
-
   grid: {
     maxWidth: 1200,
     margin: "0 auto",
@@ -136,30 +123,25 @@ const styles: any = {
     gridTemplateColumns: "repeat(2, 1fr)",
     gap: 40,
   },
-
   card: {
     borderRadius: 26,
     overflow: "hidden",
     background: "#fff",
     boxShadow: "0 15px 40px rgba(0,0,0,0.08)",
   },
-
   imageWrap: {
     width: "100%",
     height: 260,
     overflow: "hidden",
   },
-
   image: {
     width: "100%",
     height: "100%",
     objectFit: "cover",
   },
-
   cardBody: {
     borderTop: "3px solid",
   },
-
   cardHeader: {
     padding: "18px 20px",
     color: "#fff",
@@ -167,7 +149,6 @@ const styles: any = {
     fontSize: 16,
     letterSpacing: 1,
   },
-
   subList: {
     listStyle: "none",
     padding: "18px 22px 22px",
@@ -176,12 +157,10 @@ const styles: any = {
     flexDirection: "column",
     gap: 10,
   },
-
   subItem: {
     borderRadius: 10,
     background: "#F3F4F6",
   },
-
   button: {
     width: "100%",
     padding: "10px 12px",
@@ -191,7 +170,6 @@ const styles: any = {
     textAlign: "left",
     cursor: "pointer",
   },
-
   footer: {
     textAlign: "center",
     padding: 32,
