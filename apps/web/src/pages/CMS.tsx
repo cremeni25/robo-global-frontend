@@ -1,9 +1,7 @@
-// apps/web/src/pages/CMS.tsx
-
 import { useState } from "react";
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const API_URL = import.meta.env.VITE_API_URL;
+const MASTER_KEY = import.meta.env.VITE_MASTER_KEY;
 
 export default function CMS() {
   const [title, setTitle] = useState("");
@@ -12,41 +10,37 @@ export default function CMS() {
 
   async function criarNicho() {
     try {
-      const response = await fetch(
-        `${SUPABASE_URL}/robo_global.nichos`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            apikey: SUPABASE_ANON_KEY,
-            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-            Prefer: "return=minimal",
-          },
-          body: JSON.stringify({
-            title,
-            slug,
-            description,
-          }),
-        }
-      );
+      const res = await fetch(`${API_URL}/cms/nichos`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-master-key": MASTER_KEY,
+        },
+        body: JSON.stringify({
+          title,
+          slug,
+          description,
+        }),
+      });
 
-      if (!response.ok) {
-        throw new Error("Erro ao inserir no Supabase");
+      if (!res.ok) {
+        throw new Error("Erro ao criar via API");
       }
 
-      alert("Nicho criado com sucesso!");
+      alert("Nicho criado via API soberana!");
+
       setTitle("");
       setSlug("");
       setDescription("");
-    } catch (error) {
-      console.error("Erro ao criar nicho:", error);
-      alert("Erro ao criar nicho.");
+    } catch (err) {
+      console.error(err);
+      alert("Falha ao criar nicho");
     }
   }
 
   return (
     <div style={styles.container}>
-      <h1 style={styles.title}>CMS Nichos</h1>
+      <h1 style={styles.title}>CMS — MASTER REAL</h1>
 
       <input
         style={styles.input}
@@ -90,13 +84,11 @@ const styles: Record<string, React.CSSProperties> = {
   },
   input: {
     padding: 10,
-    fontSize: 14,
     borderRadius: 8,
     border: "1px solid #e5e7eb",
   },
   textarea: {
     padding: 10,
-    fontSize: 14,
     borderRadius: 8,
     border: "1px solid #e5e7eb",
     minHeight: 120,
