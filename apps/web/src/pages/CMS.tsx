@@ -1,3 +1,5 @@
+// apps/web/src/pages/CMS.tsx
+
 import { useState } from "react";
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
@@ -30,33 +32,69 @@ export default function CMS() {
       setSlug("");
       setDescription("");
     } catch (e) {
-      console.error(e);
+      console.error("Erro ao criar nicho", e);
     }
   }
 
   return (
-    <div>
-      <h1>CMS Nichos</h1>
+    <div style={styles.container}>
+      <h1 style={styles.title}>CMS Nichos</h1>
 
       <input
+        style={styles.input}
         placeholder="Título"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
 
       <input
+        style={styles.input}
         placeholder="Slug"
         value={slug}
         onChange={(e) => setSlug(e.target.value)}
       />
 
       <textarea
+        style={styles.textarea}
         placeholder="Descrição"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       />
 
-      <button onClick={criarNicho}>Criar Nicho</button>
+      <button style={styles.button} onClick={criarNicho}>
+        Criar Nicho
+      </button>
     </div>
   );
 }
+
+const styles: any = {
+  container: {
+    maxWidth: 600,
+    margin: "0 auto",
+    display: "flex",
+    flexDirection: "column",
+    gap: 12,
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: 800,
+  },
+  input: {
+    padding: 10,
+    fontSize: 14,
+    borderRadius: 8,
+    border: "1px solid #e5e7eb",
+  },
+  textarea: {
+    padding: 10,
+    fontSize: 14,
+    borderRadius: 8,
+    border: "1px solid #e5e7eb",
+    minHeight: 120,
+  },
+  button: {
+    padding: 12,
+    backgroundColor: "#111827",
+    color: "#fff",
+    border: "none
