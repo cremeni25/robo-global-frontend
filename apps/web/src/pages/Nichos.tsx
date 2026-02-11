@@ -11,7 +11,6 @@ import { navigateToDores } from "../navigation/goToDores";
 
 const dictionaries: any = { pt, en, es };
 
-// cores continuam editoriais
 const colors = [
   "#5FA777",
   "#E39C4A",
@@ -22,13 +21,8 @@ const colors = [
   "#3F8F6B",
 ];
 
-/*
-=====================================================
-🔥 AGORA USAMOS SUPABASE DIRETO (SEM DIRECTUS)
-=====================================================
-*/
-const SUPABASE_URL = "https://lnftqpxrnuushzkuuete.supabase.co/rest/v1";
-const SUPABASE_ANON_KEY = "COLE_AQUI_SUA_ANON_PUBLIC_KEY";
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 export default function Nichos() {
   const { lang } = useLanguage();
@@ -88,7 +82,6 @@ export default function Nichos() {
 }
 
 function EditorialCard({ niche, color, navigate }: any) {
-  // 🔥 agora não existe mais image do Directus
   const imageUrl = "https://placehold.co/600x400";
 
   return (
