@@ -12,27 +12,35 @@ export default function CMS() {
 
   async function criarNicho() {
     try {
-      await fetch(`${SUPABASE_URL}/robo_global.nichos`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          apikey: SUPABASE_ANON_KEY,
-          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-          Prefer: "return=minimal",
-        },
-        body: JSON.stringify({
-          title,
-          slug,
-          description,
-        }),
-      });
+      const response = await fetch(
+        `${SUPABASE_URL}/robo_global.nichos`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            apikey: SUPABASE_ANON_KEY,
+            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+            Prefer: "return=minimal",
+          },
+          body: JSON.stringify({
+            title,
+            slug,
+            description,
+          }),
+        }
+      );
 
-      alert("Nicho criado!");
+      if (!response.ok) {
+        throw new Error("Erro ao inserir no Supabase");
+      }
+
+      alert("Nicho criado com sucesso!");
       setTitle("");
       setSlug("");
       setDescription("");
-    } catch (e) {
-      console.error("Erro ao criar nicho", e);
+    } catch (error) {
+      console.error("Erro ao criar nicho:", error);
+      alert("Erro ao criar nicho.");
     }
   }
 
@@ -68,10 +76,10 @@ export default function CMS() {
   );
 }
 
-const styles: any = {
+const styles: Record<string, React.CSSProperties> = {
   container: {
     maxWidth: 600,
-    margin: "0 auto",
+    margin: "40px auto",
     display: "flex",
     flexDirection: "column",
     gap: 12,
@@ -97,4 +105,9 @@ const styles: any = {
     padding: 12,
     backgroundColor: "#111827",
     color: "#fff",
-    border: "none
+    border: "none",
+    borderRadius: 8,
+    cursor: "pointer",
+    fontWeight: 600,
+  },
+};
