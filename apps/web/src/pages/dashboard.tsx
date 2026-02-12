@@ -144,3 +144,16 @@ export function MasterCadastroProduto() {
     </div>
   );
 }
+
+// ===================================================
+// B2 — RENDER MASTER NO FINAL DO DASHBOARD
+// inclusão segura sem alterar estrutura existente
+// ===================================================
+
+export function RenderMasterCadastro() {
+  return (
+    <div style={{ marginTop: 60 }}>
+      <MasterCadastroProduto />
+    </div>
+  );
+}
