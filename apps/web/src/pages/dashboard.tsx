@@ -60,7 +60,13 @@ export default function Dashboard() {
         </div>
       )}
 
-      <div style={{ display: "grid", gap: 20, gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))" }}>
+      <div
+        style={{
+          display: "grid",
+          gap: 20,
+          gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))",
+        }}
+      >
         <div style={card}>
           <h2>Status do Robô</h2>
           <strong>{status.estado || "Aguardando…"}</strong>
@@ -89,6 +95,12 @@ export default function Dashboard() {
           <strong>{capital.disponivel ?? "—"}</strong>
         </div>
       </div>
+
+      {/* ========================= */}
+      {/* B2 — FORMULÁRIO MASTER */}
+      {/* ========================= */}
+
+      <MasterCadastroProduto />
     </div>
   );
 }
@@ -100,12 +112,7 @@ const card: React.CSSProperties = {
   padding: 16,
 };
 
-// ============================================
-// B2 — FORMULÁRIO MASTER (CADASTRO DE PRODUTO)
-// inclusão segura no final do dashboard
-// ============================================
-
-export function MasterCadastroProduto() {
+function MasterCadastroProduto() {
   const [nome, setNome] = useState("");
   const [plataforma, setPlataforma] = useState("");
   const [preco, setPreco] = useState("");
@@ -113,47 +120,62 @@ export function MasterCadastroProduto() {
 
   async function enviar() {
     try {
-      const res = await fetch("https://api.roboglobal.com.br/master/produto", {
+      await fetch("https://api.roboglobal.com.br/master/produto", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           nome,
           plataforma,
-          preco: Number(preco),
-          comissao: Number(comissao),
+          preco,
+          comissao,
         }),
       });
 
-      const data = await res.json();
-      alert("Produto cadastrado: " + data.produto.nome);
-    } catch (e) {
-      alert("Erro ao cadastrar produto");
+      alert("Produto cadastrado com sucesso");
+      setNome("");
+      setPlataforma("");
+      setPreco("");
+      setComissao("");
+    } catch {
+      alert("Erro ao enviar produto");
     }
   }
 
   return (
     <div style={{ marginTop: 40 }}>
-      <h2>Cadastro Master</h2>
+      <h2>Cadastro MASTER — Produto</h2>
 
-      <input placeholder="Nome" onChange={(e) => setNome(e.target.value)} />
-      <input placeholder="Plataforma" onChange={(e) => setPlataforma(e.target.value)} />
-      <input placeholder="Preço" onChange={(e) => setPreco(e.target.value)} />
-      <input placeholder="Comissão" onChange={(e) => setComissao(e.target.value)} />
+      <input
+        placeholder="Nome"
+        value={nome}
+        onChange={(e) => setNome(e.target.value)}
+      />
+      <br />
+
+      <input
+        placeholder="Plataforma"
+        value={plataforma}
+        onChange={(e) => setPlataforma(e.target.value)}
+      />
+      <br />
+
+      <input
+        placeholder="Preço"
+        value={preco}
+        onChange={(e) => setPreco(e.target.value)}
+      />
+      <br />
+
+      <input
+        placeholder="Comissão"
+        value={comissao}
+        onChange={(e) => setComissao(e.target.value)}
+      />
+      <br />
 
       <button onClick={enviar}>Cadastrar Produto</button>
-    </div>
-  );
-}
-
-// ===================================================
-// B2 — RENDER MASTER NO FINAL DO DASHBOARD
-// inclusão segura sem alterar estrutura existente
-// ===================================================
-
-export function RenderMasterCadastro() {
-  return (
-    <div style={{ marginTop: 60 }}>
-      <MasterCadastroProduto />
     </div>
   );
 }
