@@ -99,3 +99,50 @@ const card: React.CSSProperties = {
   borderRadius: 12,
   padding: 16,
 };
+
+// ============================================
+// B2 — FORMULÁRIO MASTER (CADASTRO DE PRODUTO)
+// inclusão segura no final do dashboard
+// ============================================
+
+import { useState } from "react";
+
+export function MasterCadastroProduto() {
+  const [nome, setNome] = useState("");
+  const [plataforma, setPlataforma] = useState("");
+  const [preco, setPreco] = useState("");
+  const [comissao, setComissao] = useState("");
+
+  async function enviar() {
+    try {
+      const res = await fetch("https://api.roboglobal.com.br/master/produto", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nome,
+          plataforma,
+          preco: Number(preco),
+          comissao: Number(comissao),
+        }),
+      });
+
+      const data = await res.json();
+      alert("Produto cadastrado: " + data.produto.nome);
+    } catch (e) {
+      alert("Erro ao cadastrar produto");
+    }
+  }
+
+  return (
+    <div style={{ marginTop: 40 }}>
+      <h2>Cadastro Master</h2>
+
+      <input placeholder="Nome" onChange={(e) => setNome(e.target.value)} />
+      <input placeholder="Plataforma" onChange={(e) => setPlataforma(e.target.value)} />
+      <input placeholder="Preço" onChange={(e) => setPreco(e.target.value)} />
+      <input placeholder="Comissão" onChange={(e) => setComissao(e.target.value)} />
+
+      <button onClick={enviar}>Cadastrar Produto</button>
+    </div>
+  );
+}
