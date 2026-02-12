@@ -105,8 +105,6 @@ const card: React.CSSProperties = {
 // inclusão segura no final do dashboard
 // ============================================
 
-import { useState } from "react";
-
 export function MasterCadastroProduto() {
   const [nome, setNome] = useState("");
   const [plataforma, setPlataforma] = useState("");
