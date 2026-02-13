@@ -7,151 +7,142 @@ type Status = {
 
 type Capital = {
   total?: number;
-  em_risco?: number;
   disponivel?: number;
-  roi?: number;
 };
 
-type Escala = {
-  permitida?: boolean;
-  risco?: string;
+type Produto = {
+  nome: string;
+  plataforma: string;
+  preco: number;
+  comissao: string;
+  link_afiliado?: string;
+  url_produto?: string;
+  imagem?: string;
+  nicho?: string;
+  dor?: string;
+  codigo?: string;
+  gul?: string;
 };
 
 export default function Dashboard() {
   const [status, setStatus] = useState<Status>({});
   const [capital, setCapital] = useState<Capital>({});
-  const [escala, setEscala] = useState<Escala>({});
-  const [erro, setErro] = useState(false);
+  const [produtos, setProdutos] = useState<Produto[]>([]);
 
-  async function safeFetch(path: string) {
-    try {
-      const res = await fetch(`https://api.roboglobal.com.br${path}`);
-      if (!res.ok) throw new Error("Erro API");
-      return await res.json();
-    } catch {
-      setErro(true);
-      return null;
-    }
-  }
+  // ================================
+  // B2.4 — FORM MASTER
+  // ================================
 
-  useEffect(() => {
-    async function load() {
-      const s = await safeFetch("/status");
-      const c = await safeFetch("/capital");
-      const e = await safeFetch("/escala");
-
-      if (s) setStatus(s);
-      if (c) setCapital(c);
-      if (e) setEscala(e);
-    }
-
-    load();
-    const i = setInterval(load, 15000);
-    return () => clearInterval(i);
-  }, []);
-
-  return (
-    <div style={{ padding: 32 }}>
-      <h1>Dashboard Operacional</h1>
-
-      {erro && (
-        <div style={{ marginBottom: 20, color: "#f59f00" }}>
-          API ainda não respondeu — exibindo modo operacional básico.
-        </div>
-      )}
-
-      <div
-        style={{
-          display: "grid",
-          gap: 20,
-          gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))",
-        }}
-      >
-        <div style={card}>
-          <h2>Status do Robô</h2>
-          <strong>{status.estado || "Aguardando…"}</strong>
-          <p>{status.decisao || "-"}</p>
-        </div>
-
-        <div style={card}>
-          <h2>Escala</h2>
-          <strong>
-            {escala.permitida === undefined
-              ? "Aguardando…"
-              : escala.permitida
-              ? "PERMITIDA"
-              : "BLOQUEADA"}
-          </strong>
-          <p>Risco: {escala.risco || "-"}</p>
-        </div>
-
-        <div style={card}>
-          <h2>Capital Total</h2>
-          <strong>{capital.total ?? "—"}</strong>
-        </div>
-
-        <div style={card}>
-          <h2>Disponível</h2>
-          <strong>{capital.disponivel ?? "—"}</strong>
-        </div>
-      </div>
-
-      {/* ========================= */}
-      {/* B2 — FORMULÁRIO MASTER */}
-      {/* ========================= */}
-
-      <MasterCadastroProduto />
-
-      {/* ========================= */}
-      {/* B2.3 — PRODUTOS OPERACIONAIS */}
-      {/* ========================= */}
-
-      <RenderProdutosB2 />
-    </div>
-  );
-}
-
-const card: React.CSSProperties = {
-  background: "#0f172a",
-  border: "1px solid #1b2742",
-  borderRadius: 12,
-  padding: 16,
-};
-
-function MasterCadastroProduto() {
   const [nome, setNome] = useState("");
   const [plataforma, setPlataforma] = useState("");
   const [preco, setPreco] = useState("");
   const [comissao, setComissao] = useState("");
+  const [linkAfiliado, setLinkAfiliado] = useState("");
+  const [urlProduto, setUrlProduto] = useState("");
+  const [imagem, setImagem] = useState("");
+  const [nicho, setNicho] = useState("");
+  const [dor, setDor] = useState("");
+  const [codigo, setCodigo] = useState("");
 
-  async function enviar() {
+  // ================================
+  // LOAD API
+  // ================================
+
+  useEffect(() => {
+    async function carregar() {
+      try {
+        const s = await fetch("https://api.roboglobal.com.br/status");
+        const sj = await s.json();
+        setStatus(sj);
+
+        const c = await fetch("https://api.roboglobal.com.br/capital");
+        const cj = await c.json();
+        setCapital(cj);
+
+        const p = await fetch("https://api.roboglobal.com.br/b2/produtos");
+        const pj = await p.json();
+        setProdutos(pj.produtos || []);
+      } catch (e) {
+        console.log("API ainda não respondeu");
+      }
+    }
+    carregar();
+  }, []);
+
+  // ================================
+  // ENVIO MASTER
+  // ================================
+
+  async function cadastrar() {
     try {
-      await fetch("https://api.roboglobal.com.br/master/produto", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          nome,
-          plataforma,
-          preco,
-          comissao,
-        }),
-      });
+      const res = await fetch(
+        "https://api.roboglobal.com.br/master/produto",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            nome,
+            plataforma,
+            preco,
+            comissao,
+            link_afiliado: linkAfiliado,
+            url_produto: urlProduto,
+            imagem,
+            nicho,
+            dor,
+            codigo,
+          }),
+        }
+      );
 
-      alert("Produto cadastrado com sucesso");
+      const data = await res.json();
+      alert(data.mensagem || "Produto cadastrado");
+
       setNome("");
       setPlataforma("");
       setPreco("");
       setComissao("");
-    } catch {
-      alert("Erro ao enviar produto");
+      setLinkAfiliado("");
+      setUrlProduto("");
+      setImagem("");
+      setNicho("");
+      setDor("");
+      setCodigo("");
+    } catch (e) {
+      alert("Erro ao cadastrar");
     }
   }
 
+  // ================================
+  // UI
+  // ================================
+
   return (
-    <div style={{ marginTop: 40 }}>
-      <h2>Cadastro MASTER — Produto</h2>
+    <div style={{ padding: 30 }}>
+      <h1>Painel Operacional</h1>
+
+      <div style={{ display: "flex", gap: 20 }}>
+        <div>
+          <h3>Status do Robô</h3>
+          <p>{status.estado || "Aguardando..."}</p>
+        </div>
+
+        <div>
+          <h3>Capital Total</h3>
+          <p>{capital.total ?? "-"}</p>
+        </div>
+
+        <div>
+          <h3>Disponível</h3>
+          <p>{capital.disponivel ?? "-"}</p>
+        </div>
+      </div>
+
+      {/* ========================================
+          B2.4 — CADASTRO MASTER COMPLETO
+      ========================================= */}
+
+      <h2 style={{ marginTop: 40 }}>Cadastro MASTER — Produto</h2>
 
       <input
         placeholder="Nome"
@@ -181,58 +172,69 @@ function MasterCadastroProduto() {
       />
       <br />
 
-      <button onClick={enviar}>Cadastrar Produto</button>
-    </div>
-  );
-}
+      <input
+        placeholder="Link Afiliado"
+        value={linkAfiliado}
+        onChange={(e) => setLinkAfiliado(e.target.value)}
+      />
+      <br />
 
-// ======================================================
-// B2.3 — LISTAGEM OPERACIONAL DE PRODUTOS
-// ======================================================
+      <input
+        placeholder="URL Produto"
+        value={urlProduto}
+        onChange={(e) => setUrlProduto(e.target.value)}
+      />
+      <br />
 
-function ListaProdutosB2() {
-  const [produtos, setProdutos] = useState<any[]>([]);
+      <input
+        placeholder="Imagem (URL)"
+        value={imagem}
+        onChange={(e) => setImagem(e.target.value)}
+      />
+      <br />
 
-  useEffect(() => {
-    fetch("/b2/produtos")
-      .then((r) => r.json())
-      .then((data) => setProdutos(data))
-      .catch(() => {});
-  }, []);
+      <input
+        placeholder="Nicho"
+        value={nicho}
+        onChange={(e) => setNicho(e.target.value)}
+      />
+      <br />
 
-  return (
-    <div style={{ marginTop: 40 }}>
-      <h2>Produtos Operacionais (B2)</h2>
+      <input
+        placeholder="Dor"
+        value={dor}
+        onChange={(e) => setDor(e.target.value)}
+      />
+      <br />
+
+      <input
+        placeholder="Código Produto"
+        value={codigo}
+        onChange={(e) => setCodigo(e.target.value)}
+      />
+      <br />
+
+      <button onClick={cadastrar}>Cadastrar Produto</button>
+
+      {/* ========================================
+          LISTAGEM B2
+      ========================================= */}
+
+      <h2 style={{ marginTop: 40 }}>Produtos Operacionais (B2)</h2>
 
       {produtos.length === 0 && <p>Nenhum produto ainda.</p>}
 
       {produtos.map((p, i) => (
-        <div
-          key={i}
-          style={{
-            border: "1px solid #222",
-            padding: 12,
-            marginBottom: 12,
-            borderRadius: 8,
-          }}
-        >
+        <div key={i} style={{ marginBottom: 20 }}>
           <strong>{p.nome}</strong>
-          <br />
-          Plataforma: {p.plataforma}
-          <br />
-          Nicho: {p.nicho || "-"}
-          <br />
-          Dor: {p.dor || "-"}
-          <br />
-          Comissão: {p.comissao}%
-          <br />
-          GUL: {p.gul}
+          <p>{p.plataforma}</p>
+          <p>{p.preco}</p>
+          <p>{p.comissao}</p>
+          <p>{p.nicho}</p>
+          <p>{p.dor}</p>
+          <p>{p.gul}</p>
         </div>
       ))}
     </div>
   );
-}
-
-function RenderProdutosB2() {
-  return <ListaProdutosB2 />;
 }
