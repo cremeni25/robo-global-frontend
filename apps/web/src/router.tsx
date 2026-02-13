@@ -10,24 +10,30 @@ import Sobre from "./pages/Sobre";
 import Dashboard from "./pages/dashboard";
 import Go from "./pages/Go";
 
+function AppRoutes() {
+  return (
+    <Routes>
+      {/* ROTAS GLOBAIS */}
+      <Route path="/" element={<Home />} />
+      <Route path="/nichos" element={<Nichos />} />
+      <Route path="/nichos-public" element={<NichosPublic />} />
+      <Route path="/dores" element={<Dores />} />
+      <Route path="/sobre" element={<Sobre />} />
+
+      {/* DASHBOARD MASTER */}
+      <Route path="/dashboard" element={<Dashboard />} />
+
+      {/* REDIRECIONADOR */}
+      <Route path="/go/:slug" element={<Go />} />
+    </Routes>
+  );
+}
+
 export default function Router() {
   return (
     <BrowserRouter>
       <LayoutGlobal>
-        <Routes>
-          {/* ROTAS GLOBAIS */}
-          <Route path="/" element={<Home />} />
-          <Route path="/nichos" element={<Nichos />} />
-          <Route path="/nichos-public" element={<NichosPublic />} />
-          <Route path="/dores" element={<Dores />} />
-          <Route path="/sobre" element={<Sobre />} />
-
-          {/* DASHBOARD MASTER */}
-          <Route path="/dashboard" element={<Dashboard />} />
-
-          {/* REDIRECIONADOR INTELIGENTE */}
-          <Route path="/go/:slug" element={<Go />} />
-        </Routes>
+        <AppRoutes />
       </LayoutGlobal>
     </BrowserRouter>
   );
