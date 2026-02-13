@@ -1,5 +1,10 @@
 import Router from "./router";
+import LayoutGlobal from "./layout/LayoutGlobal";
 
 export default function App() {
-  return <Router />;
+  return (
+    <LayoutGlobal>
+      <Router />
+    </LayoutGlobal>
+  );
 }
