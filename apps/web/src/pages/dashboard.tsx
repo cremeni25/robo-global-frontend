@@ -185,8 +185,6 @@ function MasterCadastroProduto() {
 // ADIÇÃO SEGURA — NÃO ALTERA NADA EXISTENTE
 // ======================================================
 
-import { useEffect, useState } from "react";
-
 function ListaProdutosB2() {
 
   const [produtos, setProdutos] = useState<any[]>([]);
