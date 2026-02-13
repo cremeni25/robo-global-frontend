@@ -4,7 +4,7 @@ import Header from "./Header";
 export default function LayoutGlobal() {
   return (
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
-      
+
       {/* HEADER GLOBAL */}
       <Header />
 
@@ -28,7 +28,7 @@ export default function LayoutGlobal() {
         </div>
       </main>
 
-      {/* FOOTER INSTITUCIONAL */}
+      {/* FOOTER */}
       <footer
         style={{
           borderTop: "1px solid #eee",
