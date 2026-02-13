@@ -101,6 +101,12 @@ export default function Dashboard() {
       {/* ========================= */}
 
       <MasterCadastroProduto />
+
+      {/* ========================= */}
+      {/* B2.3 — PRODUTOS OPERACIONAIS */}
+      {/* ========================= */}
+
+      <RenderProdutosB2 />
     </div>
   );
 }
@@ -182,17 +188,15 @@ function MasterCadastroProduto() {
 
 // ======================================================
 // B2.3 — LISTAGEM OPERACIONAL DE PRODUTOS
-// ADIÇÃO SEGURA — NÃO ALTERA NADA EXISTENTE
 // ======================================================
 
 function ListaProdutosB2() {
-
   const [produtos, setProdutos] = useState<any[]>([]);
 
   useEffect(() => {
     fetch("/b2/produtos")
-      .then(r => r.json())
-      .then(data => setProdutos(data))
+      .then((r) => r.json())
+      .then((data) => setProdutos(data))
       .catch(() => {});
   }, []);
 
@@ -200,22 +204,28 @@ function ListaProdutosB2() {
     <div style={{ marginTop: 40 }}>
       <h2>Produtos Operacionais (B2)</h2>
 
-      {produtos.length === 0 && (
-        <p>Nenhum produto ainda.</p>
-      )}
+      {produtos.length === 0 && <p>Nenhum produto ainda.</p>}
 
       {produtos.map((p, i) => (
-        <div key={i} style={{
-          border: "1px solid #222",
-          padding: 12,
-          marginBottom: 12,
-          borderRadius: 8
-        }}>
-          <strong>{p.nome}</strong><br/>
-          Plataforma: {p.plataforma}<br/>
-          Nicho: {p.nicho || "-"}<br/>
-          Dor: {p.dor || "-"}<br/>
-          Comissão: {p.comissao}%<br/>
+        <div
+          key={i}
+          style={{
+            border: "1px solid #222",
+            padding: 12,
+            marginBottom: 12,
+            borderRadius: 8,
+          }}
+        >
+          <strong>{p.nome}</strong>
+          <br />
+          Plataforma: {p.plataforma}
+          <br />
+          Nicho: {p.nicho || "-"}
+          <br />
+          Dor: {p.dor || "-"}
+          <br />
+          Comissão: {p.comissao}%
+          <br />
           GUL: {p.gul}
         </div>
       ))}
@@ -223,6 +233,6 @@ function ListaProdutosB2() {
   );
 }
 
-export function RenderProdutosB2() {
+function RenderProdutosB2() {
   return <ListaProdutosB2 />;
 }
