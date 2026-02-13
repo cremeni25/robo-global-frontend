@@ -1,5 +1,10 @@
 import Router from "./router";
+import Layout from "./components/Layout";
 
 export default function App() {
-  return <Router />;
+  return (
+    <Layout>
+      <Router />
+    </Layout>
+  );
 }
