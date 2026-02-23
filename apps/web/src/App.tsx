@@ -1,6 +1,6 @@
 import { BrowserRouter } from "react-router-dom";
 import { LanguageProvider } from "./contexts/LanguageContext";
-import { AppRoutes } from "./router";
+import AppRoutes from "./router";   // 👈 IMPORT DEFAULT
 
 export default function App() {
   return (
