@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 const API_URL = import.meta.env.VITE_API_URL;
 
 type Nicho = {
-  id: string;
   title: string;
   slug: string;
   description?: string;
@@ -13,30 +12,24 @@ type Nicho = {
 export default function NichosPublic() {
   const [nichos, setNichos] = useState<Nicho[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function carregar() {
       try {
         const res = await fetch(`${API_URL}/public2/nichos`);
-
-        if (!res.ok) throw new Error("Erro na API");
-
         const data = await res.json();
 
-        // 🔥 ADAPTAÇÃO DOS CAMPOS DO BACKEND
-        const adaptados = (data || []).map((n: any) => ({
-          id: n.id,
-          title: n.title || n.título,
-          slug: n.slug || n.lesma,
-          description: n.description,
-          image_url: n.image_url,
+        // 🔥 NORMALIZAÇÃO DOS CAMPOS DA API
+        const normalizados = (data || []).map((n: any) => ({
+          title: n.title ?? n.título ?? "",
+          slug: n.slug ?? n.lesma ?? "",
+          description: n.description ?? "",
+          image_url: n.image_url ?? "",
         }));
 
-        setNichos(adaptados);
+        setNichos(normalizados);
       } catch (e) {
-        console.error(e);
-        setError("Não foi possível carregar os nichos");
+        console.error("Erro ao carregar nichos", e);
       } finally {
         setLoading(false);
       }
@@ -45,18 +38,27 @@ export default function NichosPublic() {
     carregar();
   }, []);
 
-  if (loading) return <div style={{ padding: 40 }}>Carregando...</div>;
-  if (error) return <div style={{ padding: 40 }}>{error}</div>;
+  if (loading) {
+    return <div style={{ padding: 40 }}>Carregando nichos...</div>;
+  }
 
   return (
     <div style={styles.container}>
-      <h1 style={styles.title}>Escolha a área que mais faz sentido para você:</h1>
+      <h1 style={styles.title}>Escolha um Nicho</h1>
 
       <div style={styles.grid}>
         {nichos.map((nicho) => (
-          <a key={nicho.id} href={`/nicho/${nicho.slug}`} style={styles.card}>
+          <a
+            key={nicho.slug}
+            href={`/nicho/${nicho.slug}`}
+            style={styles.card}
+          >
             {nicho.image_url && (
-              <img src={nicho.image_url} alt={nicho.title} style={styles.image} />
+              <img
+                src={nicho.image_url}
+                alt={nicho.title}
+                style={styles.image}
+              />
             )}
 
             <h2 style={styles.cardTitle}>{nicho.title}</h2>
@@ -94,6 +96,7 @@ const styles: Record<string, React.CSSProperties> = {
     textDecoration: "none",
     color: "#fff",
     border: "1px solid #1f2937",
+    transition: "0.2s",
   },
   cardTitle: {
     fontSize: 20,
