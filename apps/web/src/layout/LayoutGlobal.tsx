@@ -1,13 +1,8 @@
-import type { ReactNode } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, Outlet } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useI18n } from "../i18n";
 
-interface Props {
-  children: ReactNode;
-}
-
-export default function LayoutGlobal({ children }: Props) {
+export default function LayoutGlobal() {
   const location = useLocation();
   const { lang, setLang } = useLanguage();
   const { t } = useI18n();
@@ -64,7 +59,10 @@ export default function LayoutGlobal({ children }: Props) {
         </div>
       </header>
 
-      <main style={styles.container}>{children}</main>
+      {/* 👇 AQUI ESTÁ A CORREÇÃO CRÍTICA */}
+      <main style={styles.container}>
+        <Outlet />
+      </main>
     </>
   );
 }
