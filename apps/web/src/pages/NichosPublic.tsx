@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 const API_URL = import.meta.env.VITE_API_URL;
 
 type Nicho = {
+  id: string;
   title: string;
   slug: string;
   description?: string;
@@ -12,24 +13,36 @@ type Nicho = {
 export default function NichosPublic() {
   const [nichos, setNichos] = useState<Nicho[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function carregar() {
       try {
-        const res = await fetch(`${API_URL}/public/nichos`);
+        const res = await fetch(`${API_URL}/public2/nichos`);
+
+        if (!res.ok) {
+          throw new Error("Falha ao buscar nichos");
+        }
+
         const data = await res.json();
         setNichos(data || []);
-      } catch (e) {
+      } catch (e: any) {
         console.error("Erro ao carregar nichos", e);
+        setError("Não foi possível carregar os nichos");
       } finally {
         setLoading(false);
       }
     }
+
     carregar();
   }, []);
 
   if (loading) {
     return <div style={{ padding: 40 }}>Carregando nichos...</div>;
+  }
+
+  if (error) {
+    return <div style={{ padding: 40 }}>{error}</div>;
   }
 
   return (
@@ -39,7 +52,7 @@ export default function NichosPublic() {
       <div style={styles.grid}>
         {nichos.map((nicho) => (
           <a
-            key={nicho.slug}
+            key={nicho.id}
             href={`/nicho/${nicho.slug}`}
             style={styles.card}
           >
