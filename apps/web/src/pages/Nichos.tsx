@@ -18,9 +18,21 @@ export default function Nichos(){
   const controller=new AbortController();
   const base=(import.meta.env.VITE_API_URL as string|undefined)?.trim()||"https://api.roboglobal.com.br";
   setState("loading");
-  fetch(base.replace(/\/$/,"")+"/public/nichos",{signal:controller.signal,headers:{"Accept":"application/json"}})
-   .then(async res=>{if(!res.ok)throw new Error("API unavailable");setItems(normalize(await res.json()));setState("ready");})
-   .catch(e=>{if(e.name!=="AbortError")setState("error");});
+  const endpoints=[base.replace(/\/$/,"")+"/public/nichos","https://robo-global-api-v2.onrender.com/public/nichos"];
+  const load=async()=>{
+   for(const endpoint of [...new Set(endpoints)]){
+    try{
+     const response=await fetch(endpoint,{signal:controller.signal,headers:{"Accept":"application/json"}});
+     if(!response.ok)continue;
+     const payload=await response.json();
+     if(!Array.isArray(payload)&&(!payload||!Array.isArray(payload.data)))continue;
+     if(controller.signal.aborted)return;
+     setItems(normalize(payload));setState("ready");return;
+    }catch(error){if(controller.signal.aborted)return;}
+   }
+   if(!controller.signal.aborted)setState("error");
+  };
+  void load();
   return ()=>controller.abort();
  },[attempt]);
  return <div className="rg-interior"><section className="rg-interior-hero"><span className="rg-kicker">{t.tag}</span><h1>{t.title}</h1><p>{t.intro}</p></section>
