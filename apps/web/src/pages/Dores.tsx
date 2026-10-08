@@ -1,17 +1,11 @@
-import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
-const copy={
- pt:{tag:"SEU CAMINHO",missing:"Ainda não encontramos este caminho.",unavailable:"Estamos preparando informações relevantes para este tema.",ready:"Conheça a próxima possibilidade",back:"Explorar outros temas",pending:"Recomendações comerciais ainda não disponíveis.",context:"O que importa agora"},
- en:{tag:"YOUR PATH",missing:"We couldn't find that path yet.",unavailable:"We're preparing useful information on this topic.",ready:"Explore the next possibility",back:"Explore other topics",pending:"Commercial recommendations aren't available yet.",context:"What matters now"},
- es:{tag:"TU CAMINO",missing:"Todavía no encontramos este camino.",unavailable:"Estamos preparando información útil sobre este tema.",ready:"Explorar la siguiente posibilidad",back:"Explorar otros temas",pending:"Las recomendaciones comerciales aún no están disponibles.",context:"Lo que importa ahora"}
+const copy = {
+ pt: {title:"Seu caminho está sendo preparado",body:"Estamos organizando informações verificadas para apoiar suas escolhas. Nenhuma recomendação comercial está disponível nesta etapa.",back:"Explorar outros temas"},
+ en: {title:"Your path is taking shape",body:"We're preparing verified information to support your choices. Commercial recommendations aren't available at this stage.",back:"Explore other topics"},
+ es: {title:"Estamos preparando tu camino",body:"Estamos organizando información verificada para ayudarte a decidir. Las recomendaciones comerciales aún no están disponibles.",back:"Explorar otros temas"}
 };
-export default function Dores(){
- const {lang}=useLanguage();const t=copy[lang];const [params]=useSearchParams();const niche=params.get("niche")||"";const index=Number(params.get("index")||"0");
- const selected = undefined;
- // Source narratives are authored only in PT. Never present Portuguese as translated English/Spanish.
- const showNarrative=lang==="pt"&&selected;
- const validOffer=false; // fail closed until commercial verification exists
- return <div className="rg-interior"><section className="rg-interior-hero"><span className="rg-kicker">{t.tag}</span><h1>{showNarrative?selected?.title:selected?t.context:t.missing}</h1><p>{showNarrative?selected?.narrative:t.unavailable}</p></section>
- <section className="rg-interior-body"><div className="rg-topic"><span className="rg-kicker">{t.context}</span><p>{t.pending}</p>{validOffer&&null}</div>
- <Link className="rg-back" to="/nichos">← {t.back}</Link></section></div>;
+export default function Dores() {
+ const {lang}=useLanguage();const t=copy[lang];
+ return <div className="rg-interior"><section className="rg-interior-hero"><span className="rg-kicker">ROBÔ GLOBAL</span><h1>{t.title}</h1><p>{t.body}</p></section><section className="rg-interior-body"><Link className="rg-back" to="/nichos">← {t.back}</Link></section></div>;
 }
