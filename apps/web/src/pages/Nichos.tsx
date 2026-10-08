@@ -1,178 +1,19 @@
-// apps/web/src/pages/Nichos.tsx
-
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
-import pt from "../i18n/pt";
-import en from "../i18n/en";
-import es from "../i18n/es";
-import { useNavigate } from "react-router-dom";
-import { navigateToDores } from "../navigation/goToDores";
-
-const API_URL = import.meta.env.VITE_API_URL;
-
-const dictionaries: any = { pt, en, es };
-
-const colors = [
-  "#5FA777",
-  "#E39C4A",
-  "#4C78A8",
-  "#8B6FAF",
-  "#6C7A89",
-  "#8C6B58",
-  "#3F8F6B",
-];
-
-export default function Nichos() {
-  const { lang } = useLanguage();
-  const dict = dictionaries[lang];
-  const navigate = useNavigate();
-
-  const [nichos, setNichos] = useState<any[]>([]);
-
-  useEffect(() => {
-    async function carregarNichos() {
-      try {
-        const res = await fetch(`${API_URL}/public/nichos`);
-        const json = await res.json();
-
-        if (json?.data) {
-          setNichos(json.data);
-        }
-      } catch (e) {
-        console.error("Erro ao carregar nichos via API", e);
-      }
-    }
-
-    carregarNichos();
-  }, []);
-
-  return (
-    <div style={{ width: "100%", backgroundColor: "#F9FAFB" }}>
-      <section style={styles.hero}>
-        <p style={styles.heroCall}>
-          {dict.home.nichesTitle.replace(" agora", "") + ":"}
-        </p>
-      </section>
-
-      <div style={styles.grid}>
-        {nichos.map((niche: any, i: number) => (
-          <EditorialCard
-            key={niche.id}
-            niche={niche}
-            color={colors[i % colors.length]}
-            navigate={navigate}
-          />
-        ))}
-      </div>
-
-      <footer style={styles.footer}>{dict.footer}</footer>
-    </div>
-  );
-}
-
-function EditorialCard({ niche, color, navigate }: any) {
-  const imageUrl = "https://placehold.co/600x400";
-
-  return (
-    <div style={styles.card}>
-      <div style={styles.imageWrap}>
-        <img src={imageUrl} style={styles.image} />
-      </div>
-
-      <div style={{ ...styles.cardBody, borderColor: color }}>
-        <div style={{ ...styles.cardHeader, background: color }}>
-          {String(niche.title).toUpperCase()}
-        </div>
-
-        <ul style={styles.subList}>
-          <li style={styles.subItem}>
-            <button
-              style={styles.button}
-              onClick={() =>
-                navigateToDores(navigate, {
-                  niche: niche.slug,
-                  index: 0,
-                })
-              }
-            >
-              {niche.description}
-            </button>
-          </li>
-        </ul>
-      </div>
-    </div>
-  );
-}
-
-const styles: any = {
-  hero: {
-    maxWidth: 1200,
-    margin: "30px auto 20px",
-    textAlign: "center",
-  },
-  heroCall: {
-    fontFamily: "Arial Black, Arial, sans-serif",
-    fontSize: 40,
-    fontWeight: 900,
-  },
-  grid: {
-    maxWidth: 1200,
-    margin: "0 auto",
-    padding: "0 16px 80px",
-    display: "grid",
-    gridTemplateColumns: "repeat(2, 1fr)",
-    gap: 40,
-  },
-  card: {
-    borderRadius: 26,
-    overflow: "hidden",
-    background: "#fff",
-    boxShadow: "0 15px 40px rgba(0,0,0,0.08)",
-  },
-  imageWrap: {
-    width: "100%",
-    height: 260,
-    overflow: "hidden",
-  },
-  image: {
-    width: "100%",
-    height: "100%",
-    objectFit: "cover",
-  },
-  cardBody: {
-    borderTop: "3px solid",
-  },
-  cardHeader: {
-    padding: "18px 20px",
-    color: "#fff",
-    fontWeight: 800,
-    fontSize: 16,
-    letterSpacing: 1,
-  },
-  subList: {
-    listStyle: "none",
-    padding: "18px 22px 22px",
-    margin: 0,
-    display: "flex",
-    flexDirection: "column",
-    gap: 10,
-  },
-  subItem: {
-    borderRadius: 10,
-    background: "#F3F4F6",
-  },
-  button: {
-    width: "100%",
-    padding: "10px 12px",
-    border: "none",
-    background: "transparent",
-    fontSize: 15,
-    textAlign: "left",
-    cursor: "pointer",
-  },
-  footer: {
-    textAlign: "center",
-    padding: 32,
-    opacity: 0.6,
-  },
+type Niche={id:string|number;slug:string;title:string;description?:string};
+const words={
+ pt:{tag:"EXPLORE NO SEU RITMO",title:"Por onde você quer começar?",intro:"Cada pessoa tem seu próprio momento. Escolha um assunto e descubra caminhos que fazem sentido para você.",loading:"Buscando caminhos disponíveis…",empty:"Estamos preparando novas possibilidades para você.",error:"Não conseguimos consultar os temas agora. Volte em instantes.",action:"Conhecer este caminho",back:"Voltar ao início"},
+ en:{tag:"EXPLORE AT YOUR OWN PACE",title:"Where would you like to begin?",intro:"Everyone has a different starting point. Choose what matters to you and explore a path forward.",loading:"Finding available topics…",empty:"We're preparing more possibilities for you.",error:"We couldn't load the topics right now. Please try again soon.",action:"Explore this topic",back:"Back to home"},
+ es:{tag:"EXPLORA A TU RITMO",title:"¿Por dónde te gustaría empezar?",intro:"Cada persona tiene su propio momento. Elige lo que te importa y descubre nuevas posibilidades.",loading:"Buscando temas disponibles…",empty:"Estamos preparando nuevas posibilidades para ti.",error:"No pudimos consultar los temas ahora. Vuelve a intentarlo pronto.",action:"Explorar este tema",back:"Volver al inicio"}
 };
+export default function Nichos(){
+ const {lang}=useLanguage();const t=words[lang];const [items,setItems]=useState<Niche[]>([]);const [state,setState]=useState<"loading"|"ready"|"error">("loading");
+ useEffect(()=>{const controller=new AbortController();const api=import.meta.env.VITE_API_URL as string|undefined;
+ if(!api){setState("error");return ()=>controller.abort();}
+ fetch(api.replace(/\/$/,"")+"/public/nichos",{signal:controller.signal}).then(async res=>{if(!res.ok)throw new Error("API");const data=await res.json();setItems(Array.isArray(data?.data)?data.data:[]);setState("ready");}).catch(e=>{if(e.name!=="AbortError")setState("error");});return ()=>controller.abort();
+ },[]);
+ return <div className="rg-interior"><section className="rg-interior-hero"><span className="rg-kicker">{t.tag}</span><h1>{t.title}</h1><p>{t.intro}</p></section>
+ <section className="rg-interior-body">{state==="loading"?<p role="status">{t.loading}</p>:state==="error"?<p role="alert">{t.error}</p>:items.length===0?<p role="status">{t.empty}</p>:<div className="rg-topic-grid">{items.map((item,i)=><article className="rg-topic" key={item.id}><span className="rg-path-number">0{i+1}</span><h2>{item.title}</h2><p>{item.description}</p><Link to={"/dores?niche="+encodeURIComponent(item.slug)+"&index=0"}>{t.action} ↗</Link></article>)}</div>}
+ <Link className="rg-back" to="/">← {t.back}</Link></section></div>
+}
