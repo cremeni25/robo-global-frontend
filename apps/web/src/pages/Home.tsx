@@ -1,232 +1,63 @@
-import { useNavigate } from "react-router-dom";
-import { useI18n } from "../i18n";
+import { Link } from "react-router-dom";
+import { useLanguage } from "../contexts/LanguageContext";
 
-export default function Home() {
-  const navigate = useNavigate();
-  const { t } = useI18n();
-
-  return (
-    <>
-      {/* HERO */}
-      <section style={styles.hero}>
-        <div style={styles.heroContainer}>
-          <div>
-            <h1 style={styles.heroTitle}>
-              {t("home.hero.title")}
-            </h1>
-
-            <p style={styles.heroSubtitle}>
-              {t("home.hero.subtitle")}
-            </p>
-
-            <div style={styles.pills}>
-              <span style={styles.pill}>{t("home.hero.pills.0")}</span>
-              <span style={styles.pill}>{t("home.hero.pills.1")}</span>
-              <span style={styles.pill}>{t("home.hero.pills.2")}</span>
-            </div>
-          </div>
-
-          <div style={styles.imageWrapper}>
-            <img
-              src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70"
-              alt="Pessoa refletindo sobre escolhas e caminhos"
-              style={styles.image}
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* BLOCO CENTRAL — FRASE + COMO FUNCIONA */}
-      <section style={styles.centerBlock}>
-        <p style={styles.quote}>
-          {t("home.anchor")}
-        </p>
-
-        <h2 style={styles.sectionTitle}>
-          {t("home.howItWorks.title")}
-        </h2>
-
-        <div style={styles.steps}>
-          <div style={styles.step}>
-            <span style={styles.stepNumber}>1</span>
-            <p>{t("home.howItWorks.steps.0")}</p>
-          </div>
-
-          <div style={styles.step}>
-            <span style={styles.stepNumber}>2</span>
-            <p>{t("home.howItWorks.steps.1")}</p>
-          </div>
-
-          <div style={styles.step}>
-            <span style={styles.stepNumber}>3</span>
-            <p>{t("home.howItWorks.steps.2")}</p>
-          </div>
-        </div>
-      </section>
-
-      {/* DIRECIONAMENTOS */}
-      <section style={styles.sectionAlt}>
-        <h2 style={styles.sectionTitle}>
-          {t("home.nichesTitle")}
-        </h2>
-
-        <div style={styles.niches}>
-          <div
-            style={styles.nicheCard}
-            onClick={() => navigate("/nichos?area=saude")}
-          >
-            🌱 {t("home.niches.0")}
-          </div>
-
-          <div
-            style={styles.nicheCard}
-            onClick={() => navigate("/nichos?area=habilidades")}
-          >
-            🧠 {t("home.niches.1")}
-          </div>
-
-          <div
-            style={styles.nicheCard}
-            onClick={() => navigate("/nichos?area=digital")}
-          >
-            💻 {t("home.niches.2")}
-          </div>
-
-          <div
-            style={styles.nicheCard}
-            onClick={() => navigate("/nichos?area=vida")}
-          >
-            🤝 {t("home.niches.3")}
-          </div>
-        </div>
-      </section>
-
-      {/* RODAPÉ */}
-      <footer style={styles.footer}>
-        <p style={styles.footerText}>
-          {t("footer")}
-        </p>
-      </footer>
-    </>
-  );
-}
-
-const styles: Record<string, React.CSSProperties> = {
-  hero: {
-    padding: "64px 24px",
+const copy = {
+  pt: {
+    eyebrow:"INTELIGÊNCIA PARA ESCOLHAS REAIS",
+    title:"O mundo oferece possibilidades. Você merece encontrar as suas.",
+    lead:"O Robô Global aproxima necessidades reais de caminhos úteis. Sem complicação, sem pressão e no seu ritmo.",
+    primary:"Explorar possibilidades",secondary:"Entender como funciona",
+    note:"Você escolhe o caminho. A tecnologia ajuda a enxergar as opções.",
+    intro:"Um espaço feito para pessoas, não para cliques.",
+    introText:"Seja para aprender, cuidar do cotidiano ou encontrar soluções, comece pelo que faz sentido para você.",
+    paths:[["Descobrir","Encontre possibilidades que combinam com seu momento."],["Entender","Compare informações e avance com mais clareza."],["Decidir","Siga apenas quando a escolha fizer sentido."]],
+    promise:"Sua confiança vale mais que uma visita.",
+    promiseText:"Indicações identificadas, informações claras e liberdade para decidir. Algumas recomendações podem gerar remuneração de afiliado, sem custo adicional informado por nós.",
+    action:"Conhecer os temas", foot:"Robô Global · Tecnologia a serviço de escolhas humanas.",
+    status:"Catálogo em preparação: nenhuma indicação comercial é publicada sem validação."
   },
-  heroContainer: {
-    maxWidth: 1200,
-    margin: "0 auto",
-    display: "grid",
-    gridTemplateColumns: "1.2fr 0.8fr",
-    gap: 48,
-    alignItems: "center",
+  en: {
+    eyebrow:"INTELLIGENCE FOR REAL-LIFE CHOICES",
+    title:"A world of possibilities. Find what matters to you.",
+    lead:"Robô Global connects everyday needs with useful paths forward. No pressure, no needless complexity. Your pace, your choice.",
+    primary:"Explore possibilities",secondary:"How it works",
+    note:"You set the direction. Technology helps you see your options.",
+    intro:"Built around people, not page views.",
+    introText:"Whether you want to learn, simplify daily life or find solutions, start with what matters to you.",
+    paths:[["Discover","Explore ideas that fit where you are today."],["Understand","Look at your options and move forward with clarity."],["Choose","Take the next step only when it feels right."]],
+    promise:"Your trust matters more than a single visit.",
+    promiseText:"Clear information, transparent recommendations and room to decide. Some recommendations may earn us an affiliate commission.",
+    action:"Explore topics",foot:"Robô Global · Technology shaped around people.",
+    status:"Catalogue in preparation: no commercial recommendations go live without validation."
   },
-  heroTitle: {
-    fontSize: 42,
-    fontWeight: 700,
-    color: "#0B2A4A",
-    marginBottom: 20,
-  },
-  heroSubtitle: {
-    fontSize: 18,
-    lineHeight: 1.6,
-    color: "#2E2E2E",
-  },
-  pills: {
-    display: "flex",
-    gap: 12,
-    marginTop: 24,
-  },
-  pill: {
-    background: "#E6EDF3",
-    padding: "8px 18px",
-    borderRadius: 24,
-    fontWeight: 600,
-  },
-  imageWrapper: {
-    borderRadius: 14,
-    overflow: "hidden",
-  },
-  image: {
-    width: "100%",
-    height: "100%",
-    objectFit: "cover",
-  },
-
-  /* 🔑 BLOCO CENTRAL */
-  centerBlock: {
-    maxWidth: 1100,
-    margin: "0 auto",
-    padding: "56px 24px 72px",
-    textAlign: "center",
-  },
-  quote: {
-    fontSize: 28,
-    fontStyle: "italic",
-    fontWeight: 600,
-    color: "#0B2A4A",
-    marginBottom: 32,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: 700,
-    color: "#0B2A4A",
-    marginBottom: 32,
-    textAlign: "left",
-  },
-  steps: {
-    display: "grid",
-    gridTemplateColumns: "repeat(3, 1fr)",
-    gap: 32,
-  },
-  step: {
-    background: "#FFF",
-    border: "1px solid #E0E4E8",
-    borderRadius: 12,
-    padding: 32,
-    textAlign: "center",
-  },
-  stepNumber: {
-    width: 36,
-    height: 36,
-    borderRadius: "50%",
-    background: "#0B2A4A",
-    color: "#FFF",
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 12,
-    fontWeight: 700,
-  },
-
-  sectionAlt: {
-    background: "#F4F6F8",
-    padding: "64px 24px",
-  },
-  niches: {
-    maxWidth: 1200,
-    margin: "0 auto",
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-    gap: 24,
-  },
-  nicheCard: {
-    background: "#FFF",
-    border: "1px solid #E0E4E8",
-    borderRadius: 14,
-    padding: 28,
-    cursor: "pointer",
-    fontWeight: 600,
-  },
-  footer: {
-    borderTop: "1px solid #E6E6E6",
-    padding: 24,
-    textAlign: "center",
-  },
-  footerText: {
-    fontSize: 12,
-    color: "#6A6A6A",
-  },
+  es: {
+    eyebrow:"INTELIGENCIA PARA DECISIONES REALES",
+    title:"Un mundo de posibilidades. Encuentra las que son para ti.",
+    lead:"Robô Global conecta tus necesidades con opciones útiles. Sin presiones, sin complicaciones y a tu ritmo.",
+    primary:"Explorar posibilidades",secondary:"Cómo funciona",
+    note:"Tú marcas el rumbo. La tecnología te ayuda a ver las opciones.",
+    intro:"Un espacio pensado para personas, no para visitas.",
+    introText:"Si buscas aprender, resolver algo cotidiano o descubrir nuevas opciones, empieza por lo que te importa.",
+    paths:[["Descubre","Explora posibilidades que encajan con tu momento."],["Comprende","Conoce tus opciones y avanza con claridad."],["Decide","Da el siguiente paso solo cuando tenga sentido para ti."]],
+    promise:"Tu confianza vale más que una visita.",
+    promiseText:"Información clara, recomendaciones transparentes y libertad para elegir. Algunas recomendaciones pueden generar comisiones de afiliación.",
+    action:"Explorar temas",foot:"Robô Global · Tecnología al servicio de las personas.",
+    status:"Catálogo en preparación: ninguna recomendación comercial se publica sin validación."
+  }
 };
+export default function Home() {
+  const {lang}=useLanguage(); const t=copy[lang];
+  return <div className="rg-home">
+    <section className="rg-hero"><div className="rg-orbit rg-orbit-one"/><div className="rg-orbit rg-orbit-two"/>
+      <div className="rg-hero-content"><div className="rg-eyebrow"><span className="rg-dot"/> {t.eyebrow}</div>
+      <h1>{t.title}</h1><p className="rg-lead">{t.lead}</p>
+      <div className="rg-actions"><Link className="rg-button rg-button-primary" to="/nichos">{t.primary} <span aria-hidden>↗</span></Link><a className="rg-button rg-button-outline" href="#como-funciona">{t.secondary} <span aria-hidden>↓</span></a></div>
+      <p className="rg-hero-note">✦ {t.note}</p></div>
+      <div className="rg-hero-art" aria-hidden="true"><div className="rg-globe"><div className="rg-globe-line rg-l1"/><div className="rg-globe-line rg-l2"/><div className="rg-globe-core">RG<span>∞</span></div></div></div>
+    </section>
+    <section className="rg-section" id="como-funciona"><div className="rg-section-heading"><span className="rg-kicker">01 / ROBÔ GLOBAL</span><h2>{t.intro}</h2><p>{t.introText}</p></div>
+      <div className="rg-paths">{t.paths.map((item,i)=><article className="rg-path" key={i}><span className="rg-path-number">0{i+1}</span><div className="rg-path-symbol">{["✳","◎","↗"][i]}</div><h3>{item[0]}</h3><p>{item[1]}</p></article>)}</div></section>
+    <section className="rg-promise"><div><span className="rg-kicker">02 / CONFIANÇA</span><h2>{t.promise}</h2><p>{t.promiseText}</p><Link className="rg-button rg-button-light" to="/nichos">{t.action} ↗</Link></div><div className="rg-promise-mark" aria-hidden="true">✳</div></section>
+    <div className="rg-status" role="status">● {t.status}</div><footer className="rg-footer">{t.foot}</footer>
+  </div>;
+}
