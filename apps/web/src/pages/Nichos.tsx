@@ -37,7 +37,7 @@ export default function Nichos(){
  },[attempt]);
  return <div className="rg-interior"><section className="rg-interior-hero"><span className="rg-kicker">{t.tag}</span><h1>{t.title}</h1><p>{t.intro}</p></section>
  <section className="rg-interior-body">{state==="loading"?<p role="status">{t.loading}</p>:state==="error"?<div role="alert"><p>{t.error}</p><button className="rg-retry" onClick={()=>setAttempt(a=>a+1)}>{t.retry} ↻</button></div>:items.length===0?<p role="status">{t.empty}</p>:<div className="rg-topic-grid">{items.map((item,i)=>{
-  const localized=lang==="pt"?{title:item.title,description:item.description}:item.translations?.[lang];
+  const localized=lang==="pt"?{title:item.title,description:item.description}:{title:item.translations?.[lang]?.title||item.title,description:item.translations?.[lang]?.description||item.description};
   return <article className="rg-topic" key={item.id}><span className="rg-path-number">0{i+1}</span><h2>{localized?.title||t.preparing}</h2><p>{localized?.description||""}</p>{localized?.title&&<Link to={"/dores?niche="+encodeURIComponent(item.slug)+"&index=0"}>{t.action} ↗</Link>}</article>;
  })}</div>}
  <Link className="rg-back" to="/">← {t.back}</Link></section></div>;
