@@ -13,7 +13,12 @@ const LanguageContext = createContext<LanguageContextProps | undefined>(
 );
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Language>(() => {\n    const saved = localStorage.getItem("rg_lang");\n    if (saved === "pt" || saved === "en" || saved === "es") return saved;\n    const browser = navigator.language.toLowerCase().split("-")[0];\n    return browser === "en" || browser === "es" ? browser : "pt";\n  });
+  const [lang, setLangState] = useState<Language>(() => {
+    const saved = localStorage.getItem("rg_lang");
+    if (saved === "pt" || saved === "en" || saved === "es") return saved;
+    const browser = navigator.language.toLowerCase().split("-")[0];
+    return browser === "en" || browser === "es" ? browser : "pt";
+  });
 
   useEffect(() => {
     document.documentElement.lang = lang;
