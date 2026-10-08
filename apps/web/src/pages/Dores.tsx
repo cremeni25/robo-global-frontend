@@ -13,7 +13,7 @@ export default function Dores(){
  // Source narratives are authored only in PT. Never present Portuguese as translated English/Spanish.
  const showNarrative=lang==="pt"&&selected;
  const validOffer=selected?.productStatus==="ATIVO"&&false; // fail closed until commercial verification exists
- return <div className="rg-interior"><section className="rg-interior-hero"><span className="rg-kicker">{t.tag}</span><h1>{showNarrative?selected.title:selected?t.context:t.missing}</h1><p>{showNarrative?selected.narrative:t.unavailable}</p></section>
+ return <div className="rg-interior"><section className="rg-interior-hero"><span className="rg-kicker">{t.tag}</span><h1>{showNarrative?selected?.title:selected?t.context:t.missing}</h1><p>{showNarrative?selected?.narrative:t.unavailable}</p></section>
  <section className="rg-interior-body"><div className="rg-topic"><span className="rg-kicker">{t.context}</span><p>{t.pending}</p>{validOffer&&null}</div>
  <Link className="rg-back" to="/nichos">← {t.back}</Link></section></div>;
 }
