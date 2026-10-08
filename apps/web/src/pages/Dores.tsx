@@ -24,7 +24,7 @@ async function getItems(path:string,signal:AbortSignal):Promise<Item[]>{
 }
 export default function Dores(){
  const {lang}=useLanguage();const t=copy[lang];const [params,setParams]=useSearchParams();
- const niche=params.get("niche")||"";const sub=params.get("sub")||"";
+ const niche=params.get("niche")||"";const sub=params.get("sub")||"";const pain=params.get("pain")||"";
  const [items,setItems]=useState<Item[]>([]);const [state,setState]=useState<State>("loading");const [retry,setRetry]=useState(0);
  useEffect(()=>{
   const controller=new AbortController();setState("loading");setItems([]);
@@ -34,6 +34,6 @@ export default function Dores(){
   return()=>controller.abort();
  },[niche,sub,retry]);
  return <div className="rg-interior"><section className="rg-interior-hero"><span className="rg-kicker">ROBÔ GLOBAL</span><h1>{sub?t.pain:t.title}</h1><p>{t.intro}</p></section><section className="rg-interior-body">
- {!niche?<p>{t.select}</p>:state==="loading"?<p role="status">…</p>:state==="error"?<div role="alert"><p>{t.error}</p><button className="rg-retry" onClick={()=>setRetry(v=>v+1)}>{t.retry}</button></div>:items.length===0?<p role="status">{t.empty}</p>:<div className="rg-topic-grid">{items.map((item,i)=><article className="rg-topic" key={item.id}><span className="rg-path-number">0{i+1}</span><h2>{lang==="pt"?item.title:(item.translations?.[lang]?.title||item.title)}</h2><p>{lang==="pt"?(item.description||""):(item.translations?.[lang]?.description||item.description||"")}</p>{!sub?<button className="rg-retry" onClick={()=>setParams({niche,sub:item.id})}>{t.next} ↗</button>:<span>{t.detail}</span>}</article>)}</div>}
- <Link className="rg-back" to={sub?"/dores?niche="+encodeURIComponent(niche):"/nichos"}>← {t.back}</Link></section></div>;
+ {!niche?<p>{t.select}</p>:state==="loading"?<p role="status">…</p>:state==="error"?<div role="alert"><p>{t.error}</p><button className="rg-retry" onClick={()=>setRetry(v=>v+1)}>{t.retry}</button></div>:items.length===0?<p role="status">{t.empty}</p>:<div className="rg-topic-grid">{items.filter(item=>!pain||item.id===pain).map((item,i)=><article className="rg-topic" key={item.id}><span className="rg-path-number">0{i+1}</span><h2>{lang==="pt"?item.title:(item.translations?.[lang]?.title||item.title)}</h2><p>{lang==="pt"?(item.description||""):(item.translations?.[lang]?.description||item.description||"")}</p>{!sub?<button className="rg-retry" onClick={()=>setParams({niche,sub:item.id})}>{t.next} ↗</button>:!pain?<button className="rg-retry" onClick={()=>setParams({niche,sub,pain:item.id})}>{t.detail} ↗</button>:null}</article>)}</div>}
+ <Link className="rg-back" to={pain?"/dores?niche="+encodeURIComponent(niche)+"&sub="+encodeURIComponent(sub):sub?"/dores?niche="+encodeURIComponent(niche):"/nichos"}>← {t.back}</Link></section></div>;
 }
