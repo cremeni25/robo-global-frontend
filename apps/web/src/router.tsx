@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Nichos from "./pages/Nichos";
 import Dores from "./pages/Dores";
 import Sobre from "./pages/Sobre";
+import Go from "./pages/Go";
 
 export default function Router() {
   return (
@@ -14,6 +15,7 @@ export default function Router() {
         <Route path="/nichos" element={<Nichos />} />
         <Route path="/dores" element={<Dores />} />
         <Route path="/sobre" element={<Sobre />} />
+        <Route path="/go" element={<Go />} />
       </Route>
     </Routes>
   );
