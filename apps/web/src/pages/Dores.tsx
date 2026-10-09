@@ -10,7 +10,7 @@ function verifiedDestination(raw:string):string|null {
   const parsed=new URL(raw);
   const allowed=new Set(["api.roboglobal.com.br","robo-global-api-v2.onrender.com"]);
   if(parsed.protocol!=="https:"||!allowed.has(parsed.hostname)||parsed.port||parsed.username||parsed.password)return null;
-  if(!/^\/go\/[a-zA-Z0-9-]{1,80}$/.test(parsed.pathname)||parsed.search||parsed.hash)return null;
+  if(!/^\/go\/offer\/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(parsed.pathname)||parsed.search||parsed.hash)return null;
   return parsed.toString();
  }catch{return null;}
 }
