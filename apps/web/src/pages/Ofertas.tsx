@@ -25,7 +25,7 @@ export default function Ofertas(){
      const data=Array.isArray(body)?body:(body&&typeof body==="object"&&"data" in body?(body as {data:unknown}).data:null);
      if(!Array.isArray(data))continue;
      if(controller.signal.aborted)return;
-     setItems(data.filter((x):x is Offer=>!!x&&typeof x==="object"&&typeof x.id==="string"&&typeof (x.url||x.go_url)==="string"));
+     setItems(data.filter((x):x is Offer=>!!x&&typeof x==="object"&&typeof x.id==="string"&&typeof (x.url||x.go_url)==="string").map(x=>({...x,url:new URL(x.url||x.go_url||"",base).href})));
      setState("ready");return;
     }catch{if(controller.signal.aborted)return;}
    }
