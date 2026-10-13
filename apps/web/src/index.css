@@ -11,3 +11,36 @@
 @media(max-width:600px){.rg-interior-hero{padding:66px 20px}.rg-interior-body{padding:42px 20px 75px}.rg-interior-hero p{font-size:16px}}
 
 .rg-retry{display:inline-flex;align-items:center;gap:8px;background:#0c605c;color:#fff;border:0;border-radius:10px;padding:12px 18px;font-weight:700;cursor:pointer}.rg-retry:hover{background:#084a49}
+
+
+/* Public consumer catalogue — mobile-first, isolated from legacy screens */
+.rg-catalog{background:#f5f7f5;color:#142c32;min-height:100vh}
+.rg-catalog-hero{background:linear-gradient(115deg,#0a252c,#10454a);color:#f6fffb;padding:86px 24px 92px}
+.rg-catalog-hero-inner{max-width:1180px;margin:auto}
+.rg-catalog-eyebrow{font-size:11px;font-weight:800;letter-spacing:.2em;color:#8de9d0}
+.rg-catalog-hero h1{font:800 clamp(38px,5vw,70px)/1.12 Manrope,sans-serif;letter-spacing:-.05em;max-width:830px;margin:24px 0}
+.rg-catalog-hero p{font-size:17px;line-height:1.8;color:#c4dfdd;max-width:650px}
+.rg-catalog-search{margin-top:32px;max-width:590px;display:flex;align-items:center;gap:14px;padding:5px 19px;background:white;border-radius:15px;color:#2c5e60;box-shadow:0 15px 38px #001b2340}
+.rg-catalog-search span{font-size:28px}.rg-catalog-search input{border:0;outline:0;background:transparent;color:#15393c;width:100%;font:500 16px DM Sans,sans-serif;min-height:56px}
+.rg-catalog-search:focus-within{outline:3px solid #8de9d0;outline-offset:3px}
+.rg-catalog-content{max-width:1228px;margin:auto;padding:42px 24px 90px}
+.rg-catalog-toolbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:30px;color:#617b7c;font-size:13px;font-weight:700}
+.rg-catalog-filters{display:flex;gap:9px}.rg-catalog-filters button{border:1px solid #d4e3dd;border-radius:100px;padding:11px 20px;background:white;color:#36565a;font:700 13px DM Sans,sans-serif;cursor:pointer}
+.rg-catalog-filters button.selected{background:#123d42;color:white;border-color:#123d42}
+.rg-catalog-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:23px}
+.rg-product-card{background:white;border:1px solid #e1e9e6;border-radius:20px;overflow:hidden;box-shadow:0 12px 35px #173c3b0b;transition:transform .2s,box-shadow .2s}
+.rg-product-card:hover{transform:translateY(-4px);box-shadow:0 18px 45px #173c3b1a}
+.rg-product-image{height:230px;position:relative;background:#dce7e4;overflow:hidden}
+.rg-product-image img{height:100%;width:100%;object-fit:cover;display:block}
+.rg-product-image span{position:absolute;bottom:12px;right:12px;background:#08252ac9;color:white;padding:6px 9px;border-radius:6px;font-size:10px}
+.rg-product-content{padding:25px}.rg-product-category{font-size:11px;letter-spacing:.08em;font-weight:800;text-transform:uppercase;color:#168277}
+.rg-product-category span{color:#8b9f9e}.rg-product-content h2{font:800 23px/1.32 Manrope,sans-serif;letter-spacing:-.025em;color:#18343a;margin:16px 0 10px}
+.rg-product-provider{font-size:14px;color:#607a7b}.rg-product-trust{font-size:12px;color:#3e8b7b;margin:20px 0}
+.rg-product-action{display:flex;justify-content:space-between;align-items:center;background:#0c4b48;color:white;padding:15px 17px;border-radius:11px;font-size:13px;font-weight:800;gap:10px}
+.rg-product-action:hover{background:#087b69}.rg-product-action span{font-size:20px}
+.rg-catalog-disclosure{color:#6a7c7c;font-size:12px;line-height:1.7;margin:30px 0}
+.rg-catalog-feedback{padding:70px 20px;text-align:center;background:white;border:1px solid #e0e9e6;border-radius:16px}
+.rg-catalog-feedback button{border:0;background:#0c4b48;color:white;padding:12px 18px;border-radius:8px;cursor:pointer}
+.rg-catalog-loading{text-align:center;padding:70px;font-size:35px}
+@media(max-width:950px){.rg-catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){.rg-catalog-hero{padding:57px 20px 65px}.rg-catalog-hero h1{font-size:37px}.rg-catalog-hero p{font-size:15px}.rg-catalog-content{padding:28px 17px 60px}.rg-catalog-grid{grid-template-columns:1fr}.rg-catalog-toolbar{align-items:flex-start;flex-direction:column}.rg-product-image{height:215px}.rg-product-content h2{font-size:21px}}

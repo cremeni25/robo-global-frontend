@@ -14,7 +14,7 @@ const copy = {
     promise:"Sua confiança vale mais que uma visita.",
     promiseText:"Indicações identificadas, informações claras e liberdade para decidir. Algumas recomendações podem gerar remuneração de afiliado, sem custo adicional informado por nós.",
     action:"Conhecer os temas", foot:"Robô Global · Tecnologia a serviço de escolhas humanas.",
-    status:"Catálogo em preparação: nenhuma indicação comercial é publicada sem validação."
+    status:"Catálogo disponível: explore as soluções verificadas."
   },
   en: {
     eyebrow:"INTELLIGENCE FOR REAL-LIFE CHOICES",
@@ -28,7 +28,7 @@ const copy = {
     promise:"Your trust matters more than a single visit.",
     promiseText:"Clear information, transparent recommendations and room to decide. Some recommendations may earn us an affiliate commission.",
     action:"Explore topics",foot:"Robô Global · Technology shaped around people.",
-    status:"Catalogue in preparation: no commercial recommendations go live without validation."
+    status:"Catalogue available: explore verified solutions."
   },
   es: {
     eyebrow:"INTELIGENCIA PARA DECISIONES REALES",
@@ -42,7 +42,7 @@ const copy = {
     promise:"Tu confianza vale más que una visita.",
     promiseText:"Información clara, recomendaciones transparentes y libertad para elegir. Algunas recomendaciones pueden generar comisiones de afiliación.",
     action:"Explorar temas",foot:"Robô Global · Tecnología al servicio de las personas.",
-    status:"Catálogo en preparación: ninguna recomendación comercial se publica sin validación."
+    status:"Catálogo disponible: explora soluciones verificadas."
   }
 };
 export default function Home() {
@@ -51,7 +51,7 @@ export default function Home() {
     <section className="rg-hero"><div className="rg-orbit rg-orbit-one"/><div className="rg-orbit rg-orbit-two"/>
       <div className="rg-hero-content"><div className="rg-eyebrow"><span className="rg-dot"/> {t.eyebrow}</div>
       <h1>{t.title}</h1><p className="rg-lead">{t.lead}</p>
-      <div className="rg-actions"><Link className="rg-button rg-button-primary" to="/nichos">{t.primary} <span aria-hidden>↗</span></Link><a className="rg-button rg-button-outline" href="#como-funciona">{t.secondary} <span aria-hidden>↓</span></a></div>
+      <div className="rg-actions"><Link className="rg-button rg-button-primary" to="/ofertas">{t.primary} <span aria-hidden>↗</span></Link><a className="rg-button rg-button-outline" href="#como-funciona">{t.secondary} <span aria-hidden>↓</span></a></div>
       <p className="rg-hero-note">✦ {t.note}</p></div>
       <div className="rg-hero-art" aria-hidden="true"><div className="rg-globe"><div className="rg-globe-line rg-l1"/><div className="rg-globe-line rg-l2"/><div className="rg-globe-core">RG<span>∞</span></div></div></div>
     </section>

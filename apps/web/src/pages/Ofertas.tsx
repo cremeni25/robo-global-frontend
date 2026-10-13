@@ -1,39 +1,58 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
 
-type Offer = {id:string;title?:string;name?:string;description?:string;url?:string;go_url?:string};
-type ViewState = "loading" | "ready" | "error";
-const words = {
- pt:{title:"Soluções disponíveis",intro:"Aqui aparecem somente oportunidades autorizadas e verificadas.",empty:"Ainda não há ofertas comerciais autorizadas para publicação.",error:"Não foi possível consultar as ofertas agora.",retry:"Tentar novamente",open:"Conhecer a solução",back:"Voltar ao início"},
- en:{title:"Available solutions",intro:"Only verified, authorized opportunities appear here.",empty:"No commercial offers are authorized for publication yet.",error:"We could not load offers right now.",retry:"Try again",open:"Explore solution",back:"Back to home"},
- es:{title:"Soluciones disponibles",intro:"Aquí solo aparecen oportunidades autorizadas y verificadas.",empty:"Todavía no hay ofertas comerciales autorizadas para publicar.",error:"No pudimos consultar las ofertas ahora.",retry:"Intentar de nuevo",open:"Conocer la solución",back:"Volver al inicio"}
+type Offer = { id:string; title:string; market:string; language:string; url:string };
+type Phase = "loading" | "ready" | "error";
+const API = "https://robo-global-core-v1.onrender.com";
+const copy = {
+ pt:{eyebrow:"CATÁLOGO ROBÔ GLOBAL",title:"Possibilidades reais. Escolhas suas.",lead:"Explore soluções de parceiros com autorização comercial verificada. Você decide se deseja visitar o fornecedor.",search:"Buscar uma solução",all:"Todas",services:"Serviços",count:"solução disponível",counts:"soluções disponíveis",open:"Conhecer no site do parceiro",notice:"Alguns links são de afiliados. Podemos receber uma comissão por compras qualificadas, sem cobrança adicional do ROBÔ GLOBAL.",empty:"Nenhuma solução corresponde à sua busca.",error:"Não foi possível carregar o catálogo neste momento.",retry:"Tentar novamente",back:"Voltar ao início",illustrative:"Imagem ilustrativa",type:"Serviços para empresas",secure:"Fornecedor externo · Link rastreável"},
+ en:{eyebrow:"ROBÔ GLOBAL CATALOGUE",title:"Real possibilities. Your choice.",lead:"Explore solutions from commercially verified partners. You decide whether to visit the provider.",search:"Search solutions",all:"All",services:"Services",count:"solution available",counts:"solutions available",open:"Visit partner website",notice:"Some links are affiliate links. We may earn a commission on qualifying purchases at no additional ROBÔ GLOBAL charge.",empty:"No solutions match your search.",error:"We couldn't load the catalogue right now.",retry:"Try again",back:"Back to home",illustrative:"Illustrative photo",type:"Business services",secure:"External partner · Tracked link"},
+ es:{eyebrow:"CATÁLOGO ROBÔ GLOBAL",title:"Posibilidades reales. Tú decides.",lead:"Explora soluciones de socios con autorización comercial verificada. Tú decides si visitar al proveedor.",search:"Buscar soluciones",all:"Todas",services:"Servicios",count:"solución disponible",counts:"soluciones disponibles",open:"Visitar al proveedor",notice:"Algunos enlaces son de afiliación. Podemos recibir una comisión por compras válidas, sin cargo adicional de ROBÔ GLOBAL.",empty:"Ninguna solución coincide con tu búsqueda.",error:"No pudimos cargar el catálogo ahora.",retry:"Intentar de nuevo",back:"Volver al inicio",illustrative:"Imagen ilustrativa",type:"Servicios empresariales",secure:"Proveedor externo · Enlace rastreable"}
 };
+const localizedTitle = (offer:Offer,lang:"pt"|"en"|"es") =>
+ offer.title.includes("World Businesses for Sale") ?
+ ({pt:"Planos para anunciar a venda de uma empresa",en:"Business selling plans",es:"Planes para anunciar la venta de una empresa"}[lang]) : offer.title;
+
 export default function Ofertas(){
- const {lang}=useLanguage();const t=words[lang];const [items,setItems]=useState<Offer[]>([]);const [state,setState]=useState<ViewState>("loading");const [attempt,setAttempt]=useState(0);
+ const {lang}=useLanguage();const t=copy[lang];
+ const [items,setItems]=useState<Offer[]>([]),[phase,setPhase]=useState<Phase>("loading");
+ const [attempt,setAttempt]=useState(0),[query,setQuery]=useState(""),[category,setCategory]=useState("all");
  useEffect(()=>{
   const controller=new AbortController();
-  setState("loading");
-  const configured=(import.meta.env.VITE_API_URL as string|undefined)?.trim();
-  const bases=[configured,"https://robo-global-api-v2.onrender.com"].filter((x):x is string=>!!x);
+  setPhase("loading");
   (async()=>{
-   for(const base of [...new Set(bases)]){
-    try{
-     const response=await fetch(base.replace(/\/$/,"")+"/public/ofertas",{signal:controller.signal,headers:{Accept:"application/json"}});
-     if(!response.ok)continue;
-     const body:unknown=await response.json();
-     const data=Array.isArray(body)?body:(body&&typeof body==="object"&&"data" in body?(body as {data:unknown}).data:null);
-     if(!Array.isArray(data))continue;
-     if(controller.signal.aborted)return;
-     setItems(data.filter((x):x is Offer=>!!x&&typeof x==="object"&&typeof x.id==="string"&&typeof (x.url||x.go_url)==="string").map(x=>({...x,url:new URL(x.url||x.go_url||"",base).href})));
-     setState("ready");return;
-    }catch{if(controller.signal.aborted)return;}
-   }
-   if(!controller.signal.aborted)setState("error");
+   try{
+    const response=await fetch(API+"/v1/public/catalog",{signal:controller.signal,headers:{Accept:"application/json"}});
+    if(!response.ok)throw new Error("catalogue_unavailable");
+    const body:unknown=await response.json();
+    if(!body||typeof body!=="object"||!("data" in body)||!Array.isArray(body.data))throw new Error("invalid_catalogue");
+    const valid=(body.data as unknown[]).filter((v):v is Offer=>{
+     if(!v||typeof v!=="object")return false;
+     const x=v as Partial<Offer>;
+     return typeof x.id==="string"&&typeof x.title==="string"&&typeof x.url==="string"&&x.url.startsWith("/r/");
+    });
+    if(!controller.signal.aborted){setItems(valid);setPhase("ready");}
+   }catch{if(!controller.signal.aborted)setPhase("error");}
   })();
   return()=>controller.abort();
  },[attempt]);
- return <div className="rg-interior"><section className="rg-interior-hero"><span className="rg-kicker">ROBÔ GLOBAL</span><h1>{t.title}</h1><p>{t.intro}</p></section><section className="rg-interior-body">
- {state==="loading"?<p role="status">…</p>:state==="error"?<div role="alert"><p>{t.error}</p><button className="rg-retry" onClick={()=>setAttempt(x=>x+1)}>{t.retry}</button></div>:items.length===0?<p role="status">{t.empty}</p>:<div className="rg-topic-grid">{items.map(item=><article className="rg-topic" key={item.id}><h2>{item.title||item.name||t.title}</h2><p>{item.description||""}</p><a className="rg-retry" href={item.url||item.go_url} rel="noopener noreferrer sponsored" target="_blank">{t.open} ↗</a></article>)}</div>}
- <Link className="rg-back" to="/">← {t.back}</Link></section></div>;
+ const shown=useMemo(()=>items.filter(item=>{
+  const term=query.toLocaleLowerCase().trim();
+  return (category==="all"||category==="services")&&(!term||[item.title,localizedTitle(item,lang),item.market].join(" ").toLocaleLowerCase().includes(term));
+ }),[items,query,category,lang]);
+ return <div className="rg-catalog">
+  <section className="rg-catalog-hero"><div className="rg-catalog-hero-inner">
+   <span className="rg-catalog-eyebrow">✳ {t.eyebrow}</span><h1>{t.title}</h1><p>{t.lead}</p>
+   <div className="rg-catalog-search"><span aria-hidden="true">⌕</span><input aria-label={t.search} placeholder={t.search} value={query} onChange={e=>setQuery(e.target.value)}/></div>
+  </div></section>
+  <section className="rg-catalog-content">
+   <div className="rg-catalog-toolbar"><div className="rg-catalog-filters"><button type="button" className={category==="all"?"selected":""} onClick={()=>setCategory("all")}>{t.all}</button><button type="button" className={category==="services"?"selected":""} onClick={()=>setCategory("services")}>{t.services}</button></div><span aria-live="polite">{phase==="ready"?shown.length+" "+(shown.length===1?t.count:t.counts):""}</span></div>
+   {phase==="loading"?<div className="rg-catalog-loading" role="status">•••</div>:phase==="error"?<div className="rg-catalog-feedback" role="alert"><p>{t.error}</p><button onClick={()=>setAttempt(x=>x+1)}>{t.retry} ↻</button></div>:shown.length===0?<div className="rg-catalog-feedback" role="status">{t.empty}</div>:<div className="rg-catalog-grid">{shown.map(item=><article className="rg-product-card" key={item.id}>
+    <div className="rg-product-image"><img loading="lazy" src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1000&q=85" alt={t.illustrative}/><span>{t.illustrative}</span></div>
+    <div className="rg-product-content"><div className="rg-product-category">{t.type} <span>· {item.market}</span></div><h2>{localizedTitle(item,lang)}</h2><p className="rg-product-provider">World Businesses for Sale</p><p className="rg-product-trust">✓ {t.secure}</p><a className="rg-product-action" href={new URL(item.url,API).href} target="_blank" rel="noopener noreferrer sponsored">{t.open}<span aria-hidden="true">↗</span></a></div>
+   </article>)}</div>}
+   <p className="rg-catalog-disclosure">{t.notice}</p><Link className="rg-back" to="/">← {t.back}</Link>
+  </section>
+ </div>;
 }
