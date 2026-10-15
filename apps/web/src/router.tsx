@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import LayoutGlobal from "./layout/LayoutGlobal";
 
 import Home from "./pages/Home";
+import MasterAccess from "./pages/MasterAccess";
 import Nichos from "./pages/Nichos";
 import Dores from "./pages/Dores";
 import Sobre from "./pages/Sobre";
@@ -16,6 +17,7 @@ export default function Router() {
         <Route path="/dores" element={<Dores />} />
         <Route path="/sobre" element={<Sobre />} />
         <Route path="/ofertas" element={<Ofertas />} />
+        <Route path="/master" element={<MasterAccess />} />
       </Route>
     </Routes>
   );
