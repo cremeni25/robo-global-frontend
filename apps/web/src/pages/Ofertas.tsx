@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
 
-type Offer = { id:string; title:string; market:string; language:string; url:string; provider?:string };
+type Offer = { id:string; title:string; market:string; language:string; url:string; provider?:string; need_category?:string; need_problem?:string; solution_angle?:string };
 type Phase = "loading" | "ready" | "error";
 const API = "https://robo-global-core-v1.onrender.com";
 const copy = {
@@ -37,7 +37,7 @@ export default function Ofertas(){
  },[attempt]);
  const shown=useMemo(()=>items.filter(item=>{
   const term=query.toLocaleLowerCase().trim();
-  return (category==="all"||category==="services")&&(!term||[item.title,localizedTitle(item,lang),item.market].join(" ").toLocaleLowerCase().includes(term));
+  return (category==="all"||category==="services")&&(!term||[item.title,localizedTitle(item,lang),item.market,item.need_category,item.need_problem,item.solution_angle].join(" ").toLocaleLowerCase().includes(term));
  }),[items,query,category,lang]);
  return <div className="rg-catalog">
   <section className="rg-catalog-hero"><div className="rg-catalog-hero-inner">
@@ -48,7 +48,7 @@ export default function Ofertas(){
    <div className="rg-catalog-toolbar"><div className="rg-catalog-filters"><button type="button" className={category==="all"?"selected":""} onClick={()=>setCategory("all")}>{t.all}</button><button type="button" className={category==="services"?"selected":""} onClick={()=>setCategory("services")}>{t.services}</button></div><span aria-live="polite">{phase==="ready"?shown.length+" "+(shown.length===1?t.count:t.counts):""}</span></div>
    {phase==="loading"?<div className="rg-catalog-loading" role="status">•••</div>:phase==="error"?<div className="rg-catalog-feedback" role="alert"><p>{t.error}</p><button onClick={()=>setAttempt(x=>x+1)}>{t.retry} ↻</button></div>:shown.length===0?<div className="rg-catalog-feedback" role="status">{t.empty}</div>:<div className="rg-catalog-grid">{shown.map(item=><article className="rg-product-card" key={item.id}>
     
-    <div className="rg-product-content"><div className="rg-product-category">{t.type} <span>· {item.market}</span></div><h2>{localizedTitle(item,lang)}</h2>{item.provider&&<p className="rg-product-provider">{item.provider}</p>}<p className="rg-product-trust">✓ {t.secure}</p><a className="rg-product-action" href={API+"/go/"+encodeURIComponent(item.id)} target="_blank" rel="noopener noreferrer sponsored">{t.open}<span aria-hidden="true">↗</span></a></div>
+    <div className="rg-product-content"><div className="rg-product-category">{t.type} <span>· {item.market}</span></div><h2>{localizedTitle(item,lang)}</h2>{item.need_problem&&<p>{item.need_problem}</p>}{item.solution_angle&&<p>{item.solution_angle}</p>}{item.provider&&<p className="rg-product-provider">{item.provider}</p>}<p className="rg-product-trust">✓ {t.secure}</p><a className="rg-product-action" href={API+"/go/"+encodeURIComponent(item.id)} target="_blank" rel="noopener noreferrer sponsored">{t.open}<span aria-hidden="true">↗</span></a></div>
    </article>)}</div>}
    <p className="rg-catalog-disclosure">{t.notice}</p><Link className="rg-back" to="/">← {t.back}</Link>
   </section>
