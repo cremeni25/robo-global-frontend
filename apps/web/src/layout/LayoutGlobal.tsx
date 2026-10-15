@@ -7,6 +7,6 @@ export default function LayoutGlobal(){
  return <div className="rg-shell"><header className="rg-header"><div className="rg-header-inner">
  <Link className="rg-brand" to="/" aria-label="Robô Global, início"><span className="rg-brand-icon">✳</span><span>ROBÔ <strong>GLOBAL</strong><small>BY CREMENI</small></span></Link>
  <nav className="rg-nav" aria-label="Navegação principal">{nav.map(([url],i)=><Link key={url} className={loc.pathname===url?"rg-nav-active":""} to={url}>{labels[lang][i]}</Link>)}</nav>
- <div className="rg-languages" aria-label="Idioma">{(["pt","en","es"] as const).map(code=><button key={code} type="button" aria-pressed={lang===code} className={lang===code?"rg-lang-active":""} onClick={()=>setLang(code)}>{code.toUpperCase()}</button>)}</div>
+ <Link to="/master" aria-label="Acesso restrito Master" title="Área restrita Master" style={{fontSize:12,color:"#9fc9c9",whiteSpace:"nowrap"}}>Área Master ↗</Link><div className="rg-languages" aria-label="Idioma">{(["pt","en","es"] as const).map(code=><button key={code} type="button" aria-pressed={lang===code} className={lang===code?"rg-lang-active":""} onClick={()=>setLang(code)}>{code.toUpperCase()}</button>)}</div>
  </div></header><main><Outlet/></main></div>
 }
