@@ -19,18 +19,20 @@ export default function MasterAccess() {
     setBusy(true);
     setMessage("");
     try {
-      const endpoint = import.meta.env.VITE_MASTER_AUTH_ENDPOINT;
-      if (!endpoint) {
+      const endpoint = import.meta.env.VITE_SUPABASE_URL;
+      const publicKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+      if (!endpoint || !publicKey) {
         setMessage("A autenticação Master ainda não foi habilitada no servidor.");
         return;
       }
-      const response = await fetch(endpoint, {
+      const response = await fetch(endpoint + "/auth/v1/token?grant_type=password", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "apikey": publicKey },
         body: JSON.stringify({ email, password })
       });
-      if (!response.ok) throw new Error("Login recusado");
-      setMessage("Identidade recebida. O acesso administrativo depende da autorização Master no servidor.");
+      const result = await response.json();
+      if (!response.ok || !result.access_token) throw new Error("Login recusado");
+      setMessage("Identidade autenticada. Acesso administrativo bloqueado até a autorização Master no servidor.");
     } catch {
       setMessage("Não foi possível validar o acesso administrativo.");
     } finally {
