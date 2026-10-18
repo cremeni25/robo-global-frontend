@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useLanguage } from "../contexts/LanguageContext";
 
 type Offer = { id:string; title:string; market:string; language:string; url:string; provider?:string; need_category?:string; need_problem?:string; solution_angle?:string };
@@ -13,9 +13,9 @@ const copy = {
 const localizedTitle = (offer:Offer,_lang:"pt"|"en"|"es") => offer.title;
 
 export default function Ofertas(){
- const {lang}=useLanguage();const t=copy[lang];
+ const {lang}=useLanguage();const t=copy[lang];const [params]=useSearchParams();
  const [items,setItems]=useState<Offer[]>([]),[phase,setPhase]=useState<Phase>("loading");
- const [attempt,setAttempt]=useState(0),[query,setQuery]=useState(""),[category,setCategory]=useState("all");
+ const [attempt,setAttempt]=useState(0),[query,setQuery]=useState(()=>params.get("q")||""),[category,setCategory]=useState("all");
  useEffect(()=>{
   const controller=new AbortController();
   setPhase("loading");
