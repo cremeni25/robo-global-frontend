@@ -51,13 +51,13 @@ export default function Home() {
     <section className="rg-hero"><div className="rg-orbit rg-orbit-one"/><div className="rg-orbit rg-orbit-two"/>
       <div className="rg-hero-content"><div className="rg-eyebrow"><span className="rg-dot"/> {t.eyebrow}</div>
       <h1>{t.title}</h1><p className="rg-lead">{t.lead}</p>
-      <div className="rg-actions"><Link className="rg-button rg-button-primary" to="/ofertas">{t.primary} <span aria-hidden>↗</span></Link><a className="rg-button rg-button-outline" href="#como-funciona">{t.secondary} <span aria-hidden>↓</span></a></div>
+      <div className="rg-actions"><Link className="rg-button rg-button-primary" to="/nichos">{t.primary} <span aria-hidden>↗</span></Link><a className="rg-button rg-button-outline" href="#como-funciona">{t.secondary} <span aria-hidden>↓</span></a></div>
       <p className="rg-hero-note">✦ {t.note}</p></div>
       <div className="rg-hero-art" aria-hidden="true"><div className="rg-globe"><div className="rg-globe-line rg-l1"/><div className="rg-globe-line rg-l2"/><div className="rg-globe-core">RG<span>∞</span></div></div></div>
     </section>
     <section className="rg-section" id="como-funciona"><div className="rg-section-heading"><span className="rg-kicker">01 / ROBÔ GLOBAL</span><h2>{t.intro}</h2><p>{t.introText}</p></div>
       <div className="rg-paths">{t.paths.map((item,i)=><article className="rg-path" key={i}><span className="rg-path-number">0{i+1}</span><div className="rg-path-symbol">{["✳","◎","↗"][i]}</div><h3>{item[0]}</h3><p>{item[1]}</p></article>)}</div></section>
-    <section className="rg-promise"><div><span className="rg-kicker">02 / CONFIANÇA</span><h2>{t.promise}</h2><p>{t.promiseText}</p><Link className="rg-button rg-button-light" to="/ofertas">{t.action} ↗</Link></div><div className="rg-promise-mark" aria-hidden="true">✳</div></section>
+    <section className="rg-promise"><div><span className="rg-kicker">02 / CONFIANÇA</span><h2>{t.promise}</h2><p>{t.promiseText}</p><Link className="rg-button rg-button-light" to="/nichos">{t.action} ↗</Link></div><div className="rg-promise-mark" aria-hidden="true">✳</div></section>
     <div className="rg-status" role="status">● {t.status}</div><footer className="rg-footer">{t.foot}</footer>
   </div>;
 }
