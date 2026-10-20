@@ -42,7 +42,7 @@ export default function Dores(){
   fetch(CORE+"/v1/public/catalog/by-need/"+encodeURIComponent(pain),{signal:controller.signal})
    .then(async response=>{if(!response.ok)throw new Error("unavailable");return response.json();})
    .then(data=>{if(controller.signal.aborted)return;
-     const eligible=Array.isArray(data.data)?data.data.filter((x:Solution)=>x&&typeof x.id==="string"&&typeof x.title==="string"&&typeof x.url==="string"&&/^\\/r\\/[0-9a-f-]{36}$/.test(x.url)):[];
+     const eligible=Array.isArray(data.data)?data.data.filter((x:Solution)=>x&&typeof x.id==="string"&&typeof x.title==="string"&&typeof x.url==="string"&&x.url.startsWith("/r/")&&/^[0-9a-f-]{36}$/i.test(x.url.slice(3))):[];
      setSolutions(eligible);setSolutionsState("ready");
    }).catch(()=>{if(!controller.signal.aborted)setSolutionsState("error");});
   return()=>controller.abort();
