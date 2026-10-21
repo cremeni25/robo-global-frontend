@@ -7,9 +7,14 @@ const copy = {
   en: { eyebrow:"RESTRICTED ACCESS · CREMENI",title:"Master area",body:"ROBÔ GLOBAL management will be centralized here. Finance and B2 operations require real server-side authentication and authorization.",status:"Administrative access is being integrated. No financial data is exposed here.",back:"Back to home",areas:["Governance and decisions","Partners and products (B2)","Finance and reconciliation (B3)"] },
   es: { eyebrow:"ACCESO RESTRINGIDO · CREMENI",title:"Área Master",body:"El control de ROBÔ GLOBAL estará centralizado aquí. Finanzas y operaciones B2 requieren autenticación y autorización reales en el servidor.",status:"El acceso administrativo está en integración. No se exponen datos financieros aquí.",back:"Volver al inicio",areas:["Gobernanza y decisiones","Socios y productos (B2)","Finanzas y conciliación (B3)"] }
 };
+const formCopy={
+ pt:{heading:"Identificação Master",email:"E-mail",password:"Senha",busy:"Validando…",enter:"Entrar",notEnabled:"A autenticação Master ainda não foi habilitada no servidor.",notAuthorized:"Identidade autenticada. Acesso administrativo bloqueado até a autorização Master no servidor.",failed:"Não foi possível validar o acesso administrativo."},
+ en:{heading:"Master sign-in",email:"Email",password:"Password",busy:"Checking…",enter:"Sign in",notEnabled:"Master authentication has not been enabled on the server yet.",notAuthorized:"Identity verified. Administrative access requires server-side Master authorization.",failed:"We couldn't verify administrative access."},
+ es:{heading:"Identificación Master",email:"Correo electrónico",password:"Contraseña",busy:"Validando…",enter:"Entrar",notEnabled:"La autenticación Master aún no está habilitada en el servidor.",notAuthorized:"Identidad verificada. El acceso administrativo requiere autorización Master en el servidor.",failed:"No pudimos validar el acceso administrativo."}
+};
 export default function MasterAccess() {
   const {lang} = useLanguage();
-  const t = copy[lang];
+  const t = {...copy[lang],...formCopy[lang]};
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
   const [message,setMessage] = useState("");
@@ -22,7 +27,7 @@ export default function MasterAccess() {
       const endpoint = import.meta.env.VITE_SUPABASE_URL;
       const publicKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
       if (!endpoint || !publicKey) {
-        setMessage("A autenticação Master ainda não foi habilitada no servidor.");
+        setMessage(t.notEnabled);
         return;
       }
       const response = await fetch(endpoint + "/auth/v1/token?grant_type=password", {
@@ -32,9 +37,9 @@ export default function MasterAccess() {
       });
       const result = await response.json();
       if (!response.ok || !result.access_token) throw new Error("Login recusado");
-      setMessage("Identidade autenticada. Acesso administrativo bloqueado até a autorização Master no servidor.");
+      setMessage(t.notAuthorized);
     } catch {
-      setMessage("Não foi possível validar o acesso administrativo.");
+      setMessage(t.failed);
     } finally {
       setPassword("");
       setBusy(false);
@@ -47,12 +52,12 @@ export default function MasterAccess() {
       <h1 style={{fontFamily:"Manrope, sans-serif",fontSize:"clamp(36px,5vw,60px)",letterSpacing:"-.05em",margin:"18px 0",color:"#f0f9fa"}}>{t.title}</h1>
       <p className="rg-lead" style={{maxWidth:750}}>{t.body}</p>
       <form onSubmit={handleLogin} style={{maxWidth:560,margin:"30px 0",padding:24,border:"1px solid #31505a",borderRadius:14,background:"#0b2831"}}>
-        <h2 style={{margin:"0 0 18px",fontSize:22}}>Identificação Master</h2>
-        <label htmlFor="master-email">E-mail</label>
+        <h2 style={{margin:"0 0 18px",fontSize:22}}>{t.heading}</h2>
+        <label htmlFor="master-email">{t.email}</label>
         <input id="master-email" type="email" autoComplete="username" required value={email} onChange={event=>setEmail(event.target.value)} style={{display:"block",width:"100%",margin:"8px 0 18px",padding:12,borderRadius:8,border:"1px solid #31505a",background:"#071b24",color:"white"}} />
-        <label htmlFor="master-password">Senha</label>
+        <label htmlFor="master-password">{t.password}</label>
         <input id="master-password" type="password" autoComplete="current-password" required value={password} onChange={event=>setPassword(event.target.value)} style={{display:"block",width:"100%",margin:"8px 0 18px",padding:12,borderRadius:8,border:"1px solid #31505a",background:"#071b24",color:"white"}} />
-        <button className="rg-button rg-button-primary" type="submit" disabled={busy} style={{border:0,cursor:"pointer"}}>{busy?"Validando…":"Entrar"}</button>
+        <button className="rg-button rg-button-primary" type="submit" disabled={busy} style={{border:0,cursor:"pointer"}}>{busy?t.busy:t.enter}</button>
         <p role="status" aria-live="polite" style={{color:"#b4cdd1"}}>{message}</p>
       </form>
       <div style={{border:"1px solid #31505a",borderRadius:14,padding:24,margin:"32px 0",background:"#0b2831"}}>

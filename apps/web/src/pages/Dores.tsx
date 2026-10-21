@@ -46,6 +46,7 @@ function DoresPath(){
   fetch(bases[0].replace(/\/$/,"")+"/public/dores/"+encodeURIComponent(pain)+"/solucoes",{signal:controller.signal})
    .then(async response=>{if(!response.ok)throw new Error("unavailable");return response.json();})
    .then(data=>{if(controller.signal.aborted)return;
+     if(!data||!Array.isArray(data.data))throw new Error("invalid_catalogue");
      const eligible=Array.isArray(data.data)?data.data.filter((x:Solution)=>x&&typeof x.id==="string"&&typeof x.title==="string"&&typeof x.url==="string"&&x.url==="/r/"+x.id&&/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(x.id)):[];
      setSolutions(eligible);setSolutionsState("ready");
    }).catch(()=>{if(!controller.signal.aborted)setSolutionsState("error");});
