@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { localizeEditorial } from "../catalogCopy";
 import { useLanguage } from "../contexts/LanguageContext";
 type Niche={id:string|number;slug:string;title:string;description?:string;translations?:Record<string,{title?:string;description?:string}>};
 const words={
@@ -16,8 +17,7 @@ export default function Nichos(){
  const {lang}=useLanguage();const t=words[lang];const [items,setItems]=useState<Niche[]>([]);const [state,setState]=useState<"loading"|"ready"|"error">("loading");const [attempt,setAttempt]=useState(0);
  useEffect(()=>{
   const controller=new AbortController();
-  const base=(import.meta.env.VITE_API_URL as string|undefined)?.trim()||"https://api.roboglobal.com.br";
-  setState("loading");
+  const base=(import.meta.env.VITE_API_URL as string|undefined)?.trim()||"https://robo-global-api-v2.onrender.com";
   const endpoints=[base.replace(/\/$/,"")+"/public/nichos","https://robo-global-api-v2.onrender.com/public/nichos"];
   const load=async()=>{
    for(const endpoint of [...new Set(endpoints)]){
@@ -28,7 +28,7 @@ export default function Nichos(){
      if(!Array.isArray(payload)&&(!payload||!Array.isArray(payload.data)))continue;
      if(controller.signal.aborted)return;
      setItems(normalize(payload));setState("ready");return;
-    }catch(error){if(controller.signal.aborted)return;}
+    }catch{if(controller.signal.aborted)return;}
    }
    if(!controller.signal.aborted)setState("error");
   };
@@ -36,8 +36,8 @@ export default function Nichos(){
   return ()=>controller.abort();
  },[attempt]);
  return <div className="rg-interior"><section className="rg-interior-hero"><span className="rg-kicker">{t.tag}</span><h1>{t.title}</h1><p>{t.intro}</p></section>
- <section className="rg-interior-body">{state==="loading"?<p role="status">{t.loading}</p>:state==="error"?<div role="alert"><p>{t.error}</p><button className="rg-retry" onClick={()=>setAttempt(a=>a+1)}>{t.retry} ↻</button></div>:items.length===0?<p role="status">{t.empty}</p>:<div className="rg-topic-grid">{items.map((item,i)=>{
-  const localized=lang==="pt"?{title:item.title,description:item.description}:{title:item.translations?.[lang]?.title||item.title,description:item.translations?.[lang]?.description||item.description};
+ <section className="rg-interior-body">{state==="loading"?<p role="status">{t.loading}</p>:state==="error"?<div role="alert"><p>{t.error}</p><button className="rg-retry" onClick={()=>{setState("loading");setAttempt(a=>a+1);}}>{t.retry} ↻</button></div>:items.length===0?<p role="status">{t.empty}</p>:<div className="rg-topic-grid">{items.map((item,i)=>{
+  const localized=localizeEditorial(item,lang);
   return <article className="rg-topic" key={item.id}><span className="rg-path-number">0{i+1}</span><h2>{localized?.title||t.preparing}</h2><p>{localized?.description||""}</p>{localized?.title&&<Link to={"/dores?niche="+encodeURIComponent(item.slug)+"&index=0"}>{t.action} ↗</Link>}</article>;
  })}</div>}
  <Link className="rg-back" to="/">← {t.back}</Link></section></div>;

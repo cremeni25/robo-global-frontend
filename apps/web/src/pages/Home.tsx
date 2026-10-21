@@ -57,7 +57,7 @@ export default function Home() {
     </section>
     <section className="rg-section" id="como-funciona"><div className="rg-section-heading"><span className="rg-kicker">01 / ROBÔ GLOBAL</span><h2>{t.intro}</h2><p>{t.introText}</p></div>
       <div className="rg-paths">{t.paths.map((item,i)=><article className="rg-path" key={i}><span className="rg-path-number">0{i+1}</span><div className="rg-path-symbol">{["✳","◎","↗"][i]}</div><h3>{item[0]}</h3><p>{item[1]}</p></article>)}</div></section>
-    <section className="rg-promise"><div><span className="rg-kicker">02 / CONFIANÇA</span><h2>{t.promise}</h2><p>{t.promiseText}</p><Link className="rg-button rg-button-light" to="/nichos">{t.action} ↗</Link></div><div className="rg-promise-mark" aria-hidden="true">✳</div></section>
+    <section className="rg-promise"><div><span className="rg-kicker">02 / {lang==="pt"?"CONFIANÇA":lang==="en"?"TRUST":"CONFIANZA"}</span><h2>{t.promise}</h2><p>{t.promiseText}</p><Link className="rg-button rg-button-light" to="/nichos">{t.action} ↗</Link></div><div className="rg-promise-mark" aria-hidden="true">✳</div></section>
     <div className="rg-status" role="status">● {t.status}</div><footer className="rg-footer">{t.foot}</footer>
   </div>;
 }
