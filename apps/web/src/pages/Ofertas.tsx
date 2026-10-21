@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import { localizeOffer } from "../catalogCopy";
 import { useLanguage } from "../contexts/LanguageContext";
 
 type Offer = { id:string; title:string; market:string; language:string; url:string; provider?:string; need_category?:string; need_problem?:string; solution_angle?:string };
@@ -10,7 +11,7 @@ const copy = {
  en:{eyebrow:"ROBÔ GLOBAL CATALOGUE",title:"Real possibilities. Your choice.",lead:"Explore solutions from commercially verified partners. You decide whether to visit the provider.",search:"Search solutions",all:"All",services:"Services",count:"solution available",counts:"solutions available",open:"Visit partner website",notice:"Some links are affiliate links. We may earn a commission on qualifying purchases at no additional ROBÔ GLOBAL charge.",empty:"No solutions match your search.",error:"We couldn't load the catalogue right now.",retry:"Try again",back:"Back to home",illustrative:"Illustrative photo",type:"Business services",secure:"External partner · Tracked link"},
  es:{eyebrow:"CATÁLOGO ROBÔ GLOBAL",title:"Posibilidades reales. Tú decides.",lead:"Explora soluciones de socios con autorización comercial verificada. Tú decides si visitar al proveedor.",search:"Buscar soluciones",all:"Todas",services:"Servicios",count:"solución disponible",counts:"soluciones disponibles",open:"Visitar al proveedor",notice:"Algunos enlaces son de afiliación. Podemos recibir una comisión por compras válidas, sin cargo adicional de ROBÔ GLOBAL.",empty:"Ninguna solución coincide con tu búsqueda.",error:"No pudimos cargar el catálogo ahora.",retry:"Intentar de nuevo",back:"Volver al inicio",illustrative:"Imagen ilustrativa",type:"Servicios empresariales",secure:"Proveedor externo · Enlace rastreable"}
 };
-const localizedTitle = (offer:Offer,_lang:"pt"|"en"|"es") => offer.title;
+const localizedTitle = (offer:Offer,lang:"pt"|"en"|"es") => localizeOffer(offer,lang).title;
 
 export default function Ofertas(){
  const {lang}=useLanguage();const t=copy[lang];const [params]=useSearchParams();
@@ -48,7 +49,7 @@ export default function Ofertas(){
    <div className="rg-catalog-toolbar"><div className="rg-catalog-filters"><button type="button" className={category==="all"?"selected":""} onClick={()=>setCategory("all")}>{t.all}</button><button type="button" className={category==="services"?"selected":""} onClick={()=>setCategory("services")}>{t.services}</button></div><span aria-live="polite">{phase==="ready"?shown.length+" "+(shown.length===1?t.count:t.counts):""}</span></div>
    {phase==="loading"?<div className="rg-catalog-loading" role="status">•••</div>:phase==="error"?<div className="rg-catalog-feedback" role="alert"><p>{t.error}</p><button onClick={()=>setAttempt(x=>x+1)}>{t.retry} ↻</button></div>:shown.length===0?<div className="rg-catalog-feedback" role="status">{t.empty}</div>:<div className="rg-catalog-grid">{shown.map(item=><article className="rg-product-card" key={item.id}>
     
-    <div className="rg-product-content"><div className="rg-product-category">{t.type} <span>· {item.market}</span></div><h2>{localizedTitle(item,lang)}</h2>{item.need_problem&&<p>{item.need_problem}</p>}{item.solution_angle&&<p>{item.solution_angle}</p>}{item.provider&&<p className="rg-product-provider">{item.provider}</p>}<p className="rg-product-trust">✓ {t.secure}</p><a className="rg-product-action" href={API+item.url} target="_blank" rel="noopener noreferrer sponsored">{t.open}<span aria-hidden="true">↗</span></a></div>
+    <div className="rg-product-content"><div className="rg-product-category">{t.type} <span>· {item.market}</span></div><h2>{localizedTitle(item,lang)}</h2>{item.need_problem&&<p>{localizeOffer(item,lang).need_problem}</p>}{item.solution_angle&&<p>{localizeOffer(item,lang).solution_angle}</p>}{item.provider&&<p className="rg-product-provider">{item.provider}</p>}<p className="rg-product-trust">✓ {t.secure}</p><a className="rg-product-action" href={API+item.url} target="_blank" rel="noopener noreferrer sponsored">{t.open}<span aria-hidden="true">↗</span></a></div>
    </article>)}</div>}
    <p className="rg-catalog-disclosure">{t.notice}</p><Link className="rg-back" to="/">← {t.back}</Link>
   </section>
