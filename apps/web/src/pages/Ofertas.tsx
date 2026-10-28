@@ -38,7 +38,8 @@ export default function Ofertas(){
  },[attempt]);
  const shown=useMemo(()=>items.filter(item=>{
   const term=query.toLocaleLowerCase().trim();
-  return (category==="all"||category==="services")&&(!term||[item.title,localizedTitle(item,lang),item.market,item.need_category,item.need_problem,item.solution_angle].join(" ").toLocaleLowerCase().includes(term));
+  const localized=localizeOffer(item,lang);
+  return (category==="all"||category==="services")&&(!term||[item.title,localized.title,item.market,item.need_category,item.need_problem,item.solution_angle,localized.need_problem,localized.solution_angle].join(" ").toLocaleLowerCase().includes(term));
  }),[items,query,category,lang]);
  return <div className="rg-catalog">
   <section className="rg-catalog-hero"><div className="rg-catalog-hero-inner">
