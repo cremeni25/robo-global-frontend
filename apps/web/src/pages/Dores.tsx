@@ -36,7 +36,8 @@ function DoresPath(){
  useEffect(()=>{
   const controller=new AbortController();
   if(!pain||!sub)return()=>controller.abort();
-  requestCatalog(bases,"/public/dores/"+encodeURIComponent(pain)+"/solucoes",controller.signal)
+  // V2 waits up to 30s for Core; allow that response to arrive before timing out.
+  requestCatalog(bases,"/public/dores/"+encodeURIComponent(pain)+"/solucoes",controller.signal,35000)
    .then(data=>{if(controller.signal.aborted)return;
      const eligible=data.filter((raw):raw is Solution=>{const x=raw as Partial<Solution>|null;return !!x&&typeof x.id==="string"&&typeof x.title==="string"&&typeof x.url==="string"&&x.url==="/r/"+x.id&&/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(x.id);});
      setSolutions(eligible);setSolutionsState("ready");
